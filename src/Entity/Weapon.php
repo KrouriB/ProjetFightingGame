@@ -40,6 +40,22 @@ class Weapon
     #[ORM\Column(length: 30)]
     private ?string $nameSkill = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?TypeWeapon $weaponType = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CategoryWeapon $weaponCategory = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Element $weaponElement = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Element $skillElement = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -149,6 +165,54 @@ class Weapon
     public function setNameSkill(string $nameSkill): static
     {
         $this->nameSkill = $nameSkill;
+
+        return $this;
+    }
+
+    public function getWeaponType(): ?TypeWeapon
+    {
+        return $this->weaponType;
+    }
+
+    public function setWeaponType(?TypeWeapon $weaponType): static
+    {
+        $this->weaponType = $weaponType;
+
+        return $this;
+    }
+
+    public function getWeaponCategory(): ?CategoryWeapon
+    {
+        return $this->weaponCategory;
+    }
+
+    public function setWeaponCategory(?CategoryWeapon $weaponCategory): static
+    {
+        $this->weaponCategory = $weaponCategory;
+
+        return $this;
+    }
+
+    public function getWeaponElement(): ?Element
+    {
+        return $this->weaponElement;
+    }
+
+    public function setWeaponElement(?Element $weaponElement): static
+    {
+        $this->weaponElement = $weaponElement;
+
+        return $this;
+    }
+
+    public function getSkillElement(): ?Element
+    {
+        return $this->skillElement;
+    }
+
+    public function setSkillElement(?Element $skillElement): static
+    {
+        $this->skillElement = $skillElement;
 
         return $this;
     }
