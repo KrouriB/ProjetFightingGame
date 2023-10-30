@@ -34,6 +34,24 @@ class Personnage
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Weapon $weapon = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Accessory $accessory = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Element $element = null;
+
+    #[ORM\ManyToOne]
+    private ?TypeWeapon $type = null;
+
+    #[ORM\ManyToOne]
+    private ?CategoryWeapon $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +137,66 @@ class Personnage
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getWeapon(): ?Weapon
+    {
+        return $this->weapon;
+    }
+
+    public function setWeapon(?Weapon $weapon): static
+    {
+        $this->weapon = $weapon;
+
+        return $this;
+    }
+
+    public function getAccessory(): ?Accessory
+    {
+        return $this->accessory;
+    }
+
+    public function setAccessory(?Accessory $accessory): static
+    {
+        $this->accessory = $accessory;
+
+        return $this;
+    }
+
+    public function getElement(): ?Element
+    {
+        return $this->element;
+    }
+
+    public function setElement(?Element $element): static
+    {
+        $this->element = $element;
+
+        return $this;
+    }
+
+    public function getType(): ?TypeWeapon
+    {
+        return $this->type;
+    }
+
+    public function setType(?TypeWeapon $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCategory(): ?CategoryWeapon
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?CategoryWeapon $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
