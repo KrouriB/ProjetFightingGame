@@ -16,6 +16,9 @@ class Equipe
     #[ORM\Column(length: 20)]
     private ?string $teamName = null;
 
+    #[ORM\ManyToOne(inversedBy: 'equipes')]
+    private ?User $assosiatedUser = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class Equipe
     public function setTeamName(string $teamName): static
     {
         $this->teamName = $teamName;
+
+        return $this;
+    }
+
+    public function getAssosiatedUser(): ?User
+    {
+        return $this->assosiatedUser;
+    }
+
+    public function setAssosiatedUser(?User $assosiatedUser): static
+    {
+        $this->assosiatedUser = $assosiatedUser;
 
         return $this;
     }

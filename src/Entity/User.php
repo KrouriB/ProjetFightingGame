@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,6 +41,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
+
+    #[ORM\OneToMany(mappedBy: 'stockUser', targetEntity: StockPersonnage::class)]
+    private Collection $stockPersonnages;
+
+    #[ORM\OneToMany(mappedBy: 'stockUser', targetEntity: StockWeapon::class)]
+    private Collection $stockWeapons;
+
+    #[ORM\OneToMany(mappedBy: 'stockUser', targetEntity: StockAccessory::class)]
+    private Collection $stockAccesorys;
+
+    #[ORM\OneToMany(mappedBy: 'assosiatedUser', targetEntity: Equipe::class)]
+    private Collection $equipes;
+
+    public function __construct()
+    {
+        $this->stockPersonnages = new ArrayCollection();
+        $this->stockWeapons = new ArrayCollection();
+        $this->stockAccesorys = new ArrayCollection();
+        $this->equipes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,6 +176,126 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StockPersonnage>
+     */
+    public function getStockPersonnages(): Collection
+    {
+        return $this->stockPersonnages;
+    }
+
+    public function addStockPersonnage(StockPersonnage $stockPersonnage): static
+    {
+        if (!$this->stockPersonnages->contains($stockPersonnage)) {
+            $this->stockPersonnages->add($stockPersonnage);
+            $stockPersonnage->setStockUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockPersonnage(StockPersonnage $stockPersonnage): static
+    {
+        if ($this->stockPersonnages->removeElement($stockPersonnage)) {
+            // set the owning side to null (unless already changed)
+            if ($stockPersonnage->getStockUser() === $this) {
+                $stockPersonnage->setStockUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StockWeapon>
+     */
+    public function getStockWeapons(): Collection
+    {
+        return $this->stockWeapons;
+    }
+
+    public function addStockWeapon(StockWeapon $stockWeapon): static
+    {
+        if (!$this->stockWeapons->contains($stockWeapon)) {
+            $this->stockWeapons->add($stockWeapon);
+            $stockWeapon->setStockUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockWeapon(StockWeapon $stockWeapon): static
+    {
+        if ($this->stockWeapons->removeElement($stockWeapon)) {
+            // set the owning side to null (unless already changed)
+            if ($stockWeapon->getStockUser() === $this) {
+                $stockWeapon->setStockUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StockAccessory>
+     */
+    public function getStockAccesorys(): Collection
+    {
+        return $this->stockAccesorys;
+    }
+
+    public function addStockAccesory(StockAccessory $stockAccesory): static
+    {
+        if (!$this->stockAccesorys->contains($stockAccesory)) {
+            $this->stockAccesorys->add($stockAccesory);
+            $stockAccesory->setStockUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockAccesory(StockAccessory $stockAccesory): static
+    {
+        if ($this->stockAccesorys->removeElement($stockAccesory)) {
+            // set the owning side to null (unless already changed)
+            if ($stockAccesory->getStockUser() === $this) {
+                $stockAccesory->setStockUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipe>
+     */
+    public function getEquipes(): Collection
+    {
+        return $this->equipes;
+    }
+
+    public function addEquipe(Equipe $equipe): static
+    {
+        if (!$this->equipes->contains($equipe)) {
+            $this->equipes->add($equipe);
+            $equipe->setAssosiatedUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipe(Equipe $equipe): static
+    {
+        if ($this->equipes->removeElement($equipe)) {
+            // set the owning side to null (unless already changed)
+            if ($equipe->getAssosiatedUser() === $this) {
+                $equipe->setAssosiatedUser(null);
+            }
+        }
 
         return $this;
     }

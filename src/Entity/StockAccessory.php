@@ -18,6 +18,9 @@ class StockAccessory
     #[ORM\ManyToMany(targetEntity: Accessory::class)]
     private Collection $accesorys;
 
+    #[ORM\ManyToOne(inversedBy: 'stockAccesorys')]
+    private ?User $stockUser = null;
+
     public function __construct()
     {
         $this->accesorys = new ArrayCollection();
@@ -48,6 +51,18 @@ class StockAccessory
     public function removeAccesory(Accessory $accesory): static
     {
         $this->accesorys->removeElement($accesory);
+
+        return $this;
+    }
+
+    public function getStockUser(): ?User
+    {
+        return $this->stockUser;
+    }
+
+    public function setStockUser(?User $stockUser): static
+    {
+        $this->stockUser = $stockUser;
 
         return $this;
     }

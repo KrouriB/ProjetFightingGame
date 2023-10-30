@@ -18,6 +18,9 @@ class StockWeapon
     #[ORM\ManyToMany(targetEntity: Weapon::class)]
     private Collection $weapons;
 
+    #[ORM\ManyToOne(inversedBy: 'stockWeapons')]
+    private ?User $stockUser = null;
+
     public function __construct()
     {
         $this->weapons = new ArrayCollection();
@@ -48,6 +51,18 @@ class StockWeapon
     public function removeWeapon(Weapon $weapon): static
     {
         $this->weapons->removeElement($weapon);
+
+        return $this;
+    }
+
+    public function getStockUser(): ?User
+    {
+        return $this->stockUser;
+    }
+
+    public function setStockUser(?User $stockUser): static
+    {
+        $this->stockUser = $stockUser;
 
         return $this;
     }
