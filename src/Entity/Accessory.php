@@ -47,11 +47,11 @@ class Accessory
     private ?int $waitAction = null;
 
     #[ORM\Column]
-    private ?int $statAction = null;
+    private ?int $statAction = null; // en pourcentge
 
     #[ORM\ManyToOne(inversedBy: 'accessorys')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?TypeStatAction $typeStatAction = null; // en pourcentge
+    #[ORM\JoinColumn(nullable: false)] 
+    private ?TypeStatAction $typeStatAction = null;
 
     public function getId(): ?int
     {
