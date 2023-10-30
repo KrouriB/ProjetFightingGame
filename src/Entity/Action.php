@@ -28,6 +28,9 @@ class Action
     #[ORM\Column(length: 50)]
     private ?string $nameStat = null;
 
+    #[ORM\Column(length: 30)]
+    private ?string $nameType = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class Action
     public function setNameStat(string $nameStat): static
     {
         $this->nameStat = $nameStat;
+
+        return $this;
+    }
+
+    public function getNameType(): ?string
+    {
+        return $this->nameType;
+    }
+
+    public function setNameType(string $nameType): static
+    {
+        $this->nameType = $nameType;
 
         return $this;
     }
