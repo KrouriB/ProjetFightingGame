@@ -22,6 +22,12 @@ class TypeWeapon
     #[ORM\Column]
     private ?int $disadvantage = null;
 
+    #[ORM\Column]
+    private ?float $advantageMultiplicator = null;
+
+    #[ORM\Column]
+    private ?float $disadvantageMultiplicator = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +65,30 @@ class TypeWeapon
     public function setDisadvantage(int $disadvantage): static
     {
         $this->disadvantage = $disadvantage;
+
+        return $this;
+    }
+
+    public function getAdvantageMultiplicator(): ?float
+    {
+        return $this->advantageMultiplicator;
+    }
+
+    public function setAdvantageMultiplicator(float $advantageMultiplicator): static
+    {
+        $this->advantageMultiplicator = $advantageMultiplicator;
+
+        return $this;
+    }
+
+    public function getDisadvantageMultiplicator(): ?float
+    {
+        return $this->disadvantageMultiplicator;
+    }
+
+    public function setDisadvantageMultiplicator(float $disadvantageMultiplicator): static
+    {
+        $this->disadvantageMultiplicator = $disadvantageMultiplicator;
 
         return $this;
     }
