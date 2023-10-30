@@ -37,6 +37,18 @@ class Accessory
     #[ORM\Column]
     private ?int $cost = null;
 
+    #[ORM\Column(length: 30)]
+    private ?string $nameAction = null;
+
+    #[ORM\Column]
+    private ?int $energyAction = null;
+
+    #[ORM\Column]
+    private ?int $waitAction = null;
+
+    #[ORM\Column]
+    private ?int $statAction = null; // en pourcentge
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +146,54 @@ class Accessory
     public function setCost(int $cost): static
     {
         $this->cost = $cost;
+
+        return $this;
+    }
+
+    public function getNameAction(): ?string
+    {
+        return $this->nameAction;
+    }
+
+    public function setNameAction(string $nameAction): static
+    {
+        $this->nameAction = $nameAction;
+
+        return $this;
+    }
+
+    public function getEnergyAction(): ?int
+    {
+        return $this->energyAction;
+    }
+
+    public function setEnergyAction(int $energyAction): static
+    {
+        $this->energyAction = $energyAction;
+
+        return $this;
+    }
+
+    public function getWaitAction(): ?int
+    {
+        return $this->waitAction;
+    }
+
+    public function setWaitAction(int $waitAction): static
+    {
+        $this->waitAction = $waitAction;
+
+        return $this;
+    }
+
+    public function getStatAction(): ?int
+    {
+        return $this->statAction;
+    }
+
+    public function setStatAction(int $statAction): static
+    {
+        $this->statAction = $statAction;
 
         return $this;
     }
