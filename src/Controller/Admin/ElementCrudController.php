@@ -31,6 +31,7 @@ class ElementCrudController extends AbstractCrudController
                     'Métal' => 'Métal',
                     'Eau' => 'Eau',
                     'Bois' => 'Bois',
+                    'Neutre' => 'Neutre'
                 ]),
             ChoiceField::new('advantage')
                 ->renderExpanded()
@@ -41,6 +42,7 @@ class ElementCrudController extends AbstractCrudController
                     'Métal' => 3,
                     'Eau' => 4,
                     'Bois' => 5,
+                    'Neutre' => 6
                 ]),
             NumberField::new('advantageMultiplicator')
                 ->setLabel("Multiplicateur a l'Avantage"),
@@ -53,6 +55,7 @@ class ElementCrudController extends AbstractCrudController
                     'Métal' => 3,
                     'Eau' => 4,
                     'Bois' => 5,
+                    'Neutre' => 6
                 ]),
             NumberField::new('disadvantageMultiplicator')
                 ->setLabel('Multiplicateur au Désavantage'),
