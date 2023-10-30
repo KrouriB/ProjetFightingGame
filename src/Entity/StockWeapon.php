@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\StockWeaponRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\WeaponRepository;
+use App\Repository\StockWeaponRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: StockWeaponRepository::class)]
 class StockWeapon
@@ -21,9 +22,14 @@ class StockWeapon
     #[ORM\ManyToOne(inversedBy: 'stockWeapons')]
     private ?User $stockUser = null;
 
-    public function __construct()
+    public function __construct(WeaponRepository $weaponRepository)
     {
+        $weapons = $weaponRepository->findFirstWeapons();
         $this->weapons = new ArrayCollection();
+        foreach($weapons as $weapon)
+        {
+            $this->addWeapon($weapon);
+        }
     }
 
     public function getId(): ?int
