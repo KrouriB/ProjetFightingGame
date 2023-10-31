@@ -92,4 +92,9 @@ class TypeWeapon
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->nameType;
+    }
 }
