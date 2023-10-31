@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\PersonnageRepository;
+use App\Entity\TypeWeapon;
+use App\Entity\CategoryWeapon;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PersonnageRepository;
 
 #[ORM\Entity(repositoryClass: PersonnageRepository::class)]
 class Personnage
@@ -28,18 +30,12 @@ class Personnage
     #[ORM\Column]
     private ?int $life = null;
 
-    #[ORM\Column]
-    private ?bool $weaponSelection = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $image = null;
-
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Weapon $weapon = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Accessory $accessory = null;
 
     #[ORM\ManyToOne]
@@ -113,30 +109,6 @@ class Personnage
     public function setLife(int $life): static
     {
         $this->life = $life;
-
-        return $this;
-    }
-
-    public function isWeaponSelection(): ?bool
-    {
-        return $this->weaponSelection;
-    }
-
-    public function setWeaponSelection(bool $weaponSelection): static
-    {
-        $this->weaponSelection = $weaponSelection;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): static
-    {
-        $this->image = $image;
 
         return $this;
     }
