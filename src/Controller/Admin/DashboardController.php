@@ -3,10 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Element;
+use App\Entity\Personnage;
 use App\Entity\TypeWeapon;
 use App\Entity\CategoryWeapon;
 use App\Entity\TypeStatAction;
 use Symfony\Component\HttpFoundation\Response;
+use App\Controller\Admin\ElementCrudController;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -36,5 +38,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Categorie', 'fas fa-list', CategoryWeapon::class);
         yield MenuItem::linkToCrud('Type', 'fas fa-list', TypeWeapon::class);
         yield MenuItem::linkToCrud("Stat et Type d'équipement", 'fas fa-list', TypeStatAction::class);
+        yield MenuItem::linkToCrud("Perso", 'fas fa-list', Personnage::class);
     }
 }
