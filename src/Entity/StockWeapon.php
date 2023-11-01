@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Weapon;
+use App\Entity\Personnage;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\WeaponRepository;
 use App\Repository\StockWeaponRepository;
