@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Equipe;
+use App\Entity\StockWeapon;
+use App\Entity\StockAccessory;
+use App\Entity\StockPersonnage;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -65,6 +69,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->stockWeapons = new ArrayCollection();
         $this->stockAccesorys = new ArrayCollection();
         $this->equipes = new ArrayCollection();
+        $stockPerso = new StockPersonnage();
+        $stockArme = new StockWeapon();
+        $stockEquipement = new StockAccesory();
+        $this->addStockPersonnage($stockPerso);
+        $this->addStockWeapon($stockArme);
+        $this->addStockAccesory($stockEquipement);
         $this->gold = 0;
         $this->killCount = 0;
         $this->winCount = 0;
