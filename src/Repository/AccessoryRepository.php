@@ -36,6 +36,18 @@ class AccessoryRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+    /**
+    * @return Accessory[] Returns an array of Accessory objects
+    */
+    public function findFirstAccessorys($value): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = 1')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    public function findOneBySomeField($value): ?Accessory
 //    {
 //        return $this->createQueryBuilder('a')

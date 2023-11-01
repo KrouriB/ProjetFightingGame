@@ -36,6 +36,18 @@ class PersonnageRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+    /**
+    * @return Personnage[] Returns an array of Personnage objects
+    */
+    public function findFirstPersonnages($value): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id < 46')
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    public function findOneBySomeField($value): ?Personnage
 //    {
 //        return $this->createQueryBuilder('p')
