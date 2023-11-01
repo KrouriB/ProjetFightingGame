@@ -24,6 +24,18 @@ class TypeStatAction
     #[ORM\OneToMany(mappedBy: 'typeStatAction', targetEntity: Accessory::class, orphanRemoval: true)]
     private Collection $accessorys;
 
+    #[ORM\Column(nullable: false)]
+    private ?int $rankStat1 = null;
+
+    #[ORM\Column(nullable: false)]
+    private ?int $rankStat2 = null;
+
+    #[ORM\Column(nullable: false)]
+    private ?int $rankStat3 = null;
+
+    #[ORM\Column(nullable: false)]
+    private ?int $rankStat4 = null;
+
     public function __construct()
     {
         $this->accessorys = new ArrayCollection();
@@ -86,5 +98,58 @@ class TypeStatAction
         }
 
         return $this;
+    }
+
+    public function getRankStat1(): ?int
+    {
+        return $this->rankStat1;
+    }
+
+    public function setRankStat1(?int $rankStat1): static
+    {
+        $this->rankStat1 = $rankStat1;
+
+        return $this;
+    }
+
+    public function getRankStat2(): ?int
+    {
+        return $this->rankStat2;
+    }
+
+    public function setRankStat2(?int $rankStat2): static
+    {
+        $this->rankStat2 = $rankStat2;
+
+        return $this;
+    }
+
+    public function getRankStat3(): ?int
+    {
+        return $this->rankStat3;
+    }
+
+    public function setRankStat3(?int $rankStat3): static
+    {
+        $this->rankStat3 = $rankStat3;
+
+        return $this;
+    }
+
+    public function getRankStat4(): ?int
+    {
+        return $this->rankStat4;
+    }
+
+    public function setRankStat4(?int $rankStat4): static
+    {
+        $this->rankStat4 = $rankStat4;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nomType.' ( '.$this->nomStat.' ), rank 1 : '.$this->rankStat1.'% , rank 2 : '.$this->rankStat2.'% , rank 3 : '.$this->rankStat3.'% , rank 4 : '.$this->rankStat4.'%';
     }
 }

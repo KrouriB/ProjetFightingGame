@@ -6,6 +6,7 @@ use App\Entity\TypeStatAction;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class TypeStatActionCrudController extends AbstractCrudController
@@ -30,6 +31,10 @@ class TypeStatActionCrudController extends AbstractCrudController
                 ]),
             TextField::new('nomType')
                 ->setLabel("Type d'action"),
+            IntegerField::new('rankStat1'),
+            IntegerField::new('rankStat2'),
+            IntegerField::new('rankStat3'),
+            IntegerField::new('rankStat4'),
         ];
     }
 }
