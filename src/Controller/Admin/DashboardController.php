@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Weapon;
 use App\Entity\Element;
+use App\Entity\Accessory;
 use App\Entity\Personnage;
 use App\Entity\TypeWeapon;
 use App\Entity\CategoryWeapon;
@@ -39,5 +41,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Type', 'fas fa-list', TypeWeapon::class);
         yield MenuItem::linkToCrud("Stat et Type d'équipement", 'fas fa-list', TypeStatAction::class);
         yield MenuItem::linkToCrud("Perso", 'fas fa-list', Personnage::class);
+        yield MenuItem::linkToCrud("Arme", 'fas fa-list', Weapon::class);
+        yield MenuItem::linkToCrud("Équipement", 'fas fa-list', Accessory::class);
     }
 }
