@@ -24,9 +24,17 @@ class Equipe
     #[ORM\ManyToMany(targetEntity: Personnage::class)]
     private Collection $personnages;
 
+    #[ORM\ManyToMany(targetEntity: Accessory::class)]
+    private Collection $equipement;
+
+    #[ORM\ManyToMany(targetEntity: Weapon::class)]
+    private Collection $weapon;
+
     public function __construct()
     {
         $this->personnages = new ArrayCollection();
+        $this->equipement = new ArrayCollection();
+        $this->weapon = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,6 +86,54 @@ class Equipe
     public function removePersonnage(Personnage $personnage): static
     {
         $this->personnages->removeElement($personnage);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Accessory>
+     */
+    public function getEquipement(): Collection
+    {
+        return $this->equipement;
+    }
+
+    public function addEquipement(Accessory $equipement): static
+    {
+        if (!$this->equipement->contains($equipement)) {
+            $this->equipement->add($equipement);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipement(Accessory $equipement): static
+    {
+        $this->equipement->removeElement($equipement);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Weapon>
+     */
+    public function getWeapon(): Collection
+    {
+        return $this->weapon;
+    }
+
+    public function addWeapon(Weapon $weapon): static
+    {
+        if (!$this->weapon->contains($weapon)) {
+            $this->weapon->add($weapon);
+        }
+
+        return $this;
+    }
+
+    public function removeWeapon(Weapon $weapon): static
+    {
+        $this->weapon->removeElement($weapon);
 
         return $this;
     }
