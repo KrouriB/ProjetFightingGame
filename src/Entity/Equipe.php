@@ -21,21 +21,17 @@ class Equipe
     #[ORM\ManyToOne(inversedBy: 'equipes')]
     private ?User $assosiatedUser = null;
 
-    #[ORM\ManyToMany(targetEntity: Personnage::class)]
-    private Collection $personnages;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Personnage $personnage = null;
 
-    #[ORM\ManyToMany(targetEntity: Accessory::class)]
-    private Collection $equipement;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Weapon $weapon = null;
 
-    #[ORM\ManyToMany(targetEntity: Weapon::class)]
-    private Collection $weapon;
-
-    public function __construct()
-    {
-        $this->personnages = new ArrayCollection();
-        $this->equipement = new ArrayCollection();
-        $this->weapon = new ArrayCollection();
-    }
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Accessory $accessory = null;
 
     public function getId(): ?int
     {
@@ -66,74 +62,38 @@ class Equipe
         return $this;
     }
 
-    /**
-     * @return Collection<int, Personnage>
-     */
-    public function getPersonnages(): Collection
+    public function getPersonnage(): ?Personnage
     {
-        return $this->personnages;
+        return $this->personnage;
     }
 
-    public function addPersonnage(Personnage $personnage): static
+    public function setPersonnage(?Personnage $personnage): static
     {
-        if (!$this->personnages->contains($personnage)) {
-            $this->personnages->add($personnage);
-        }
+        $this->personnage = $personnage;
 
         return $this;
     }
 
-    public function removePersonnage(Personnage $personnage): static
-    {
-        $this->personnages->removeElement($personnage);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Accessory>
-     */
-    public function getEquipement(): Collection
-    {
-        return $this->equipement;
-    }
-
-    public function addEquipement(Accessory $equipement): static
-    {
-        if (!$this->equipement->contains($equipement)) {
-            $this->equipement->add($equipement);
-        }
-
-        return $this;
-    }
-
-    public function removeEquipement(Accessory $equipement): static
-    {
-        $this->equipement->removeElement($equipement);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Weapon>
-     */
-    public function getWeapon(): Collection
+    public function getWeapon(): ?Weapon
     {
         return $this->weapon;
     }
 
-    public function addWeapon(Weapon $weapon): static
+    public function setWeapon(?Weapon $weapon): static
     {
-        if (!$this->weapon->contains($weapon)) {
-            $this->weapon->add($weapon);
-        }
+        $this->weapon = $weapon;
 
         return $this;
     }
 
-    public function removeWeapon(Weapon $weapon): static
+    public function getAccessory(): ?Accessory
     {
-        $this->weapon->removeElement($weapon);
+        return $this->accessory;
+    }
+
+    public function setAccessory(?Accessory $accessory): static
+    {
+        $this->accessory = $accessory;
 
         return $this;
     }
