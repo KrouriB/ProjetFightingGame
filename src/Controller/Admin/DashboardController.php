@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Equipe;
 use App\Entity\Weapon;
 use App\Entity\Element;
 use App\Entity\Accessory;
@@ -43,5 +44,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud("Perso", 'fas fa-list', Personnage::class);
         yield MenuItem::linkToCrud("Arme", 'fas fa-list', Weapon::class);
         yield MenuItem::linkToCrud("Équipement", 'fas fa-list', Accessory::class);
+        yield MenuItem::linkToCrud("Équipier", 'fas fa-list', Equipe::class);
     }
 }
