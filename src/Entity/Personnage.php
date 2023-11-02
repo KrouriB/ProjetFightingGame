@@ -31,14 +31,6 @@ class Personnage
     private ?int $life = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Weapon $weapon = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Accessory $accessory = null;
-
-    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Element $element = null;
 
@@ -109,30 +101,6 @@ class Personnage
     public function setLife(int $life): static
     {
         $this->life = $life;
-
-        return $this;
-    }
-
-    public function getWeapon(): ?Weapon
-    {
-        return $this->weapon;
-    }
-
-    public function setWeapon(?Weapon $weapon): static
-    {
-        $this->weapon = $weapon;
-
-        return $this;
-    }
-
-    public function getAccessory(): ?Accessory
-    {
-        return $this->accessory;
-    }
-
-    public function setAccessory(?Accessory $accessory): static
-    {
-        $this->accessory = $accessory;
 
         return $this;
     }
