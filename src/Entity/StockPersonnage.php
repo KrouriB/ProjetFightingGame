@@ -2,9 +2,7 @@
 
 namespace App\Entity;
 
-use App\Service\CreateRandom;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\PersonnageRepository;
 use Doctrine\Common\Collections\Collection;
 use App\Repository\StockPersonnageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -23,16 +21,9 @@ class StockPersonnage
     #[ORM\ManyToOne(inversedBy: 'stockPersonnages')]
     private ?User $stockUser = null;
 
-    public function __construct(CreateRandom $createRandom, PersonnageRepository $personnageRepository)
+    public function __construct()
     {
-        $personnages = $personnageRepository->findFirstPersonnages();
         $this->personnages = new ArrayCollection();
-        $randomFive = $createRandom->createFiveRandom();
-        foreach($randomFive as $random)
-        {
-            $this->addPersonnage($personnages[$random]);
-        }
-        dd($this->personnages);
     }
 
     public function getId(): ?int

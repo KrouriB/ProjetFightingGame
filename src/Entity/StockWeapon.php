@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Entity\Weapon;
 use App\Entity\Personnage;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\WeaponRepository;
 use App\Repository\StockWeaponRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,14 +23,9 @@ class StockWeapon
     #[ORM\ManyToOne(inversedBy: 'stockWeapons')]
     private ?User $stockUser = null;
 
-    public function __construct(WeaponRepository $weaponRepository)
+    public function __construct()
     {
-        $weapons = $weaponRepository->findFirstWeapons();
         $this->weapons = new ArrayCollection();
-        foreach($weapons as $weapon)
-        {
-            $this->addWeapon($weapon);
-        }
     }
 
     public function getId(): ?int

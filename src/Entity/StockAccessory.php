@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\AccessoryRepository;
 use Doctrine\Common\Collections\Collection;
 use App\Repository\StockAccessoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,11 +21,9 @@ class StockAccessory
     #[ORM\ManyToOne(inversedBy: 'stockAccesorys')]
     private ?User $stockUser = null;
 
-    public function __construct(AccessoryRepository $accessoryRepository)
+    public function __construct()
     {
-        $accessory = $accessoryRepository->findFirstAccessory();
         $this->accesorys = new ArrayCollection();
-        $this->addAccesory($accesory);
     }
 
     public function getId(): ?int
