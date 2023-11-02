@@ -39,7 +39,7 @@ class PersonnageRepository extends ServiceEntityRepository
     /**
     * @return Personnage[] Returns an array of Personnage objects
     */
-    public function findFirstPersonnages($value): array
+    public function findFirstPersonnages(): array
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.id < 46')

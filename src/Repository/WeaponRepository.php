@@ -39,7 +39,7 @@ class WeaponRepository extends ServiceEntityRepository
     /**
     * @return Weapon[] Returns an array of Weapon objects
     */
-    public function findFirstWeapons($value): array
+    public function findFirstWeapons(): array
     {
         return $this->createQueryBuilder('w')
             ->andWhere('w.id < 10')
