@@ -41,7 +41,7 @@ class AccessoryRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->andWhere('a.id = 1')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 
