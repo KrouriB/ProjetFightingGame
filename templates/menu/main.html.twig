@@ -5,25 +5,21 @@
 {% block body %}
     <main>
         {# {{ dump(selected) }} #}
-        {% if app.user %}
+        <div class="leftSide">
             {% include "/nav/navMenuStartDesktop.html.twig" %}
             {% include "/nav/navMenuStartMobile.html.twig" %}
-        {% else %}
-            {% include "/nav/navNotConnected.html.twig" %}
-        {% endif %}
-        <div class="topBar">
-            {% if app.user %}
+        </div>
+        <div class="rightSide">
+            <div class="topBar">
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>
                 </div>
                 <div class="menuButton mobile"><a href="">{{ 'start'|upper }}</a></div>
                 <div class="teamSelector desktop"></div>
                 <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
-            {% endif %}
-            <div class="parameter"></div>
-        </div>
-        {% if app.user %}
-            <div id="selectedCharacter">
+                <div class="parameter"></div>
+            </div>
+            <div id="selectedCharacter menuMain">
                 <div>
                     <div>
                         {# <figure></figure>
@@ -41,6 +37,6 @@
                     <span>{{ selected.personnage.type.nameType }}</span>
                 </div>
             </div>
-        {% endif %}
+        </div>
     </main>
 {% endblock %}
