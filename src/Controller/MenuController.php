@@ -11,27 +11,34 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class MenuController extends AbstractController
-{   
+{
+    #[Route('/menu/rank', name: 'app_rank')]
+    public function rank(UserRepository $userRepository): Response
+    {
+        $users = $userRepository->findBy(['winCount' => 'DESC']);
+        return $this->render('menu/rank.html.twig', [
+            'users' => $users,
+        ]);
+    }
+
     #[Route('/menu/teammate', name: 'app_teammate')]
     #[IsGranted('ROLE_USER')]
-    public function teamate(AuthorizationCheckerInterface $authChecker, Request $request, EquipeRepository $equipeRepository): Response
+    public function teammate(EquipeRepository $equipeRepository): Response
     {
         $equipes = $equipeRepository->findBy(['assosiatedUser' => $this->getUser()->getId()]);
-        // dd($persoSelect);
         return $this->render('menu/teammate.html.twig', [
             'equipes' => $equipes,
         ]);
     }
     
-    #[Route('/menu/main/{rank}', name: 'app_main')]
+    #[Route('/menu/main/{place}', name: 'app_main')]
     #[IsGranted('ROLE_USER')]
-    public function main(AuthorizationCheckerInterface $authChecker, Request $request, EquipeRepository $equipeRepository): Response
+    public function main(Request $request, EquipeRepository $equipeRepository): Response
     {
         $equipes = $equipeRepository->findBy(['assosiatedUser' => $this->getUser()->getId()]);
-        $equipeRank = $request->get('rank');
-        $equipeSelect = $equipes[$equipeRank];
+        $equipePlace = $request->get('place');
+        $equipeSelect = $equipes[$equipePlace];
         $persoSelect = $equipeSelect->getPersonnage();
-        // dd($persoSelect);
         return $this->render('menu/main.html.twig', [
             'equipes' => $equipes,
             'selected' => $equipeSelect
