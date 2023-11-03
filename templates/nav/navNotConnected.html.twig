@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
-<nav class="desktop">
-    {# <div class="menuButton"><a href="">{{ 'partie rapide'|upper }}</a></div> #}
-    <div class="menuButton"><a href="">{{ 'inscription'|upper }}</a></div>
-    <div class="menuButton"><a href="">{{ 'connexion'|upper }}</a></div>
-    <div class="menuButton"><a href="">{{ 'classement'|upper }}</a></div>
-</nav>
+{% block body %}
+    <nav class="desktop">
+        {# <div class="menuButton"><a href="">{{ 'partie rapide'|upper }}</a></div> #}
+        <div class="menuButton"><a href="{{ path('app_register') }}">{{ 'inscription'|upper }}</a></div>
+        <div class="menuButton"><a href="{{ path('app_login') }}">{{ 'connexion'|upper }}</a></div>
+        <div class="menuButton"><a href="">{{ 'classement'|upper }}</a></div>
+    </nav>
+{% endblock %}

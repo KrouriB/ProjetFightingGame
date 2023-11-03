@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
-<nav class="mobile">
-    <div class="pseudo">{{ app.user.userIdentifier }}</div>
-    <div class="menuButton"><a href="">{{ 'menu'|upper }}</a></div>
-    <div class="menuButton"><a href="">{{ 'équipier'|upper }}</a></div>
-    <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
-    <div class="menuButton"><a href="">{{ 'inventaire'|upper }}</a></div>
-    <div class="menuButton"><a href="">{{ 'création'|upper }}</a></div>
-    <div class="menuButton"><a href="">{{ 'classement'|upper }}</a></div>
-    <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
-</nav>
+{% block body %}
+    <nav class="mobile">
+        <div class="pseudo">{{ app.user.userIdentifier }}</div>
+        <div class="menuButton"><a href="">{{ 'menu'|upper }}</a></div>
+        <div class="menuButton"><a href="">{{ 'équipier'|upper }}</a></div>
+        <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
+        <div class="menuButton"><a href="">{{ 'inventaire'|upper }}</a></div>
+        <div class="menuButton"><a href="">{{ 'création'|upper }}</a></div>
+        <div class="menuButton"><a href="">{{ 'classement'|upper }}</a></div>
+        <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
+    </nav>
+{% endblock %}
