@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block body %}
+    <main>
+        {# {{ dump(selected) }} #}
+        {% if app.user %}
+            {% include "/nav/navMenuStartDesktop.html.twig" %}
+            {% include "/nav/navMenuStartMobile.html.twig" %}
+        {% else %}
+            {% include "/nav/navNotConnected.html.twig" %}
+        {% endif %}
+        <div class="topBar">
+            {% if app.user %}
+                <div class="buttonNav mobile">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="menuButton mobile"><a href="">{{ 'start'|upper }}</a></div>
+                <div class="teamSelector desktop"></div>
+                <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
+            {% endif %}
+            <div class="parameter"></div>
+        </div>
+        {% if app.user %}
+            <div id="selectedCharacter">
+                <div>
+                    <div>
+                        {# <figure></figure>
+                        <figure></figure> #}
+                        <div>{{ selected.weapon.name }}</div>
+                        <div>{{ selected.accessory.name }}</div>
+                    </div>
+                    <figure>
+                        <figcaption>{{ selected.personnage.name }}</figcaption>
+                    </figure>
+                </div>
+                <div>
+                    <span>{{ selected.personnage.category.nameCategory }}</span>
+                    <span>|</span>
+                    <span>{{ selected.personnage.type.nameType }}</span>
+                </div>
+            </div>
+        {% endif %}
+    </main>
+{% endblock %}
