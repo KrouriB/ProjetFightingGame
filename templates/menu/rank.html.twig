@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classemant{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="leftSide">
+            {% if app.user %}
+                {% include "/nav/navMenuOtherDesktop.html.twig" %}
+                {% include "/nav/navMenuOtherMobile.html.twig" %}
+            {% else %}
+                {% include "/nav/navNotConnected.html.twig" %}
+            {% endif %}
+        </div>
+        <div class="rightSide">
+            <div class="topBar">
+                <div class="buttonNav mobile">
+                    <span></span><span></span><span></span>
+                </div>
+                {% if app.user %}
+                    <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
+                {% endif %}
+                <div class="parameter"></div>
+            </div>
+            <div id="rankingTable">
+                <table>
+                    <tr>
+                        <th><div class="black"></div></th>
+                        <th>Pseudo</th>
+                        <th>Nombre de victoire</th>
+                    </tr>
+                    {% set i = 1 %}
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ i }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.winCount }}</td>
+                        </tr>
+                        {% set i = i + 1 %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}
