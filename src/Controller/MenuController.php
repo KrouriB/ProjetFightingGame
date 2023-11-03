@@ -11,8 +11,19 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class MenuController extends AbstractController
-{    
-    #[Route('/menu/main/{rank}', name: 'app_main_co')]
+{   
+    #[Route('/menu/teammate', name: 'app_teammate')]
+    #[IsGranted('ROLE_USER')]
+    public function teamate(AuthorizationCheckerInterface $authChecker, Request $request, EquipeRepository $equipeRepository): Response
+    {
+        $equipes = $equipeRepository->findBy(['assosiatedUser' => $this->getUser()->getId()]);
+        // dd($persoSelect);
+        return $this->render('menu/teammate.html.twig', [
+            'equipes' => $equipes,
+        ]);
+    }
+    
+    #[Route('/menu/main/{rank}', name: 'app_main')]
     #[IsGranted('ROLE_USER')]
     public function main(AuthorizationCheckerInterface $authChecker, Request $request, EquipeRepository $equipeRepository): Response
     {
