@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'é'|upper }}quipier{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="leftSide">
+            {% include "/nav/navMenuOtherDesktop.html.twig" %}
+            {% include "/nav/navMenuOtherMobile.html.twig" %}
+        </div>
+        <div class="rightSide">
+            <div class="topBar">
+                <div class="buttonNav mobile">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
+                <div class="parameter"></div>
+            </div>
+            <div id="teammates">
+                {% for teammate in equipes %}
+                    <div id="selectedCharacter menuTeammate">
+                        <div>
+                            <div>
+                                {# <figure></figure>
+                                <figure></figure> #}
+                                <div>{{ teammate.weapon.name }}</div>
+                                <div>{{ teammate.accessory.name }}</div>
+                            </div>
+                            <figure>
+                                <figcaption>{{ teammate.personnage.name }}</figcaption>
+                            </figure>
+                        </div>
+                        <div>
+                            <span>{{ teammate.personnage.category.nameCategory }}</span>
+                            <span>|</span>
+                            <span>{{ teammate.personnage.type.nameType }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
