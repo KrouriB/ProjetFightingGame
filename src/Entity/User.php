@@ -48,20 +48,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[ORM\OneToMany(mappedBy: 'stockUser', targetEntity: StockPersonnage::class)]
-    private Collection $stockPersonnages;
-
-    #[ORM\OneToMany(mappedBy: 'stockUser', targetEntity: StockWeapon::class)]
-    private Collection $stockWeapons;
-
-    #[ORM\OneToMany(mappedBy: 'stockUser', targetEntity: StockAccessory::class)]
-    private Collection $stockAccesorys;
-
     #[ORM\OneToMany(mappedBy: 'assosiatedUser', targetEntity: Equipe::class)]
     private Collection $equipes;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'stockUser', targetEntity: StockPersonnage::class, orphanRemoval: true)]
+    private Collection $stockPersonnages;
+
+    #[ORM\OneToMany(mappedBy: 'stockUser', targetEntity: StockWeapon::class, orphanRemoval: true)]
+    private Collection $stockWeapons;
+
+    #[ORM\OneToMany(mappedBy: 'stockUser', targetEntity: StockAccessory::class, orphanRemoval: true)]
+    private Collection $stockAccessorys;
 
     public function __construct()
     {
@@ -255,27 +255,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, StockAccessory>
      */
-    public function getStockAccesorys(): Collection
+    public function getStockAccessorys(): Collection
     {
-        return $this->stockAccesorys;
+        return $this->stockAccessorys;
     }
 
-    public function addStockAccesory(StockAccessory $stockAccesory): static
+    public function addStockAccessory(StockAccessory $stockAccessory): static
     {
-        if (!$this->stockAccesorys->contains($stockAccesory)) {
-            $this->stockAccesorys->add($stockAccesory);
-            $stockAccesory->setStockUser($this);
+        if (!$this->stockAccessorys->contains($stockAccessory)) {
+            $this->stockAccessorys->add($stockAccessory);
+            $stockAccessory->setStockUser($this);
         }
 
         return $this;
     }
 
-    public function removeStockAccesory(StockAccessory $stockAccesory): static
+    public function removeStockAccessory(StockAccessory $stockAccessory): static
     {
-        if ($this->stockAccesorys->removeElement($stockAccesory)) {
+        if ($this->stockAccessorys->removeElement($stockAccessory)) {
             // set the owning side to null (unless already changed)
-            if ($stockAccesory->getStockUser() === $this) {
-                $stockAccesory->setStockUser(null);
+            if ($stockAccessory->getStockUser() === $this) {
+                $stockAccessory->setStockUser(null);
             }
         }
 
@@ -323,7 +323,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
+    
     public function __toString()
     {
         return $this->username;
