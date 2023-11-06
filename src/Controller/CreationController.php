@@ -36,5 +36,7 @@ class CreationController extends AbstractController
                 'equipe' => $form->createView(),
             ]
         );
+
+        // TODO: faire en sorte de d'abord selectionner un personnage et ensuite selectionne une arme et un equipement
     }
 }
