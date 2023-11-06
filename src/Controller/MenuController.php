@@ -7,6 +7,9 @@ use App\Repository\EquipeRepository;
 use App\Repository\WeaponRepository;
 use App\Repository\AccessoryRepository;
 use App\Repository\PersonnageRepository;
+use App\Repository\StockWeaponRepository;
+use App\Repository\StockAccessoryRepository;
+use App\Repository\StockPersonnageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,28 +19,31 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class MenuController extends AbstractController
 {
+    
     #[Route('/menu/stock/personnage', name: 'app_stock_personnage')]
-    public function stockPersonnage(PersonnageRepository $personnageRepository): Response
+    public function stockPersonnage(StockPersonnageRepository $personnageRepository): Response
     {
-        $personnages = $Repository->findBy(['id' => $this->getUser()->getId()]);
+        $personnages = $personnageRepository->findPersonnagesOfUser($this->getUser()->getId());
+        // dd($personnages);
         return $this->render('menu/stock/personnage.html.twig', [
             'personnages' => $personnages,
         ]);
     }
 
     #[Route('/menu/stock/weapon', name: 'app_stock_weapon')]
-    public function stockWeapon(WeaponRepository $weaponRepository): Response
+    public function stockWeapon(StockWeaponRepository $weaponRepository): Response
     {
-        $weapons = $Repository->findBy(['id' => $this->getUser()->getId()]);
+        $weapons = $weaponRepository->findWeaponsOfUser($this->getUser()->getId());
+        // dd($weapons);
         return $this->render('menu/stock/weapon.html.twig', [
             'weapons' => $weapons,
         ]);
     }
 
     #[Route('/menu/stock/accessory', name: 'app_stock_accessory')]
-    public function stockAccessory(AccessoryRepository $accessoryRepository): Response
+    public function stockAccessory(StockAccessoryRepository $accessoryRepository): Response
     {
-        $accessorys = $accessoryRepository->findBy(['id' => $this->getUser()->getId()]);
+        $accessorys = $accessoryRepository->findAccessorysOfUser($this->getUser()->getId());
         return $this->render('menu/stock/accessory.html.twig', [
             'accessorys' => $accessorys,
         ]);
