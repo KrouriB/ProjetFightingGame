@@ -36,6 +36,22 @@ class StockPersonnageRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+    public function findPersonnagesOfUser(int $id): array
+    {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+
+        $sub->select('p')
+            ->from('App\Entity\Personnage', 'p')
+            ->InnerJoin('p.stockPersonnages', 'sp')
+            ->InnerJoin('sp.stockUser', 'u')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $id);
+
+        $query = $sub->getQuery();
+        return $query->getResult();
+    }
+
 //    public function findOneBySomeField($value): ?StockPersonnage
 //    {
 //        return $this->createQueryBuilder('s')

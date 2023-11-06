@@ -36,6 +36,22 @@ class StockWeaponRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+    public function findWeaponsOfUser(int $id): array
+    {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+
+        $sub->select('p')
+            ->from('App\Entity\Weapon', 'p')
+            ->InnerJoin('p.stockWeapons', 'sp')
+            ->InnerJoin('sp.stockUser', 'u')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $id);
+
+        $query = $sub->getQuery();
+        return $query->getResult();
+    }
+
 //    public function findOneBySomeField($value): ?StockWeapon
 //    {
 //        return $this->createQueryBuilder('s')

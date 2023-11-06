@@ -36,6 +36,22 @@ class StockAccessoryRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+    public function findAccessorysOfUser(int $id): array
+    {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+
+        $sub->select('p')
+            ->from('App\Entity\Accessory', 'p')
+            ->InnerJoin('p.stockAccessorys', 'sp')
+            ->InnerJoin('sp.stockUser', 'u')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $id);
+
+        $query = $sub->getQuery();
+        return $query->getResult();
+    }
+
 //    public function findOneBySomeField($value): ?StockAccessory
 //    {
 //        return $this->createQueryBuilder('s')
