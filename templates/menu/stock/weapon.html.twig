@@ -8,5 +8,40 @@
             {% include "/nav/navMenuOtherDesktop.html.twig" %}
             {% include "/nav/navMenuOtherMobile.html.twig" %}
         </div>
+        <div class="rightSide">
+            <div class="topBar">
+                <div class="buttonNav mobile">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
+                <div class="parameter"></div>
+            </div>
+            <div id="teammates">
+                <div id="inventory">
+                    <div class="personnagesIcone unselectedInventory"><a href="{{ path('app_stock_personnage') }}">image1</a></div>
+                    <div class="weaponsIcone selectedInventory">image2</div>
+                    <div class="accessoryIcone unselectedInventory"><a href="{{ path('app_stock_accessory') }}">image3</a></div>
+                </div>
+                {% for weapon in weapons %}
+                    <div id="cardInventory">
+                        <div class="topCard">
+                            <div class="infoBulle">i</div>
+                            <div class="nameCard">{{ weapon.name }}</div>
+                        </div>
+                        <div class="mainCard">
+                            <div class="leftCard">
+                                <span>{{ weapon.weaponType.nameType }}</span>
+                                <span>{{ weapon.weaponCategory.nameCategory }}</span>
+                                <span>{{ weapon.weaponElement.nameElement }}</span>
+                                <span>{{ weapon.skillElement.nameElement }}</span>
+                            </div>
+                        </div>
+                        <!-- <div class="rightCard">
+                            <figure></figure>
+                        </div> -->
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </main>
 {% endblock %}
