@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Equipe;
+use App\Form\EquipeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,10 +23,11 @@ class CreationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $equipe = $form->getData();
+            $equipe->setAssosiatedUser($this->getUser());
             $entityManager->persist($equipe);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_teammate');
         }
 
         return $this->render(
