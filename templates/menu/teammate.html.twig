@@ -16,9 +16,9 @@
                 <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
                 <div class="parameter"></div>
             </div>
-            <div id="teammates">
+            <div id="menuMain">
                 {% for teammate in equipes %}
-                    <div id="selectedCharacter menuTeammate">
+                    <div class="teammate">
                         <div>
                             <div>
                                 {# <figure></figure>
@@ -37,6 +37,9 @@
                         </div>
                     </div>
                 {% endfor %}
+                <div class="teammate">
+                    <span><a href="">+</a></span>
+                </div>
             </div>
         </div>
     </main>
