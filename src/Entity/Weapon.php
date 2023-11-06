@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\WeaponRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: WeaponRepository::class)]
@@ -55,6 +57,14 @@ class Weapon
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Element $skillElement = null;
+
+    #[ORM\ManyToMany(targetEntity: StockWeapon::class, mappedBy: 'weapons')]
+    private Collection $stockWeapons;
+
+    public function __construct()
+    {
+        $this->stockWeapons = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -220,5 +230,32 @@ class Weapon
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, StockWeapon>
+     */
+    public function getStockWeapons(): Collection
+    {
+        return $this->stockWeapons;
+    }
+
+    public function addStockWeapon(StockWeapon $stockWeapon): static
+    {
+        if (!$this->stockWeapons->contains($stockWeapon)) {
+            $this->stockWeapons->add($stockWeapon);
+            $stockWeapon->addWeapon($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockWeapon(StockWeapon $stockWeapon): static
+    {
+        if ($this->stockWeapons->removeElement($stockWeapon)) {
+            $stockWeapon->removeWeapon($this);
+        }
+
+        return $this;
     }
 }

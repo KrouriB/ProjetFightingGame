@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\TypeWeapon;
 use App\Entity\CategoryWeapon;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PersonnageRepository;
 
@@ -39,6 +41,14 @@ class Personnage
 
     #[ORM\ManyToOne]
     private ?CategoryWeapon $category = null;
+
+    #[ORM\ManyToMany(targetEntity: StockPersonnage::class, mappedBy: 'personnages')]
+    private Collection $stockPersonnages;
+
+    public function __construct()
+    {
+        $this->stockPersonnages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -144,5 +154,32 @@ class Personnage
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, StockPersonnage>
+     */
+    public function getStockPersonnages(): Collection
+    {
+        return $this->stockPersonnages;
+    }
+
+    public function addStockPersonnage(StockPersonnage $stockPersonnage): static
+    {
+        if (!$this->stockPersonnages->contains($stockPersonnage)) {
+            $this->stockPersonnages->add($stockPersonnage);
+            $stockPersonnage->addPersonnage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockPersonnage(StockPersonnage $stockPersonnage): static
+    {
+        if ($this->stockPersonnages->removeElement($stockPersonnage)) {
+            $stockPersonnage->removePersonnage($this);
+        }
+
+        return $this;
     }
 }

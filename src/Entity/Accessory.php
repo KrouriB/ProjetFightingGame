@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AccessoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AccessoryRepository::class)]
@@ -52,6 +54,14 @@ class Accessory
     #[ORM\ManyToOne(inversedBy: 'accessorys')]
     #[ORM\JoinColumn(nullable: false)] 
     private ?TypeStatAction $typeStatAction = null;
+
+    #[ORM\ManyToMany(targetEntity: StockAccessory::class, mappedBy: 'accessorys')]
+    private Collection $stockAccessorys;
+
+    public function __construct()
+    {
+        $this->stockAccessorys = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -217,5 +227,32 @@ class Accessory
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, StockAccessory>
+     */
+    public function getStockAccessorys(): Collection
+    {
+        return $this->stockAccessorys;
+    }
+
+    public function addStockAccessory(StockAccessory $stockAccessory): static
+    {
+        if (!$this->stockAccessorys->contains($stockAccessory)) {
+            $this->stockAccessorys->add($stockAccessory);
+            $stockAccessory->addAccessory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockAccessory(StockAccessory $stockAccessory): static
+    {
+        if ($this->stockAccessorys->removeElement($stockAccessory)) {
+            $stockAccessory->removeAccessory($this);
+        }
+
+        return $this;
     }
 }

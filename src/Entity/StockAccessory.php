@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
 use App\Repository\StockAccessoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StockAccessoryRepository::class)]
 class StockAccessory
@@ -15,15 +15,16 @@ class StockAccessory
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: Accessory::class)]
-    private Collection $accesorys;
+    #[ORM\ManyToMany(targetEntity: Accessory::class, inversedBy: 'stockAccessorys')]
+    private Collection $accessorys;
 
-    #[ORM\ManyToOne(inversedBy: 'stockAccesorys')]
+    #[ORM\ManyToOne(inversedBy: 'stockAccessorys')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $stockUser = null;
 
     public function __construct()
     {
-        $this->accesorys = new ArrayCollection();
+        $this->accessorys = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -34,23 +35,23 @@ class StockAccessory
     /**
      * @return Collection<int, Accessory>
      */
-    public function getAccesorys(): Collection
+    public function getAccessorys(): Collection
     {
-        return $this->accesorys;
+        return $this->accessorys;
     }
 
-    public function addAccesory(Accessory $accesory): static
+    public function addAccessory(Accessory $accessory): static
     {
-        if (!$this->accesorys->contains($accesory)) {
-            $this->accesorys->add($accesory);
+        if (!$this->accessorys->contains($accessory)) {
+            $this->accessorys->add($accessory);
         }
 
         return $this;
     }
 
-    public function removeAccesory(Accessory $accesory): static
+    public function removeAccessory(Accessory $accessory): static
     {
-        $this->accesorys->removeElement($accesory);
+        $this->accessorys->removeElement($accessory);
 
         return $this;
     }

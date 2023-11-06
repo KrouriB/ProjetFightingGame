@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
 use App\Repository\StockPersonnageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StockPersonnageRepository::class)]
 class StockPersonnage
@@ -15,10 +15,11 @@ class StockPersonnage
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: Personnage::class)]
+    #[ORM\ManyToMany(targetEntity: Personnage::class, inversedBy: 'stockPersonnages')]
     private Collection $personnages;
 
     #[ORM\ManyToOne(inversedBy: 'stockPersonnages')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $stockUser = null;
 
     public function __construct()
