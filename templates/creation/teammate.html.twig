@@ -10,7 +10,10 @@
         </div>
 
         <div class="rightSide">
-            
+            {{ form_errors(equipe) }}
+
+            {{ form_start(equipe) }}
+            {{ form_end(equipe) }}
         </div>
     </main>
 {% endblock %}
