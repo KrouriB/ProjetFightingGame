@@ -2,7 +2,7 @@
 
 {% block body %}
     <nav class="desktop">
-        <div class="menuButton"><a href="">{{ 'menu'|upper }}</a></div>
+        <div class="menuButton"><a href="{{ path('app_main') }}">{{ 'menu'|upper }}</a></div>
         <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
         <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
         <div class="menuButton"><a href="{{ path('app_stock_personnage') }}">{{ 'inventaire'|upper }}</a></div>
