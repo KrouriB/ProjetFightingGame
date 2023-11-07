@@ -6,7 +6,9 @@ use App\Entity\Equipe;
 use App\Entity\Weapon;
 use App\Form\EquipeType;
 use App\Form\WeaponType;
+use App\Entity\Accessory;
 use App\Entity\Personnage;
+use App\Form\AccessoryType;
 use App\Form\PersonnageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,6 +44,7 @@ class CreationController extends AbstractController
         );
 
         // TODO: faire en sorte de d'abord selectionner un personnage et ensuite selectionne une arme et un equipement
+        // TODO: selection equipement selon min de vie et limite sur le type et categorie d'arme
     }
 
     #[Route('/creation/personnage', name: 'app_creation_personnage')]
@@ -92,5 +95,31 @@ class CreationController extends AbstractController
                 'weapon' => $form->createView(),
             ]
         );
+    }
+
+    #[Route('/creation/accessory', name: 'app_creation_accessory')]
+    public function accessory(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $accessory = new Accessory();
+
+        $form = $this->createForm(AccessoryType::class, $accessory);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $accessory = $form->getData();
+            $entityManager->persist($accessory);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_main',['place' => 0]);
+        }
+
+        return $this->render(
+            'creation/accessory.html.twig',
+            [
+                'accessory' => $form->createView(),
+            ]
+        );
+        // TODO: faire en sorte que le rank affiche le pourcentage selon le type d'action selectionner
     }
 }
