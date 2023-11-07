@@ -9,8 +9,11 @@ use App\Entity\Element;
 use App\Entity\Accessory;
 use App\Entity\Personnage;
 use App\Entity\TypeWeapon;
+use App\Entity\StockWeapon;
 use App\Entity\CategoryWeapon;
+use App\Entity\StockAccessory;
 use App\Entity\TypeStatAction;
+use App\Entity\StockPersonnage;
 use Symfony\Component\HttpFoundation\Response;
 use App\Controller\Admin\ElementCrudController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,5 +51,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud("Arme", 'fas fa-list', Weapon::class);
         yield MenuItem::linkToCrud("Équipement", 'fas fa-list', Accessory::class);
         yield MenuItem::linkToCrud("Équipier", 'fas fa-list', Equipe::class);
+        yield MenuItem::linkToCrud("Stock Personnage", 'fas fa-list', StockPersonnage::class);
+        yield MenuItem::linkToCrud("Stock d'Arme", 'fas fa-list', StockWeapon::class);
+        yield MenuItem::linkToCrud("Stock d'Equipement", 'fas fa-list', StockAccessory::class);
     }
 }
