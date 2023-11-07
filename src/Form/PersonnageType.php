@@ -39,6 +39,7 @@ class PersonnageType extends AbstractType
                         'min' => 200,
                         'max' => 500,
                         'step' => 20,
+                        'value' => 200
                     ]
                 ]
             )
@@ -50,7 +51,8 @@ class PersonnageType extends AbstractType
                         'class' => 'form-control',
                         'min' => 0,
                         'max' => 40,
-                        'step' => 4
+                        'step' => 4,
+                        'value' => 0
                     ]
                 ]
             )
@@ -62,7 +64,8 @@ class PersonnageType extends AbstractType
                         'class' => 'form-control',
                         'min' => 0,
                         'max' => 40,
-                        'step' => 4
+                        'step' => 4,
+                        'value' => 0
                     ]
                 ]
             )
@@ -74,7 +77,8 @@ class PersonnageType extends AbstractType
                         'class' => 'form-control',
                         'min' => 60,
                         'max' => 180,
-                        'step' => 6
+                        'step' => 6,
+                        'value' => 60
                     ]
                 ]
             )
