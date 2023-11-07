@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Teammate{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="leftSide">
+            {% include "/nav/navMenuOtherDesktop.html.twig" %}
+            {% include "/nav/navMenuOtherMobile.html.twig" %}
+        </div>
+
+        <div class="rightSide">
+            {{ form_errors(weapon) }}
+
+            {{ form_start(weapon) }}
+            {{ form_end(weapon) }}
+            {# ajouter les suffix sur certain partie du form quand plus personaliser #}
+        </div>
+    </main>
+{% endblock %}
