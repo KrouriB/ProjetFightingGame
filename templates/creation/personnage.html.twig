@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Teammate{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="leftSide">
+            {% include "/nav/navMenuOtherDesktop.html.twig" %}
+            {% include "/nav/navMenuOtherMobile.html.twig" %}
+        </div>
+
+        <div class="rightSide">
+            {{ form_errors(perso) }}
+
+            {{ form_start(perso) }}
+            {{ form_end(perso) }}
+        </div>
+    </main>
+{% endblock %}
