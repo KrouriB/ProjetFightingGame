@@ -49,8 +49,6 @@ security:
         - { path: ^/admin, roles: [ROLE_ADMIN] }
         - { path: ^/menu/notCo, roles: [PUBLIC_ACCESS] }
         - { path: ^/menu/rank, roles: [PUBLIC_ACCESS] }
-        # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        # - { path: ^/, roles: IS_AUTHENTICATED }
 
     role_hierarchy:
         ROLE_ADMIN:     [ROLE_USER]
