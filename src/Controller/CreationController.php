@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Equipe;
 use App\Form\EquipeType;
+use App\Entity\Personnage;
+use App\Form\PersonnageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,5 +40,30 @@ class CreationController extends AbstractController
         );
 
         // TODO: faire en sorte de d'abord selectionner un personnage et ensuite selectionne une arme et un equipement
+    }
+
+    #[Route('/creation/personnage', name: 'app_creation_personnage')]
+    public function personnage(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $perso = new Personnage();
+
+        $form = $this->createForm(PersonnageType::class, $perso);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $perso = $form->getData();
+            $entityManager->persist($perso);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_main',['id' => 0]);
+        }
+
+        return $this->render(
+            'creation/personnage.html.twig',
+            [
+                'perso' => $form->createView(),
+            ]
+        );
     }
 }
