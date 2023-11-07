@@ -29,17 +29,38 @@ class WeaponType extends AbstractType
                 ]
             )
             ->add(
-                'nameSkill',
-                TextType::class,
+                'cost',
+                IntegerType::class
+            )
+            ->add(
+                'weaponType',
+                EntityType::class,
                 [
+                    'class' => TypeWeapon::class,
                     'attr' => [
                         'class' => 'form-control'
                     ]
                 ]
             )
             ->add(
-                'cost',
-                IntegerType::class
+                'weaponCategory',
+                EntityType::class,
+                [
+                    'class' => CategoryWeapon::class,
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ]
+            )
+            ->add(
+                'weaponElement',
+                EntityType::class,
+                [
+                    'class' => Element::class,
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ]
             )
             ->add(
                 'attackStat',
@@ -64,6 +85,25 @@ class WeaponType extends AbstractType
                         'max' => 200,
                         'step' => 1,
                         'value' => 20
+                    ]
+                ]
+            )
+            ->add(
+                'nameSkill',
+                TextType::class,
+                [
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ]
+            )
+            ->add(
+                'skillElement',
+                EntityType::class,
+                [
+                    'class' => Element::class,
+                    'attr' => [
+                        'class' => 'form-control'
                     ]
                 ]
             )
@@ -116,46 +156,6 @@ class WeaponType extends AbstractType
                         'max' => 10,
                         'step' => 1,
                         'value' => 1
-                    ]
-                ]
-            )
-            ->add(
-                'weaponType',
-                EntityType::class,
-                [
-                    'class' => TypeWeapon::class,
-                    'attr' => [
-                        'class' => 'form-control'
-                    ]
-                ]
-            )
-            ->add(
-                'weaponCategory',
-                EntityType::class,
-                [
-                    'class' => CategoryWeapon::class,
-                    'attr' => [
-                        'class' => 'form-control'
-                    ]
-                ]
-            )
-            ->add(
-                'weaponElement',
-                EntityType::class,
-                [
-                    'class' => Element::class,
-                    'attr' => [
-                        'class' => 'form-control'
-                    ]
-                ]
-            )
-            ->add(
-                'skillElement',
-                EntityType::class,
-                [
-                    'class' => Element::class,
-                    'attr' => [
-                        'class' => 'form-control'
                     ]
                 ]
             )
