@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Equipe;
+use App\Entity\Weapon;
 use App\Form\EquipeType;
+use App\Form\WeaponType;
 use App\Entity\Personnage;
 use App\Form\PersonnageType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,13 +58,38 @@ class CreationController extends AbstractController
             $entityManager->persist($perso);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_main',['id' => 0]);
+            return $this->redirectToRoute('app_main',['place' => 0]);
         }
 
         return $this->render(
             'creation/personnage.html.twig',
             [
                 'perso' => $form->createView(),
+            ]
+        );
+    }
+
+    #[Route('/creation/weapon', name: 'app_creation_weapon')]
+    public function weapon(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $weapon = new Weapon();
+
+        $form = $this->createForm(WeaponType::class, $weapon);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $weapon = $form->getData();
+            $entityManager->persist($weapon);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_main',['place' => 0]);
+        }
+
+        return $this->render(
+            'creation/weapon.html.twig',
+            [
+                'weapon' => $form->createView(),
             ]
         );
     }
