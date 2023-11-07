@@ -108,6 +108,8 @@ class CreationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $accessory = $form->getData();
+            $accessory->setEnergyAction($accessory->getEnergyAction() * $accessory->getStatAction()); // set the accessory energy * by the rank action selectionned
+            $accessory->setWaitAction($accessory->getWaitAction() * $accessory->getStatAction());
             $entityManager->persist($accessory);
             $entityManager->flush();
 
