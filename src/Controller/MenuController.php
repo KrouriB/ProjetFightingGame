@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
+use App\Form\TeammateSelectionType;
 use App\Repository\EquipeRepository;
 use App\Repository\WeaponRepository;
 use App\Repository\AccessoryRepository;
@@ -68,17 +69,32 @@ class MenuController extends AbstractController
         ]);
     }
     
-    #[Route('/menu/main/{place}', name: 'app_main')]
+    #[Route('/menu/main', name: 'app_main')]
     #[IsGranted('ROLE_USER')]
     public function main(Request $request, EquipeRepository $equipeRepository): Response
     {
+        $session = $request->getSession();
+        
         $equipes = $equipeRepository->findBy(['assosiatedUser' => $this->getUser()->getId()]);
-        $equipePlace = $request->get('place');
-        $equipeSelect = $equipes[$equipePlace];
-        $persoSelect = $equipeSelect->getPersonnage();
+        // $equipePlace = $request->get('place');
+        // $equipeSelect = $equipes[$equipePlace];
+        // $persoSelect = $equipeSelect->getPersonnage();
+
+        $form = $this->createForm(TeammateSelectionType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            // dd($data);
+            $selectedTeammate = $data['equipe'];
+            $session->set('selected_teammate', $selectedTeammate);
+
+            return $this->redirectToRoute('app_fight');
+        }
+
         return $this->render('menu/main.html.twig', [
             'equipes' => $equipes,
-            'selected' => $equipeSelect
+            'teammate' => $form->createView(),
         ]);
     }
 
