@@ -61,6 +61,9 @@ class Weapon
     #[ORM\ManyToMany(targetEntity: StockWeapon::class, mappedBy: 'weapons')]
     private Collection $stockWeapons;
 
+    #[ORM\ManyToOne]
+    private ?User $userCreator = null;
+
     public function __construct()
     {
         $this->stockWeapons = new ArrayCollection();
@@ -255,6 +258,18 @@ class Weapon
         if ($this->stockWeapons->removeElement($stockWeapon)) {
             $stockWeapon->removeWeapon($this);
         }
+
+        return $this;
+    }
+
+    public function getUserCreator(): ?User
+    {
+        return $this->userCreator;
+    }
+
+    public function setUserCreator(?User $userCreator): static
+    {
+        $this->userCreator = $userCreator;
 
         return $this;
     }

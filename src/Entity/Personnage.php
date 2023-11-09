@@ -45,6 +45,9 @@ class Personnage
     #[ORM\ManyToMany(targetEntity: StockPersonnage::class, mappedBy: 'personnages')]
     private Collection $stockPersonnages;
 
+    #[ORM\ManyToOne]
+    private ?User $userCreator = null;
+
     public function __construct()
     {
         $this->stockPersonnages = new ArrayCollection();
@@ -179,6 +182,18 @@ class Personnage
         if ($this->stockPersonnages->removeElement($stockPersonnage)) {
             $stockPersonnage->removePersonnage($this);
         }
+
+        return $this;
+    }
+
+    public function getUserCreator(): ?User
+    {
+        return $this->userCreator;
+    }
+
+    public function setUserCreator(?User $userCreator): static
+    {
+        $this->userCreator = $userCreator;
 
         return $this;
     }
