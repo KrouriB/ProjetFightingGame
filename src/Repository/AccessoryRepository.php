@@ -36,10 +36,29 @@ class AccessoryRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+    /**
+     * @return Accessory[] Returns an array of Accessory objects
+     */
     public function findFirstAccessory(): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.id = 1')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Accessory[] Returns an array of Accessory objects
+     */
+    public function findAccessorysAdapted(Personnage $personnage): array
+    {
+        $life = $personnage->getLife();
+
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.minLife <= :life')
+            ->andWhere('a.userCreator IS NULL')
+            ->setParameter('life', $life)
             ->getQuery()
             ->getResult()
         ;
