@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Weapon;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Personnage;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Weapon>
@@ -44,6 +45,32 @@ class WeaponRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('w')
             ->andWhere('w.id < 10')
             ->orderBy('w.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+    * @return Weapon[] Returns an array of Weapon objects
+    */
+    public function findWeaponsAdapted(Personnage $personnage): array
+    {
+        $type = $personnage->getType()->getId();
+        $category = $personnage->getCategory()->getId();
+        $element = $personnage->getElement()->getId();
+
+        return $this->createQueryBuilder('w')
+            ->InnerJoin('w.weaponType', 'wt')
+            ->InnerJoin('w.weaponCategory', 'wc')
+            ->InnerJoin('w.weaponElement', 'we')
+            ->InnerJoin('w.skillElement', 'se')
+            ->andWhere('we.id = :element OR we.id = 6')
+            ->andWhere('se.id = :element OR se.id = 6')
+            ->andWhere('wc.id = :category')
+            ->andWhere('wt.id = :type')
+            ->setParameter('type', $type)
+            ->setParameter('category', $category)
+            ->setParameter('element', $element)
             ->getQuery()
             ->getResult()
         ;
