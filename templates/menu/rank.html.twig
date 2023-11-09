@@ -6,8 +6,8 @@
     <main>
         <div class="leftSide">
             {% if app.user %}
-                {% include "/nav/navMenuOtherDesktop.html.twig" %}
-                {% include "/nav/navMenuOtherMobile.html.twig" %}
+                {% include "/nav/navMenuDesktop.html.twig" %}
+                {% include "/nav/navMenuMobile.html.twig" %}
             {% else %}
                 {% include "/nav/navNotConnected.html.twig" %}
             {% endif %}
