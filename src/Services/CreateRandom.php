@@ -35,8 +35,16 @@ class CreateRandom
         return $random;
     }
 
+    // method used to have a random index for an array
     public function createSingleRandom(int $lenght): int
     {
-        return rand(0, $lenght);
+        if($lenght == 1)
+        {
+            return 0;
+        }
+        else
+        {
+            return rand(0, $lenght-1);
+        }
     }
 }
