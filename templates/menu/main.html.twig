@@ -6,8 +6,24 @@
     <main>
         {# {{ dump(selected) }} #}
         <div class="leftSide">
-            {% include "/nav/navMenuStartDesktop.html.twig" %}
-            {% include "/nav/navMenuStartMobile.html.twig" %}
+            <nav class="desktop">
+                {# <div class="menuButton"><a href="">{{ 'start'|upper }}</a></div> #}
+                <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
+                <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
+                <div class="menuButton"><a href="{{ path('app_stock_personnage') }}">{{ 'inventaire'|upper }}</a></div>
+                <div class="menuButton"><a href="">{{ 'création'|upper }}</a></div>
+                <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
+                <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
+            </nav>
+            <nav class="mobile">
+                <div class="pseudo">{{ app.user.userIdentifier }}</div>
+                <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
+                <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
+                <div class="menuButton"><a href="{{ path('app_stock_personnage') }}">{{ 'inventaire'|upper }}</a></div>
+                <div class="menuButton"><a href="">{{ 'création'|upper }}</a></div>
+                <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
+                <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
+            </nav>
         </div>
         <div class="rightSide">
             <div class="topBar">
@@ -15,15 +31,20 @@
                     <span></span><span></span><span></span>
                 </div>
                 <div class="menuButton mobile"><a href="">{{ 'start'|upper }}</a></div>
-                <div class="teamSelector desktop"></div>
+                <div class="teamSelector desktop">
+                    {{ form_errors(teammate) }}
+
+                    {{ form_start(teammate) }}
+                    {{ form_end(teammate) }}
+                </div>
                 <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
                 <div class="parameter"></div>
             </div>
             <div id="menuMain">
-                <div>
+                {# <div>
                     <div>
-                        {# <figure></figure>
-                        <figure></figure> #}
+                        <figure></figure>
+                        <figure></figure>
                         <div>{{ selected.weapon.name }}</div>
                         <div>{{ selected.accessory.name }}</div>
                     </div>
@@ -35,7 +56,7 @@
                     <span>{{ selected.personnage.category.nameCategory }}</span>
                     <span>|</span>
                     <span>{{ selected.personnage.type.nameType }}</span>
-                </div>
+                </div> #}
             </div>
         </div>
     </main>
