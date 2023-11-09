@@ -38,8 +38,8 @@ class WeaponRepository extends ServiceEntityRepository
 //    }
 
     /**
-    * @return Weapon[] Returns an array of Weapon objects
-    */
+     * @return Weapon[] Returns an array of Weapon objects
+     */
     public function findFirstWeapons(): array
     {
         return $this->createQueryBuilder('w')
@@ -51,8 +51,8 @@ class WeaponRepository extends ServiceEntityRepository
     }
 
     /**
-    * @return Weapon[] Returns an array of Weapon objects
-    */
+     * @return Weapon[] Returns an array of Weapon objects
+     */
     public function findWeaponsAdapted(Personnage $personnage): array
     {
         $type = $personnage->getType()->getId();
@@ -68,6 +68,7 @@ class WeaponRepository extends ServiceEntityRepository
             ->andWhere('se.id = :element OR se.id = 6')
             ->andWhere('wc.id = :category')
             ->andWhere('wt.id = :type')
+            ->andWhere('w.userCreator IS NULL')
             ->setParameter('type', $type)
             ->setParameter('category', $category)
             ->setParameter('element', $element)
