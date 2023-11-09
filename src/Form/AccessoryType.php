@@ -51,7 +51,7 @@ class AccessoryType extends AbstractType
                     'attr' => [
                         'class' => 'form-control',
                         'min' => 0,
-                        'max' => 40,
+                        'max' => 20,
                         'step' => 2,
                         'value' => 0
                     ]
@@ -64,7 +64,7 @@ class AccessoryType extends AbstractType
                     'attr' => [
                         'class' => 'form-control',
                         'min' => 0,
-                        'max' => 40,
+                        'max' => 20,
                         'step' => 2,
                         'value' => 0
                     ]
