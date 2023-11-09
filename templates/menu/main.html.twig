@@ -5,7 +5,7 @@
 {% block body %}
     <main>
         {# {{ dump(selected) }} #}
-        <div class="leftSide">
+        <div class="shortSide">
             <nav class="desktop">
                 {# <div class="menuButton"><a href="">{{ 'start'|upper }}</a></div> #}
                 <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
@@ -25,7 +25,7 @@
                 <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
             </nav>
         </div>
-        <div class="rightSide">
+        <div class="longSide">
             <div class="topBar">
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>

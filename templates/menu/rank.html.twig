@@ -4,7 +4,7 @@
 
 {% block body %}
     <main>
-        <div class="leftSide">
+        <div class="shortSide">
             {% if app.user %}
                 {% include "/nav/navMenuDesktop.html.twig" %}
                 {% include "/nav/navMenuMobile.html.twig" %}
@@ -12,7 +12,7 @@
                 {% include "/nav/navNotConnected.html.twig" %}
             {% endif %}
         </div>
-        <div class="rightSide">
+        <div class="longSide">
             <div class="topBar">
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>

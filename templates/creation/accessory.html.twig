@@ -4,12 +4,12 @@
 
 {% block body %}
     <main>
-        <div class="leftSide">
+        <div class="shortSide">
             {% include "/nav/navMenuDesktop.html.twig" %}
             {% include "/nav/navMenuMobile.html.twig" %}
         </div>
 
-        <div class="rightSide">
+        <div class="longSide">
             {{ form_errors(accessory) }}
 
             {{ form_start(accessory) }}
