@@ -19,7 +19,7 @@ class StockWeapon
     private Collection $weapons;
 
     #[ORM\ManyToOne(inversedBy: 'stockWeapons')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $stockUser = null;
 
     public function __construct()
