@@ -67,9 +67,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->stockPersonnages = new ArrayCollection();
         $this->stockWeapons = new ArrayCollection();
-        $this->stockAccesorys = new ArrayCollection();
+        $this->stockAccessorys = new ArrayCollection();
         $this->equipes = new ArrayCollection();
-        $this->gold = 0;
+        $this->gold = 1000;
         $this->killCount = 0;
         $this->winCount = 0;
     }
