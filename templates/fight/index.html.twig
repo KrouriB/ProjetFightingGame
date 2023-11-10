@@ -6,13 +6,36 @@
     <main>
         <div class="longSide">
             <div id="scene">
-                
+                <div class="ennemiesSide">
+                    <div>
+                        <span></span>
+                        <ul>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="healthBar">
+                            <div class="greenBar"></div>
+                            <div class="redBar"></div>
+                            <span>{{ app.session. }}/{{ ennemie.getLife }}</span>
+                        </div>
+                        <div class="energyBar">
+                            <div class="blueBar"></div>
+                            <div class="blackBar"></div>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="allySide">
+
+                </div>
             </div>
             <div id="actionBar">
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
+                <a href="{{ path() }}">Attaque</a>
+                <a href="{{ path() }}">{{  }}</a>
+                <a href="{{ path() }}">{{  }}</a>
+                <a href="{{ path() }}">Abandonné</a>
             </div>
         </div>
         <div class="shortSide">
