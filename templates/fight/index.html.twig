@@ -4,42 +4,65 @@
 
 {% block body %}
     <main>
-        <div class="longSide">
+        {# {{ dump( app.session.get('ally') ) }} #}
+        <section class="longSide">
             <div id="scene">
                 <div class="ennemiesSide">
                     <div>
-                        <span></span>
+                        <span>{{ ennemie.personnage.getName }}</span>
                         <ul>
-                            <li></li>
-                            <li></li>
+                            <li>{{ ennemie.weapon.getName }}</li>
+                            <li>{{ ennemie.accessory.getName }}</li>
                         </ul>
                     </div>
                     <div>
                         <div class="healthBar">
                             <div class="greenBar"></div>
                             <div class="redBar"></div>
-                            <span>{{ app.session. }}/{{ ennemie.getLife }}</span>
+                            <span>{{ app.session.get('ennemie')['hp'] }}/{{ ennemie.personnage.getLife }}</span>
                         </div>
                         <div class="energyBar">
                             <div class="blueBar"></div>
                             <div class="blackBar"></div>
-                            <span></span>
+                            <span>{{ app.session.get('ennemie')['energy'] }}/{{ ennemie.personnage.getEnergy }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="allySide">
-
+                    <div>
+                        <span>{{ teammate.personnage.getName }}</span>
+                        <ul>
+                            <li>{{ teammate.weapon.getName }}</li>
+                            <li>{{ teammate.accessory.getName }}</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="energyBar">
+                            <div class="blueBar"></div>
+                            <div class="blackBar"></div>
+                            <span>{{ app.session.get('ally')['energy'] }}/{{ teammate.personnage.getEnergy }}</span>
+                        </div>
+                        <div class="healthBar">
+                            <div class="greenBar"></div>
+                            <div class="redBar"></div>
+                            <span>{{ app.session.get('ally')['hp'] }}/{{ teammate.personnage.getLife }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="actionBar">
-                <a href="{{ path() }}">Attaque</a>
-                <a href="{{ path() }}">{{  }}</a>
-                <a href="{{ path() }}">{{  }}</a>
-                <a href="{{ path() }}">Abandonné</a>
+                <button type="button" class="buttonFight">Attaque</button>
+                <button type="button" class="buttonFight">{{ teammate.weapon.getNameSkill }}</button>
+                <button type="button" class="buttonFight">{{ teammate.accessory.getNameAction }}</button>
+                <a href="{{ path('app_lose') }}" class="buttonFight">Abandonné</a>
+                <button type="button" class="mobile buttonFight">Log (icone fleche haut)</button>
             </div>
-        </div>
-        <div class="shortSide">
-
-        </div>
+        </section>
+        <section class="shortSide">
+            <div id="logs">
+                
+            </div>
+            <button type="button" class="mobile buttonFight">Combat (icone fleche bas)</button>
+        </section>
     </main>
 {% endblock %}
