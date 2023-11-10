@@ -47,6 +47,10 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator): Response
     {
+        if ($this->getUser() == true) {
+            return $this->redirectToRoute('app_main');
+        }
+        
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -66,11 +70,15 @@ class RegistrationController extends AbstractController
 
             $user->addStockPersonnage($stockPersonnage);
             $user->addStockWeapon($stockWeapon);
-            $user->addStockAccesory($stockAccessory);
-            
+            $user->addStockAccessory($stockAccessory);
+
+            // dd($user);
+
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
+            
+            
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
