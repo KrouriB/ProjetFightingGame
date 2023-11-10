@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div id="actionBar">
-                <button type="button" class="buttonFight">Attaque</button>
+                <button type="button" class="buttonFight" onclick="allyAttack()">Attaque</button>
                 <button type="button" class="buttonFight">{{ teammate.weapon.getNameSkill }}</button>
                 <button type="button" class="buttonFight">{{ teammate.accessory.getNameAction }}</button>
                 <a href="{{ path('app_lose') }}" class="buttonFight">Abandonné</a>
