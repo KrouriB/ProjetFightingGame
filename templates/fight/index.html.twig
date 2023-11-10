@@ -2,6 +2,11 @@
 
 {% block title %}Hello FightController!{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('/js/fight.js') }}"></script>
+    
+{% endblock %}
+
 {% block body %}
     <main>
         {# {{ dump( app.session.get('ally') ) }} #}
@@ -60,7 +65,7 @@
         </section>
         <section class="shortSide">
             <div id="logs">
-                
+
             </div>
             <button type="button" class="mobile buttonFight">Combat (icone fleche bas)</button>
         </section>
