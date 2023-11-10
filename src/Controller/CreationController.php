@@ -61,7 +61,7 @@ class CreationController extends AbstractController
             $entityManager->persist($perso);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_main',['place' => 0]);
+            return $this->redirectToRoute('app_main');
         }
 
         return $this->render(
@@ -86,7 +86,7 @@ class CreationController extends AbstractController
             $entityManager->persist($weapon);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_main',['place' => 0]);
+            return $this->redirectToRoute('app_main');
         }
 
         return $this->render(
@@ -113,7 +113,7 @@ class CreationController extends AbstractController
             $entityManager->persist($accessory);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_main',['place' => 0]);
+            return $this->redirectToRoute('app_main');
         }
 
         return $this->render(
