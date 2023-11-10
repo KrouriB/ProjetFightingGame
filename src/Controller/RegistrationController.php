@@ -135,7 +135,7 @@ class RegistrationController extends AbstractController
         $stockA = new StockAccessory();
         foreach($accessorys as $accessory)
         {
-            $stockA->addAccesory($accessory);
+            $stockA->addAccessory($accessory);
         }
 
         $this->entityManager->persist($stockA);
