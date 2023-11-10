@@ -33,16 +33,19 @@ class FightController extends AbstractController
         $accessorys = $accessoryRepository->findAccessorysAdapted($personnage);
         $accessory = $accessorys[$createRandom->createSingleRandom(count($accessorys))];
         
-        // create the enemies teammate
-        $enemies = new Equipe();
-        $enemies->setPersonnage($personnage);
-        $enemies->setWeapon($weapon);
-        $enemies->setAccessory($accessory);
-        dd($enemies);
+        // create the ennemie teammate
+        $ennemie = new Equipe();
+        $ennemie->setPersonnage($personnage);
+        $ennemie->setWeapon($weapon);
+        $ennemie->setAccessory($accessory);
+        // dd($ennemie);
+
+        $session->set('ennemie', ['hp' => $ennemie->getPersonnage()->getLife(), 'energy' => $ennemie->getPersonnage()->getEnergy()]);
+        $session->set('ally', ['hp' => $teammate->getPersonnage()->getLife(), 'energy' => $teammate->getPersonnage()->getEnergy()]);
         
         return $this->render('fight/index.html.twig', [
             'teammate' => $teammate,
-            'enemies' => $enemies,
+            'ennemie' => $ennemie,
         ]);
     }
 }
