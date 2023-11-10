@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Equipe;
+use App\Services\JsonBuilder;
 use App\Services\CreateRandom;
 use App\Repository\EquipeRepository;
 use App\Repository\WeaponRepository;
@@ -33,7 +34,7 @@ class FightController extends AbstractController
     }
 
     #[Route('/fight', name: 'app_fight')]
-    public function fight(Request $request, CreateRandom $createRandom, PersonnageRepository $personnageRepository, WeaponRepository $weaponRepository, AccessoryRepository $accessoryRepository, EquipeRepository $equipeRepository): Response
+    public function fight(Request $request, CreateRandom $createRandom, JsonBuilder $jsonBuilder, PersonnageRepository $personnageRepository, WeaponRepository $weaponRepository, AccessoryRepository $accessoryRepository, EquipeRepository $equipeRepository): Response
     {
         $session = $request->getSession();
         $mate = $session->get('selected_teammate'); // here we retive the object Equipe selectioned by the user where all the value except the id are null
@@ -61,7 +62,11 @@ class FightController extends AbstractController
         // set in session the teammates hp and energy in session to modify them later as actual stat and not max
         $session->set('ennemie', ['hp' => $ennemie->getPersonnage()->getLife(), 'energy' => $ennemie->getPersonnage()->getEnergy()]);
         $session->set('ally', ['hp' => $teammate->getPersonnage()->getLife(), 'energy' => $teammate->getPersonnage()->getEnergy()]);
+        $session->set('ennemieData', $jsonBuilder->stockData($ennemie));
+        $session->set('allyData', $jsonBuilder->stockData($teammate));
         
+        // create data to send of teammates
+
         // dd($session);
         
         return $this->render('fight/index.html.twig', [
