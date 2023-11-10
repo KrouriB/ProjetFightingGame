@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Equipe;
 use App\Services\CreateRandom;
+use App\Repository\EquipeRepository;
 use App\Repository\WeaponRepository;
 use App\Repository\AccessoryRepository;
 use App\Repository\PersonnageRepository;
@@ -16,10 +17,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FightController extends AbstractController
 {
     #[Route('/fight', name: 'app_fight')]
-    public function index(Request $request, CreateRandom $createRandom, PersonnageRepository $personnageRepository, WeaponRepository $weaponRepository, AccessoryRepository $accessoryRepository): Response
+    public function index(Request $request, CreateRandom $createRandom, PersonnageRepository $personnageRepository, WeaponRepository $weaponRepository, AccessoryRepository $accessoryRepository, EquipeRepository $equipeRepository): Response
     {
         $session = $request->getSession();
-        $teammate = $session->get('selected_teammate');
+        $mate = $session->get('selected_teammate'); // here we retive the object Equipe selectioned by the user where all the value except the id are null
+        $teammate = $equipeRepository->find($mate->getId()); // with the id of the precedent Object Equipe we find the same object with all the correct value
 
         // searching a random character in the db
         $personnages = $personnageRepository->findBy(['userCreator' => null]);
@@ -38,10 +40,13 @@ class FightController extends AbstractController
         $ennemie->setPersonnage($personnage);
         $ennemie->setWeapon($weapon);
         $ennemie->setAccessory($accessory);
-        // dd($ennemie);
 
+        
+        // set in session the teammates hp and energy in session to modify them later as actual stat and not max
         $session->set('ennemie', ['hp' => $ennemie->getPersonnage()->getLife(), 'energy' => $ennemie->getPersonnage()->getEnergy()]);
         $session->set('ally', ['hp' => $teammate->getPersonnage()->getLife(), 'energy' => $teammate->getPersonnage()->getEnergy()]);
+        
+        // dd($session);
         
         return $this->render('fight/index.html.twig', [
             'teammate' => $teammate,
