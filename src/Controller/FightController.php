@@ -16,8 +16,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FightController extends AbstractController
 {
+    #[Route('/fight/lose', name: 'app_lose')]
+    public function lose(): Response
+    {
+        $this->getUser()->loseGame();
+
+        return $this->redirectToRoute('app_main');
+    }
+    
+    #[Route('/fight/win', name: 'app_win')]
+    public function win(): Response
+    {
+        $this->getUser()->winGame();
+
+        return $this->redirectToRoute('app_main');
+    }
+
     #[Route('/fight', name: 'app_fight')]
-    public function index(Request $request, CreateRandom $createRandom, PersonnageRepository $personnageRepository, WeaponRepository $weaponRepository, AccessoryRepository $accessoryRepository, EquipeRepository $equipeRepository): Response
+    public function fight(Request $request, CreateRandom $createRandom, PersonnageRepository $personnageRepository, WeaponRepository $weaponRepository, AccessoryRepository $accessoryRepository, EquipeRepository $equipeRepository): Response
     {
         $session = $request->getSession();
         $mate = $session->get('selected_teammate'); // here we retive the object Equipe selectioned by the user where all the value except the id are null
