@@ -323,6 +323,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function loseGame(): static
+    {
+        $this->winCount--;
+
+        return $this;
+    }
+
+    public function winGame(): static
+    {
+        $this->winCount++;
+        $this->gold += 500;
+
+        return $this;
+    }
     
     public function __toString()
     {
