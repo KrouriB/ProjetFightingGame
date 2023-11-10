@@ -103,4 +103,17 @@ class MenuController extends AbstractController
     {
         return $this->render('menu/notCo.html.twig');
     }
+
+    #[Route('/', name: 'app_redirect_menu')]
+    public function redirectMenu(): Response
+    {
+        if($this->getUser() == true)
+        {
+            return $this->redirectToRoute('app_main');
+        }
+        else
+        {
+            return $this->redirectToRoute('app_not_co');
+        }
+    }
 }
