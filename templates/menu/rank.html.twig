@@ -4,16 +4,16 @@
 
 {% block body %}
     <main>
-        <div class="shortSide">
+        <section class="shortSide">
             {% if app.user %}
                 {% include "/nav/navMenuDesktop.html.twig" %}
                 {% include "/nav/navMenuMobile.html.twig" %}
             {% else %}
                 {% include "/nav/navNotConnected.html.twig" %}
             {% endif %}
-        </div>
-        <div class="longSide">
-            <div class="topBar">
+        </section>
+        <section class="longSide">
+            <header class="topBar">
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>
                 </div>
@@ -21,7 +21,7 @@
                     <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
                 {% endif %}
                 <div class="parameter"></div>
-            </div>
+            </header>
             <div id="rankingTable">
                 <table>
                     <tr>
@@ -40,6 +40,6 @@
                     {% endfor %}
                 </table>
             </div>
-        </div>
+        </section>
     </main>
 {% endblock %}

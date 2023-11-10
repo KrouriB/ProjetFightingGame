@@ -5,7 +5,7 @@
 {% block body %}
     <main>
         {# {{ dump(selected) }} #}
-        <div class="shortSide">
+        <section class="shortSide">
             <nav class="desktop">
                 {# <div class="menuButton"><a href="">{{ 'start'|upper }}</a></div> #}
                 <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
@@ -24,9 +24,9 @@
                 <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
                 <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
             </nav>
-        </div>
-        <div class="longSide">
-            <div class="topBar">
+        </section>
+        <section class="longSide">
+            <header class="topBar">
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>
                 </div>
@@ -36,10 +36,11 @@
 
                     {{ form_start(teammate) }}
                     {{ form_end(teammate) }}
+                    {# {{ dump(teammate) }} #}
                 </div>
                 <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
                 <div class="parameter"></div>
-            </div>
+            </header>
             <div id="menuMain">
                 {# <div>
                     <div>
@@ -58,6 +59,6 @@
                     <span>{{ selected.personnage.type.nameType }}</span>
                 </div> #}
             </div>
-        </div>
+        </section>
     </main>
 {% endblock %}
