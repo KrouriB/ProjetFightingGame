@@ -74,8 +74,6 @@ class FightController extends AbstractController
             'ennemie' => $ennemie,
             'allyData' => $jsonBuilder->stockData($ally), // create JSON string to send data to js file for the fight
             'ennemieData' => $jsonBuilder->stockData($ennemie),
-            'allyInfo' => $jsonBuilder->setInfo($ally),
-            'ennemieInfo' => $jsonBuilder->setInfo($ennemie),
             'element' => $jsonBuilder->elementData(),
             'type' => $jsonBuilder->typeData(),
             'category' => $jsonBuilder->categoryData(),
