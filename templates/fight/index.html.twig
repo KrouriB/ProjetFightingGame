@@ -32,12 +32,12 @@
                         <div class="healthBar">
                             <div class="greenBar"></div>
                             <div class="redBar"></div>
-                            <span>/{{ ennemie.personnage.getLife }}</span>
+                            <span id="actualEnnemieHp"></span>
                         </div>
                         <div class="energyBar">
                             <div class="blueBar"></div>
                             <div class="blackBar"></div>
-                            <span>/{{ ennemie.personnage.getEnergy }}</span>
+                            <span id="actualEnnemieNrj"></span>
                         </div>
                     </div>
                 </div>
@@ -53,19 +53,19 @@
                         <div class="energyBar">
                             <div class="blueBar"></div>
                             <div class="blackBar"></div>
-                            <span>/{{ ally.personnage.getEnergy }}</span>
+                            <span id="actualAllyNrj"></span>
                         </div>
                         <div class="healthBar">
                             <div class="greenBar"></div>
                             <div class="redBar"></div>
-                            <span>/{{ ally.personnage.getLife }}</span>
+                            <span id="actualAllyHp"></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="actionBar">
                 <button type="button" class="buttonFight" onclick="allyAttack()">Attaque</button>
-                <button type="button" class="buttonFight" onclick="checkActionElement()">{{ ally.weapon.getNameSkill }}</button>
+                <button type="button" class="buttonFight" onclick="checkActionElement('atkFromAlly')">{{ ally.weapon.getNameSkill }}</button>
                 <button type="button" class="buttonFight">{{ ally.accessory.getNameAction }}</button>
                 <a href="{{ path('app_lose') }}" class="buttonFight">Abandonné</a>
                 <button type="button" class="mobile buttonFight">Log (icone fleche haut)</button>
