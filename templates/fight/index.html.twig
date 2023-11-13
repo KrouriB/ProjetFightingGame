@@ -2,19 +2,6 @@
 
 {% block title %}Hello FightController!{% endblock %}
 
-{% block javascripts %}
-    <script>
-        var ennemie ="{{ ennemieData }}";
-        var ally ="{{ allyData }}";
-        var ennemieInfo ="{{ ennemieInfo }}";
-        var allyInfo ="{{ allyInfo }}";
-        var element ="{{ element }}";
-        var type ="{{ type }}";
-        var category ="{{ category }}";
-    </script>
-    <script src="{{ asset('/js/fight.js') }}"></script>
-{% endblock %}
-
 {% block body %}
     <main>
         {# {{ dump( app.session ) }} #}
@@ -37,7 +24,7 @@
                         <div class="energyBar">
                             <div class="blueBar"></div>
                             <div class="blackBar"></div>
-                            <span id="actualEnnemieNrj"></span>
+                            <span id="actualEnnemieEnergy"></span>
                         </div>
                     </div>
                 </div>
@@ -53,7 +40,7 @@
                         <div class="energyBar">
                             <div class="blueBar"></div>
                             <div class="blackBar"></div>
-                            <span id="actualAllyNrj"></span>
+                            <span id="actualAllyEnergy"></span>
                         </div>
                         <div class="healthBar">
                             <div class="greenBar"></div>
@@ -78,4 +65,15 @@
             <button type="button" class="mobile buttonFight">Combat (icone fleche bas)</button>
         </section>
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var ennemie ="{{ ennemieData }}";
+        var ally ="{{ allyData }}";
+        var element ="{{ element }}";
+        var typeOfWeapon ="{{ type }}";
+        var categoryOfWeapon ="{{ category }}";
+    </script>
+    <script src="{{ asset('/js/fight.js') }}"></script>
 {% endblock %}
