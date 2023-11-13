@@ -34,11 +34,20 @@ class FightController extends AbstractController
     }
 
     #[Route('/fight', name: 'app_fight')]
-    public function fight(Request $request, CreateRandom $createRandom, JsonBuilder $jsonBuilder, PersonnageRepository $personnageRepository, WeaponRepository $weaponRepository, AccessoryRepository $accessoryRepository, EquipeRepository $equipeRepository): Response
+    public function fight(
+        Request $request,
+        CreateRandom $createRandom,
+        JsonBuilder $jsonBuilder,
+        PersonnageRepository $personnageRepository,
+        WeaponRepository $weaponRepository,
+        AccessoryRepository $accessoryRepository,
+        EquipeRepository $equipeRepository,
+    ): Response
     {
         $session = $request->getSession();
         $mate = $session->get('selected_teammate'); // here we retive the object Equipe selectioned by the user where all the value except the id are null
-        $teammate = $equipeRepository->find($mate->getId()); // with the id of the precedent Object Equipe we find the same object with all the correct value
+        $ally = $equipeRepository->find($mate->getId()); // with the id of the precedent Object Equipe we find the same object with all the correct value
+
 
         // searching a random character in the db
         $personnages = $personnageRepository->findBy(['userCreator' => null]);
@@ -58,20 +67,18 @@ class FightController extends AbstractController
         $ennemie->setWeapon($weapon);
         $ennemie->setAccessory($accessory);
 
-        
-        // set in session the teammates hp and energy in session to modify them later as actual stat and not max
-        $session->set('ennemie', ['hp' => $ennemie->getPersonnage()->getLife(), 'energy' => $ennemie->getPersonnage()->getEnergy()]);
-        $session->set('ally', ['hp' => $teammate->getPersonnage()->getLife(), 'energy' => $teammate->getPersonnage()->getEnergy()]);
-        $session->set('ennemieData', $jsonBuilder->stockData($ennemie));
-        $session->set('allyData', $jsonBuilder->stockData($teammate));
-        
-        // create data to send of teammates
-
         // dd($session);
         
         return $this->render('fight/index.html.twig', [
-            'teammate' => $teammate,
+            'ally' => $ally,
             'ennemie' => $ennemie,
+            'allyData' => $jsonBuilder->stockData($ally), // create JSON string to send data to js file for the fight
+            'ennemieData' => $jsonBuilder->stockData($ennemie),
+            'allyInfo' => $jsonBuilder->setInfo($ally),
+            'ennemieInfo' => $jsonBuilder->setInfo($ennemie),
+            'element' => $jsonBuilder->elementData(),
+            'type' => $jsonBuilder->typeData(),
+            'category' => $jsonBuilder->categoryData(),
         ]);
     }
 }
