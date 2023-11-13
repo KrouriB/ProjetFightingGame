@@ -3,13 +3,21 @@
 {% block title %}Hello FightController!{% endblock %}
 
 {% block javascripts %}
+    <script>
+        var ennemie ="{{ ennemieData }}";
+        var ally ="{{ allyData }}";
+        var ennemieInfo ="{{ ennemieInfo }}";
+        var allyInfo ="{{ allyInfo }}";
+        var element ="{{ element }}";
+        var type ="{{ type }}";
+        var category ="{{ category }}";
+    </script>
     <script src="{{ asset('/js/fight.js') }}"></script>
-    
 {% endblock %}
 
 {% block body %}
     <main>
-        {# {{ dump( app.session.get('ally') ) }} #}
+        {# {{ dump( app.session ) }} #}
         <section class="longSide">
             <div id="scene">
                 <div class="ennemiesSide">
@@ -24,41 +32,41 @@
                         <div class="healthBar">
                             <div class="greenBar"></div>
                             <div class="redBar"></div>
-                            <span>{{ app.session.get('ennemie')['hp'] }}/{{ ennemie.personnage.getLife }}</span>
+                            <span>/{{ ennemie.personnage.getLife }}</span>
                         </div>
                         <div class="energyBar">
                             <div class="blueBar"></div>
                             <div class="blackBar"></div>
-                            <span>{{ app.session.get('ennemie')['energy'] }}/{{ ennemie.personnage.getEnergy }}</span>
+                            <span>/{{ ennemie.personnage.getEnergy }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="allySide">
                     <div>
-                        <span>{{ teammate.personnage.getName }}</span>
+                        <span>{{ ally.personnage.getName }}</span>
                         <ul>
-                            <li>{{ teammate.weapon.getName }}</li>
-                            <li>{{ teammate.accessory.getName }}</li>
+                            <li>{{ ally.weapon.getName }}</li>
+                            <li>{{ ally.accessory.getName }}</li>
                         </ul>
                     </div>
                     <div>
                         <div class="energyBar">
                             <div class="blueBar"></div>
                             <div class="blackBar"></div>
-                            <span>{{ app.session.get('ally')['energy'] }}/{{ teammate.personnage.getEnergy }}</span>
+                            <span>/{{ ally.personnage.getEnergy }}</span>
                         </div>
                         <div class="healthBar">
                             <div class="greenBar"></div>
                             <div class="redBar"></div>
-                            <span>{{ app.session.get('ally')['hp'] }}/{{ teammate.personnage.getLife }}</span>
+                            <span>/{{ ally.personnage.getLife }}</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="actionBar">
                 <button type="button" class="buttonFight" onclick="allyAttack()">Attaque</button>
-                <button type="button" class="buttonFight">{{ teammate.weapon.getNameSkill }}</button>
-                <button type="button" class="buttonFight">{{ teammate.accessory.getNameAction }}</button>
+                <button type="button" class="buttonFight" onclick="checkActionElement()">{{ ally.weapon.getNameSkill }}</button>
+                <button type="button" class="buttonFight">{{ ally.accessory.getNameAction }}</button>
                 <a href="{{ path('app_lose') }}" class="buttonFight">Abandonné</a>
                 <button type="button" class="mobile buttonFight">Log (icone fleche haut)</button>
             </div>
