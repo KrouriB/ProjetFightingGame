@@ -1,20 +1,35 @@
+// creation of constant and variable
+
 const ennemieData = JSON.parse(ennemie.replaceAll('&quot;', '"'));
 const allyData = JSON.parse(ally.replaceAll('&quot;', '"'));
-var ennemieInfo = JSON.parse(ennemieInfo.replaceAll('&quot;', '"'));
-var allyInfo = JSON.parse(allyInfo.replaceAll('&quot;', '"'));
 var elements = JSON.parse(element.replaceAll('&quot;', '"'));
-var types = JSON.parse(type.replaceAll('&quot;', '"'));
-var categorys = JSON.parse(category.replaceAll('&quot;', '"'));
+var types = JSON.parse(typeOfWeapon.replaceAll('&quot;', '"'));
+var categorys = JSON.parse(categoryOfWeapon.replaceAll('&quot;', '"'));
+// set max value to show
+const maxAllyHp = allyData.personnage.Life.toString();
+const maxEnnemieHp = ennemieData.personnage.Life.toString();
+const maxAllyEnergy = allyData.personnage.Energy.toString();
+const maxEnnemieEnergy = ennemieData.personnage.Energy.toString();
+// set acual value 
+var actualAllyHp = allyData.personnage.Life.toString();
+var actualEnnemieHp = ennemieData.personnage.Life.toString();
+var actualAllyEnergy = allyData.personnage.Energy.toString();
+var actualEnnemieEnergy = ennemieData.personnage.Energy.toString();
+// inialize the turn to wait to 0
+var waitSkillAlly = 0;
+var waitActionAlly = 0;
+var waitSkillEnnemie = 0;
+var waitActionEnnemie = 0;
+
+
 
 function allyAttack()
 {
 
 
-    console.log(allyData);
-    console.log(elements)
+    console.log(allyInfo.hp);
+    console.log(allyData.personnage.Life);
 }
-
-
 
 
 // update of view
@@ -22,23 +37,33 @@ function allyAttack()
 
 function setAllyHp()
 {
-    
+    var allyHealthInfo = actualAllyHp + "/" + maxAllyHp;
+    let bar = document.getElementById('actualAllyHp');
+    bar.innerText = allyHealthInfo;
 }
 
 function setEnnemieHp()
 {
-    
+    var ennemieHealthInfo = actualEnnemieHp + "/" + maxEnnemieHp;
+    let bar = document.getElementById('actualEnnemieHp');
+    bar.innerText = ennemieHealthInfo;
 }
 
 function setAllyEnergy()
 {
-    
+    var allyEnergyInfo = actualAllyEnergy + "/" + maxAllyEnergy;
+    let bar = document.getElementById('actualAllyEnergy');
+    bar.innerText = allyEnergyInfo;
 }
 
-function setEnnemieyEnergy()
+function setEnnemieEnergy()
 {
-    
+    var ennemieEnergyInfo = actualEnnemieEnergy + "/" + maxEnnemieEnergy;
+    let bar = document.getElementById('actualEnnemieEnergy');
+    bar.innerText = ennemieEnergyInfo;
 }
+
+
 
 
 // check action to return multiplicator
@@ -201,3 +226,10 @@ function checkActionCategory(action) // method to send category multiplicator de
             };
     }
 }
+
+// when loading the page
+
+setAllyHp();
+setEnnemieHp();
+setAllyEnergy();
+setEnnemieEnergy();
