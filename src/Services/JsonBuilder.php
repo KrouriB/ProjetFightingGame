@@ -70,7 +70,7 @@ class JsonBuilder
 
         foreach($elements as $element)
         {
-            $data[] = ['id' => $element->getId(), 'name' => $element->getNameElment(), 'advantage' => $this->elementRepository->find($element->getAdvantage()), 'advantageMultiplicator' => $element->getAdvantageMultiplicator(), 'disadvantage' => $this->elementRepository->find($element->getDisadvantage()), 'disadvantageMultiplicator' => $element->getDisadvantageMultiplicator()];
+            $data[] = ['id' => $element->getId(), 'name' => $element->getNameElement(), 'advantage' => $element->getAdvantage(), 'advantageMultiplicator' => $element->getAdvantageMultiplicator(), 'disadvantage' => $element->getDisadvantage(), 'disadvantageMultiplicator' => $element->getDisadvantageMultiplicator()];
         }
         
         $jsonFile = json_encode($data);
@@ -86,7 +86,7 @@ class JsonBuilder
 
         foreach($types as $type)
         {
-            $data[] = ['id' => $type->getId(), 'name' => $type->getNameType(), 'advantage' => $this->typeWeaponRepository->find($type->getAdvantage()), 'advantageMultiplicator' => $type->getAdvantageMultiplicator(), 'disadvantage' => $this->typeWeaponRepository->find($type->getDisadvantage()), 'disadvantageMultiplicator' => $type->getDisadvantageMultiplicator()];
+            $data[] = ['id' => $type->getId(), 'name' => $type->getNameType(), 'advantage' => $type->getAdvantage(), 'advantageMultiplicator' => $type->getAdvantageMultiplicator(), 'disadvantage' => $type->getDisadvantage(), 'disadvantageMultiplicator' => $type->getDisadvantageMultiplicator()];
         }
         
         $jsonFile = json_encode($data);
@@ -96,13 +96,13 @@ class JsonBuilder
 
     public function categoryData()
     {
-        $types = $this->categoryWeaponRepository->findAll();
+        $categorys = $this->categoryWeaponRepository->findAll();
 
         $data = [];
 
         foreach($categorys as $category)
         {
-            $data[] = ['id' => $category->getId(), 'name' => $category->getNameCategory(), 'advantage' => $this->categoryWeaponRepository->find($category->getAdvantage()), 'advantageMultiplicator' => $category->getAdvantageMultiplicator(), 'disadvantage' => $this->categoryWeaponRepository->find($category->getDisadvantage()), 'disadvantageMultiplicator' => $category->getDisadvantageMultiplicator()];
+            $data[] = ['id' => $category->getId(), 'name' => $category->getNameCategory(), 'advantage' => $category->getAdvantage(), 'advantageMultiplicator' => $category->getAdvantageMultiplicator(), 'disadvantage' => $category->getDisadvantage(), 'disadvantageMultiplicator' => $category->getDisadvantageMultiplicator()];
         }
         
         $jsonFile = json_encode($data);
