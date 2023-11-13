@@ -20,15 +20,6 @@ class JsonBuilder
         $this->categoryWeaponRepository = $categoryWeaponRepository;
     }
 
-    public function setInfo(Equipe $equipe)
-    {
-        $data = ['hp' => $equipe->getPersonnage()->getLife(), 'energy' => $equipe->getPersonnage()->getEnergy()];
-        
-        $jsonFile = json_encode($data);
-
-        return $jsonFile;
-    }
-
     public function stockData(Equipe $equipe)
     {
         $personnage = $equipe->getPersonnage();
