@@ -15,8 +15,12 @@ var actualAllyHp = allyData.personnage.Life.toString();
 var actualEnnemieHp = ennemieData.personnage.Life.toString();
 var actualAllyEnergy = allyData.personnage.Energy.toString();
 var actualEnnemieEnergy = ennemieData.personnage.Energy.toString();
+// value to check if need to change status of action
 var energySkillEnough = true;
 var energyActionEnough = true;
+// value to check if accessory action in ongoing
+var accessoryActionAlly = 'none';
+var accessoryActionEnnemie = 'none';
 // inialize the turn to wait to 0
 var waitSkillAlly = 0;
 var waitActionAlly = 0;
@@ -29,8 +33,15 @@ var waitActionEnnemie = 0;
 
 function allyAttack()
 {
+    let reduc = 1;
+    if(accessoryActionEnnemie == 'Réduction de dégâts')
+    {
+        reduc = 1 - (ennemieData.accessory.StatAction * 0.01);
+        accessoryActionEnnemie = 'none';
+        console.log('atk ally redu');
+    }
     let rawDamage = calculRawDamage('ally', 'base');
-    let damage = Math.round(rawDamage * checkActionElement('base') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'));
+    let damage = Math.round(rawDamage * checkActionElement('base') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
 
     damageInflict('AllyToEnnemie', damage);
     rechargeEnergy('ally');
@@ -41,8 +52,15 @@ function allyAttack()
 
 function allySkill()
 {
+    let reduc = 1;
+    if(accessoryActionEnnemie == 'Réduction de dégâts')
+    {
+        reduc = 1 - (ennemieData.accessory.StatAction * 0.01);
+        accessoryActionEnnemie = 'none';
+        console.log('skill ally redu');
+    }
     let rawDamage = calculRawDamage('ally', 'skill');
-    let damage = Math.round(rawDamage * checkActionElement('skill') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'));
+    let damage = Math.round(rawDamage * checkActionElement('skill') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
 
     // here check if energy is suffisent, if not break, keep the check even with made the disable function
     actualAllyEnergy = actualAllyEnergy - allyData.weapon.EnergyCost;
@@ -55,6 +73,30 @@ function allySkill()
     // console.log(actualAllyEnergy);
 
     setAllyTurn();
+    useEnnemieAction();
+}
+
+function allyAction()
+{
+    switch(allyData.accessory.NomTypeAction)
+    {
+        case "Réduction de dégâts" :
+            accessoryActionAlly = "Réduction de dégâts";
+            break;
+        case "Protection Magique" :
+            accessoryActionAlly = "Protection Magique";
+            break;
+        case "Protection Physique" :
+            accessoryActionAlly = "Protection Physique";
+            break;
+    };
+
+    actualAllyEnergy = actualAllyEnergy - allyData.accessory.EnergyCost;
+
+    rechargeEnergy('ally');
+
+    setAllyEnergy();
+
     useEnnemieAction();
 }
 
@@ -93,21 +135,21 @@ function useEnnemieAction() // function to select randomly enemys action
                         break;
                     case 'action' :
                         console.log('actionAcc case1 switch');
-                        // here action from accessory ennemie
+                        ennemieAction();
                         break;
-                }
+                };
             }
             else
             {
                 console.log('actionSkill case1 else');
                 ennemieSkill();
                 break;
-            }
+            };
         case 2 :
-            // here action from accessory ennemie
+            ennemieAction();
             console.log('actionAcc case2');
             break;
-    }
+    };
     // let actions = [ennemieAttack(), ennemieSkill()];
     // actions[Math.floor(Math.random() * actions.length)];
     // console.log('random');
@@ -117,8 +159,15 @@ function useEnnemieAction() // function to select randomly enemys action
 
 function ennemieAttack()
 {
+    let reduc = 1;
+    if(accessoryActionAlly == 'Réduction de dégâts')
+    {
+        reduc = 1 - (allyData.accessory.StatAction * 0.01);
+        accessoryActionAlly = 'none';
+        console.log('atk ennemy reduc');
+    }
     let rawDamage = calculRawDamage('ennemie', 'base');
-    let damage = Math.round(rawDamage * checkActionElement('base') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'));
+    let damage = Math.round(rawDamage * checkActionElement('base') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
 
     damageInflict('EnnemieToAlly', damage);
     rechargeEnergy('ennemie');
@@ -128,11 +177,18 @@ function ennemieAttack()
 
 function ennemieSkill()
 {
+    let reduc = 1;
+    if(accessoryActionAlly == 'Réduction de dégâts')
+    {
+        reduc = 1 - (allyData.accessory.StatAction * 0.01);
+        accessoryActionAlly = 'none';
+        console.log('skill ennemy reduc');
+    }
     let rawDamage = calculRawDamage('ennemie', 'skill');
-    let damage = Math.round(rawDamage * checkActionElement('skill') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'));
+    let damage = Math.round(rawDamage * checkActionElement('skill') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
 
     // here check if energy is suffisent, if not break, keep the check even with made the disable function
-    actualEnnemieEnergy = actualEnnemieEnergy - EnnemieData.weapon.EnergyCost;
+    actualEnnemieEnergy = actualEnnemieEnergy - ennemieData.weapon.EnergyCost;
 
     // console.log(actualAllyEnergy);
 
@@ -142,6 +198,28 @@ function ennemieSkill()
     // console.log(actualAllyEnergy);
 
     setEnnemieTurn();
+}
+
+function ennemieAction()
+{
+    switch(ennemieData.accessory.NomTypeAction)
+    {
+        case "Réduction de dégâts" :
+            accessoryActionEnnemie = "Réduction de dégâts";
+            break;
+        case "Protection Magique" :
+            accessoryActionEnnemie = "Protection Magique";
+            break;
+        case "Protection Physique" :
+            accessoryActionEnnemie = "Protection Physique";
+            break;
+    };
+
+    actualEnnemieEnergy = actualEnnemieEnergy - ennemieData.accessory.EnergyCost;
+
+    rechargeEnergy('ennemie');
+
+    setEnnemieEnergy();
 }
 
 
@@ -178,7 +256,7 @@ function setAllyEnergy()
                 actionButton.classList.add('disabled');
                 actionButton.setAttribute('onclick','');
                 energyActionEnough = false;
-            }
+            };
             break;
         case false :
             if(actualAllyEnergy >= allyData.accessory.EnergyCost)
@@ -186,7 +264,7 @@ function setAllyEnergy()
                 actionButton.classList.remove('disabled');
                 actionButton.setAttribute('onclick','');
                 energyActionEnough = true;
-            }
+            };
             break;
     }
     // test pour activer/desactiver la compétance
@@ -198,7 +276,7 @@ function setAllyEnergy()
                 skillButton.classList.add('disabled');
                 skillButton.setAttribute('onclick','');
                 energySkillEnough = false;
-            }
+            };
             break;
         case false :
             if(actualAllyEnergy >= allyData.weapon.EnergyCost)
@@ -206,7 +284,7 @@ function setAllyEnergy()
                 skillButton.classList.remove('disabled');
                 skillButton.setAttribute('onclick','allySkill()');
                 energySkillEnough = true;
-            }
+            };
             break;
     }
 }
@@ -250,7 +328,7 @@ function checkActionElement(action) // method to send element multiplicator depe
             else
             {
                 return 1;
-            }
+            };
         case 'skill' :
             if(allyData.weapon.Element == allyData.weapon.ElementSkill)
             {
@@ -406,6 +484,8 @@ function calculRawDamage(who, what) // function to calculate damage depending th
     let adversaire;
     let attackStat;
     let magicStat;
+    let resiMagic = 1;
+    let resiPhysic = 1;
     
     // define who does the action
     switch(who)
@@ -413,9 +493,35 @@ function calculRawDamage(who, what) // function to calculate damage depending th
         case 'ally' :
             perso = allyData;
             adversaire = ennemieData;
+            if(accessoryActionEnnemie == 'Protection Magique')
+            {
+                resiMagic = 1 - (ennemieData.accessory.StatAction * 0.01);
+                accessoryActionEnnemie ='none';
+                console.log('ally magi res');
+            };
+            if(accessoryActionEnnemie == 'Protection Physique')
+            {
+                resiPhysic = 1 - (ennemieData.accessory.StatAction * 0.01);
+                accessoryActionEnnemie ='none';
+                console.log('ally atck res');
+            };
+            break;
         case 'ennemie' :
             perso = ennemieData;
             adversaire = allyData;
+            if(accessoryActionAlly == 'Protection Magique')
+            {
+                resiMagic = 1 - (perso.accessory.StatAction * 0.01);
+                accessoryActionAlly = 'none';
+                console.log('ennemy magi res');
+            };
+            if(accessoryActionAlly == 'Protection Physique')
+            {
+                resiPhysic = 1 - (perso.accessory.StatAction * 0.01);
+                accessoryActionAlly = 'none';
+                console.log('ennemy atck res');
+            };
+            break;
     }
 
     // define if skill or base attck
@@ -433,8 +539,8 @@ function calculRawDamage(who, what) // function to calculate damage depending th
 
     let physic = (perso.personnage.Attack * (attackStat / 10) + perso.accessory.Attack);
     let magic = (perso.personnage.Magic * (magicStat / 10) + perso.accessory.Magic);
-    let physicDamage = physic - adversaire.accessory.Defense;
-    let magicDamage = magic - adversaire.accessory.Resistance;
+    let physicDamage = (physic - adversaire.accessory.Defense) * resiPhysic;
+    let magicDamage = (magic - adversaire.accessory.Resistance) * resiMagic;
 
     if(physicDamage < 0)
     {
@@ -457,14 +563,14 @@ function rechargeEnergy(who) // function to recover energy and make no overflow 
             if(actualAllyEnergy > allyData.personnage.Energy)
             {
                 actualAllyEnergy = allyData.personnage.Energy;
-            }
+            };
             break;
         case 'ennemie' :
             actualEnnemieEnergy = parseFloat(ennemieData.accessory.Recovery) + parseFloat(actualEnnemieEnergy);
             if(actualEnnemieEnergy > ennemieData.personnage.Energy)
             {
                 actualEnnemieEnergy = ennemieData.personnage.Energy;
-            }
+            };
             break;
     }
 }
@@ -478,14 +584,14 @@ function damageInflict(who, damage) // function to inflict the damage and check 
             if(actualAllyHp <= 0)
             {
                 actualAllyHp = allyData.personnage.Hp; // here Game over to do
-            }
+            };
             break;
         case 'AllyToEnnemie' :
             actualEnnemieHp = parseFloat(actualEnnemieHp) - parseFloat(damage);
             if(actualEnnemieHp <= 0)
             {
                 actualEnnemieHp = ennemieData.personnage.Hp; // here Game over to do
-            }
+            };
             break;
     }
 }
