@@ -28,23 +28,118 @@ var waitActionEnnemie = 0;
 function allyAttack()
 {
     let rawDamage = calculRawDamage('ally', 'base');
-    let damage = Math.round(rawDamage * checkActionElement('base') * checkActionType('allyToEnnemie') * checkActionCategory('allyToEnnemie'));
+    let damage = Math.round(rawDamage * checkActionElement('base') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'));
 
     damageInflict('AllyToEnnemie', damage);
     rechargeEnergy('ally');
 
     setAllyTurn();
+    useEnnemieAction();
 }
 
 function allySkill()
 {
     let rawDamage = calculRawDamage('ally', 'skill');
-    let damage = Math.round(rawDamage * checkActionElement('skill') * checkActionType('allyToEnnemie') * checkActionCategory('allyToEnnemie'));
+    let damage = Math.round(rawDamage * checkActionElement('skill') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'));
+
+    // here check if energy is suffisent, if not break, keep the check even with made the disable function
+    actualAllyEnergy = actualAllyEnergy - allyData.weapon.EnergyCost;
+
+    // console.log(actualAllyEnergy);
 
     damageInflict('AllyToEnnemie', damage);
     rechargeEnergy('ally');
 
+    // console.log(actualAllyEnergy);
+
     setAllyTurn();
+    useEnnemieAction();
+}
+
+
+// Ennemy Action
+
+
+function useEnnemieAction() // function to select randomly enemys action
+{
+    let action = 1;
+    let what;
+    if(actualEnnemieEnergy >= ennemieData.weapon.EnergyCost)
+    {
+        action += 1;
+        what = 'skill';
+    }
+    if(actualEnnemieEnergy >= ennemieData.accessory.EnergyCost)
+    {
+        action += 1;
+        what = 'action';
+    }
+    switch(Math.floor(Math.random() * action))
+    {
+        case 0 :
+            console.log('actionAtk');
+            ennemieAttack();
+            break;
+        case 1 :
+            if(action == 1)
+            {
+                switch(what)
+                {
+                    case 'skill' :
+                        console.log('actionSkill case1 switch');
+                        ennemieSkill();
+                        break;
+                    case 'action' :
+                        console.log('actionAcc case1 switch');
+                        // here action from accessory ennemie
+                        break;
+                }
+            }
+            else
+            {
+                console.log('actionSkill case1 else');
+                ennemieSkill();
+                break;
+            }
+        case 2 :
+            // here action from accessory ennemie
+            console.log('actionAcc case2');
+            break;
+    }
+    // let actions = [ennemieAttack(), ennemieSkill()];
+    // actions[Math.floor(Math.random() * actions.length)];
+    // console.log('random');
+    // console.log(actions[Math.floor(Math.random() * actions.length)]);
+    // return actions[Math.floor(Math.random() * actions.length)];
+}
+
+function ennemieAttack()
+{
+    let rawDamage = calculRawDamage('ennemie', 'base');
+    let damage = Math.round(rawDamage * checkActionElement('base') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'));
+
+    damageInflict('EnnemieToAlly', damage);
+    rechargeEnergy('ennemie');
+
+    setEnnemieTurn();
+}
+
+function ennemieSkill()
+{
+    let rawDamage = calculRawDamage('ennemie', 'skill');
+    let damage = Math.round(rawDamage * checkActionElement('skill') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'));
+
+    // here check if energy is suffisent, if not break, keep the check even with made the disable function
+    actualEnnemieEnergy = actualEnnemieEnergy - EnnemieData.weapon.EnergyCost;
+
+    // console.log(actualAllyEnergy);
+
+    damageInflict('EnnemieToAlly', damage);
+    rechargeEnergy('ennemie');
+
+    // console.log(actualAllyEnergy);
+
+    setEnnemieTurn();
 }
 
 
@@ -193,7 +288,7 @@ function checkActionType(action) // method to send type multiplicator depending 
     // select the weapon type and not the personnage type for an amelioration where a caracter will have a possbility to choose all weapon from a category or a type
     switch (action)
     {
-        case 'allyToEnnemie' :
+        case 'AllyToEnnemie' :
             if(typeWeaponAlly.advantage == typeWeaponEnnemie.id)
             {
                 return typeWeaponAlly.advantageMultiplicator;
@@ -206,7 +301,7 @@ function checkActionType(action) // method to send type multiplicator depending 
             {
                 return 1;
             };
-        case 'ennemieToAlly' :
+        case 'EnnemieToAlly' :
             if(typeWeaponEnnemie.advantage == typeWeaponAlly.id)
             {
                 return typeWeaponEnnemie.advantageMultiplicator;
@@ -231,7 +326,7 @@ function checkActionCategory(action) // method to send category multiplicator de
     // select the weapon category and not the personnage category for an amelioration where a caracter will have a possbility to choose all weapon from a category or a category
     switch (action)
     {
-        case 'allyToEnnemie' :
+        case 'AllyToEnnemie' :
             if(categoryWeaponAlly.advantage == categoryWeaponEnnemie.id)
             {
                 return categoryWeaponAlly.advantageMultiplicator;
@@ -244,7 +339,7 @@ function checkActionCategory(action) // method to send category multiplicator de
             {
                 return 1;
             };
-        case 'ennemieToAlly' :
+        case 'EnnemieToAlly' :
             if(categoryWeaponEnnemie.advantage == categoryWeaponAlly.id)
             {
                 return categoryWeaponEnnemie.advantageMultiplicator;
