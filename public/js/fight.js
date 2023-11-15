@@ -176,6 +176,7 @@ function setAllyEnergy()
             if(actualAllyEnergy < allyData.accessory.EnergyCost)
             {
                 actionButton.classList.add('disabled');
+                actionButton.setAttribute('onclick','');
                 energyActionEnough = false;
             }
             break;
@@ -183,6 +184,7 @@ function setAllyEnergy()
             if(actualAllyEnergy >= allyData.accessory.EnergyCost)
             {
                 actionButton.classList.remove('disabled');
+                actionButton.setAttribute('onclick','');
                 energyActionEnough = true;
             }
             break;
@@ -194,6 +196,7 @@ function setAllyEnergy()
             if(actualAllyEnergy < allyData.weapon.EnergyCost)
             {
                 skillButton.classList.add('disabled');
+                skillButton.setAttribute('onclick','');
                 energySkillEnough = false;
             }
             break;
@@ -201,6 +204,7 @@ function setAllyEnergy()
             if(actualAllyEnergy >= allyData.weapon.EnergyCost)
             {
                 skillButton.classList.remove('disabled');
+                skillButton.setAttribute('onclick','allySkill()');
                 energySkillEnough = true;
             }
             break;
