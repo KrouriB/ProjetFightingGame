@@ -51,9 +51,9 @@
                 </div>
             </div>
             <div id="actionBar">
-                <button type="button" class="buttonFight" onclick="allyAttack()">Attaque</button>
-                <button type="button" class="buttonFight" onclick="allySkill()">{{ ally.weapon.getNameSkill }}</button>
-                <button type="button" class="buttonFight">{{ ally.accessory.getNameAction }}</button>
+                <button type="button" class="buttonFight" id="attackButton" onclick="allyAttack()">Attaque</button>
+                <button type="button" class="buttonFight" id="skillButton" onclick="allySkill()">{{ ally.weapon.getNameSkill }}</button>
+                <button type="button" class="buttonFight" id="actionButton" onclick="">{{ ally.accessory.getNameAction }}</button>
                 <a href="{{ path('app_lose') }}" class="buttonFight">Abandonné</a>
                 <button type="button" class="mobile buttonFight">Log (icone fleche haut)</button>
             </div>
