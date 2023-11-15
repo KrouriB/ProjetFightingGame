@@ -30,7 +30,8 @@ class TypeStatActionCrudController extends AbstractCrudController
                     'Vie' => 'Life',
                 ]),
             TextField::new('nomType')
-                ->setLabel("Type d'action"),
+                ->setLabel("Type d'action")
+                ->setFormTypeOption('disabled', 'disabled'),
             IntegerField::new('rankStat1'),
             IntegerField::new('rankStat2'),
             IntegerField::new('rankStat3'),
