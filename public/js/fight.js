@@ -22,13 +22,29 @@ var waitSkillEnnemie = 0;
 var waitActionEnnemie = 0;
 
 
+// Ally Actions
+
 
 function allyAttack()
 {
+    let rawDamage = calculRawDamage('ally', 'base');
+    let damage = Math.round(rawDamage * checkActionElement('base') * checkActionType('allyToEnnemie') * checkActionCategory('allyToEnnemie'));
 
+    damageInflict('AllyToEnnemie', damage);
+    rechargeEnergy('ally');
 
-    console.log(allyInfo.hp);
-    console.log(allyData.personnage.Life);
+    setAllyTurn();
+}
+
+function allySkill()
+{
+    let rawDamage = calculRawDamage('ally', 'skill');
+    let damage = Math.round(rawDamage * checkActionElement('skill') * checkActionType('allyToEnnemie') * checkActionCategory('allyToEnnemie'));
+
+    damageInflict('AllyToEnnemie', damage);
+    rechargeEnergy('ally');
+
+    setAllyTurn();
 }
 
 
@@ -63,6 +79,19 @@ function setEnnemieEnergy()
     bar.innerText = ennemieEnergyInfo;
 }
 
+// function to apply each offensive action
+
+function setAllyTurn()
+{
+    setAllyEnergy();
+    setEnnemieHp();
+}
+
+function setEnnemieTurn()
+{
+    setEnnemieEnergy();
+    setAllyHp();
+}
 
 
 
@@ -158,7 +187,9 @@ function checkActionElement(action) // method to send element multiplicator depe
 function checkActionType(action) // method to send type multiplicator depending of the case
 {
     let typeWeaponAlly = types.filter((typeWeapon) => typeWeapon.name == allyData.weapon.Type);
+    typeWeaponAlly = typeWeaponAlly[0];
     let typeWeaponEnnemie = types.filter((typeWeapon) => typeWeapon.name == ennemieData.weapon.Type);
+    typeWeaponEnnemie = typeWeaponEnnemie[0];
     // select the weapon type and not the personnage type for an amelioration where a caracter will have a possbility to choose all weapon from a category or a type
     switch (action)
     {
@@ -194,7 +225,9 @@ function checkActionType(action) // method to send type multiplicator depending 
 function checkActionCategory(action) // method to send category multiplicator depending of the case
 {
     let categoryWeaponAlly = categorys.filter((categoryWeapon) => categoryWeapon.name == allyData.weapon.Category);
+    categoryWeaponAlly = categoryWeaponAlly[0];
     let categoryWeaponEnnemie = categorys.filter((categoryWeapon) => categoryWeapon.name == ennemieData.weapon.Category);
+    categoryWeaponEnnemie = categoryWeaponEnnemie[0];
     // select the weapon category and not the personnage category for an amelioration where a caracter will have a possbility to choose all weapon from a category or a category
     switch (action)
     {
@@ -224,6 +257,97 @@ function checkActionCategory(action) // method to send category multiplicator de
             {
                 return 1;
             };
+    }
+}
+
+function calculRawDamage(who, what) // function to calculate damage depending the case indicated
+{
+    // intialize some variable
+    let perso;
+    let adversaire;
+    let attackStat;
+    let magicStat;
+    
+    // define who does the action
+    switch(who)
+    { 
+        case 'ally' :
+            perso = allyData;
+            adversaire = ennemieData;
+        case 'ennemie' :
+            perso = ennemieData;
+            adversaire = allyData;
+    }
+
+    // define if skill or base attck
+    switch(what)
+    {
+        case 'base' :
+            attackStat = perso.weapon.baseAttack;
+            magicStat = perso.weapon.baseMagic;
+            break;
+        case 'skill' :
+            attackStat = perso.weapon.skillAttack;
+            magicStat = perso.weapon.skillMagic;
+            break;
+    }
+
+    let physic = (perso.personnage.Attack * (attackStat / 10) + perso.accessory.Attack);
+    let magic = (perso.personnage.Magic * (magicStat / 10) + perso.accessory.Magic);
+    let physicDamage = physic - adversaire.accessory.Defense;
+    let magicDamage = magic - adversaire.accessory.Resistance;
+
+    if(physicDamage < 0)
+    {
+        physicDamage = 0;
+    }
+    if(magicDamage < 0)
+    {
+        magicDamage = 0;
+    }
+
+    return physicDamage + magicDamage;
+}
+
+function rechargeEnergy(who) // function to recover energy and make no overflow of energy
+{
+    switch(who)
+    {
+        case 'ally' :
+            actualAllyEnergy = parseFloat(allyData.accessory.Recovery) + parseFloat(actualAllyEnergy);
+            if(actualAllyEnergy > allyData.personnage.Energy)
+            {
+                actualAllyEnergy = allyData.personnage.Energy;
+            }
+            break;
+        case 'ennemie' :
+            actualEnnemieEnergy = parseFloat(ennemieData.accessory.Recovery) + parseFloat(actualEnnemieEnergy);
+            if(actualEnnemieEnergy > ennemieData.personnage.Energy)
+            {
+                actualEnnemieEnergy = ennemieData.personnage.Energy;
+            }
+            break;
+    }
+}
+
+function damageInflict(who, damage) // function to inflict the damage and check if 0 hp
+{
+    switch(who)
+    {
+        case 'EnnemieToAlly' :
+            actualAllyHp = parseFloat(actualAllyHp) - parseFloat(damage);
+            if(actualAllyHp <= 0)
+            {
+                actualAllyHp = allyData.personnage.Hp; // here Game over to do
+            }
+            break;
+        case 'AllyToEnnemie' :
+            actualEnnemieHp = parseFloat(actualEnnemieHp) - parseFloat(damage);
+            if(actualEnnemieHp <= 0)
+            {
+                actualEnnemieHp = ennemieData.personnage.Hp; // here Game over to do
+            }
+            break;
     }
 }
 
