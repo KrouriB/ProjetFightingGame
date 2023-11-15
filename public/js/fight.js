@@ -10,11 +10,13 @@ const maxAllyHp = allyData.personnage.Life.toString();
 const maxEnnemieHp = ennemieData.personnage.Life.toString();
 const maxAllyEnergy = allyData.personnage.Energy.toString();
 const maxEnnemieEnergy = ennemieData.personnage.Energy.toString();
-// set acual value 
+// set actual value 
 var actualAllyHp = allyData.personnage.Life.toString();
 var actualEnnemieHp = ennemieData.personnage.Life.toString();
 var actualAllyEnergy = allyData.personnage.Energy.toString();
 var actualEnnemieEnergy = ennemieData.personnage.Energy.toString();
+var energySkillEnough = true;
+var energyActionEnough = true;
 // inialize the turn to wait to 0
 var waitSkillAlly = 0;
 var waitActionAlly = 0;
@@ -162,9 +164,47 @@ function setEnnemieHp()
 
 function setAllyEnergy()
 {
+    let skillButton = document.getElementById('skillButton');
+    let actionButton = document.getElementById('actionButton');
     var allyEnergyInfo = actualAllyEnergy + "/" + maxAllyEnergy;
     let bar = document.getElementById('actualAllyEnergy');
     bar.innerText = allyEnergyInfo;
+    // test pour activer/desactiver l'action
+    switch(energyActionEnough)
+    {
+        case true :
+            if(actualAllyEnergy < allyData.accessory.EnergyCost)
+            {
+                actionButton.classList.add('disabled');
+                energyActionEnough = false;
+            }
+            break;
+        case false :
+            if(actualAllyEnergy >= allyData.accessory.EnergyCost)
+            {
+                actionButton.classList.remove('disabled');
+                energyActionEnough = true;
+            }
+            break;
+    }
+    // test pour activer/desactiver la compétance
+    switch(energySkillEnough)
+    {
+        case true :
+            if(actualAllyEnergy < allyData.weapon.EnergyCost)
+            {
+                skillButton.classList.add('disabled');
+                energySkillEnough = false;
+            }
+            break;
+        case false :
+            if(actualAllyEnergy >= allyData.weapon.EnergyCost)
+            {
+                skillButton.classList.remove('disabled');
+                energySkillEnough = true;
+            }
+            break;
+    }
 }
 
 function setEnnemieEnergy()
