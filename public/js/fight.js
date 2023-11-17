@@ -47,7 +47,7 @@ function allyAttack()
         console.log('atk ally redu');
     }
     let rawDamage = calculRawDamage('ally', 'base');
-    let damage = Math.round(rawDamage * checkActionElement('base') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
+    let damage = Math.round(rawDamage * checkActionElement('baseAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
 
     damageInflict('AllyToEnnemie', damage);
     rechargeEnergy('ally');
@@ -66,7 +66,7 @@ function allySkill()
         console.log('skill ally redu');
     }
     let rawDamage = calculRawDamage('ally', 'skill');
-    let damage = Math.round(rawDamage * checkActionElement('skill') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
+    let damage = Math.round(rawDamage * checkActionElement('skillAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
 
     // here check if energy is suffisent, if not break, keep the check even with made the disable function
     actualAllyEnergy = actualAllyEnergy - allyData.weapon.EnergyCost;
@@ -173,7 +173,7 @@ function ennemieAttack()
         console.log('atk ennemy reduc');
     }
     let rawDamage = calculRawDamage('ennemie', 'base');
-    let damage = Math.round(rawDamage * checkActionElement('base') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
+    let damage = Math.round(rawDamage * checkActionElement('baseEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
 
     damageInflict('EnnemieToAlly', damage);
     rechargeEnergy('ennemie');
@@ -191,7 +191,7 @@ function ennemieSkill()
         console.log('skill ennemy reduc');
     }
     let rawDamage = calculRawDamage('ennemie', 'skill');
-    let damage = Math.round(rawDamage * checkActionElement('skill') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
+    let damage = Math.round(rawDamage * checkActionElement('skillEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
 
     // here check if energy is suffisent, if not break, keep the check even with made the disable function
     actualEnnemieEnergy = actualEnnemieEnergy - ennemieData.weapon.EnergyCost;
@@ -326,7 +326,7 @@ function checkActionElement(action) // method to send element multiplicator depe
 {
     switch (action)
     {
-        case 'base' :
+        case 'baseAlly' :
             if(allyData.weapon.Element == allyData.weapon.ElementBase)
             {
                 return 1.5;
@@ -335,8 +335,26 @@ function checkActionElement(action) // method to send element multiplicator depe
             {
                 return 1;
             };
-        case 'skill' :
+        case 'skillAlly' :
             if(allyData.weapon.Element == allyData.weapon.ElementSkill)
+            {
+                return 1.75;
+            }
+            else
+            {
+                return 1;
+            };
+        case 'baseEnnemie' :
+            if(ennemieData.weapon.Element == ennemieData.weapon.ElementBase)
+            {
+                return 1.5;
+            }
+            else
+            {
+                return 1;
+            };
+        case 'skillEnnemie' :
+            if(ennemieData.weapon.Element == ennemieData.weapon.ElementSkill)
             {
                 return 1.75;
             }
