@@ -5,10 +5,9 @@ var elements = JSON.parse(element.replaceAll('&quot;', '"'));
 var types = JSON.parse(typeOfWeapon.replaceAll('&quot;', '"'));
 var categorys = JSON.parse(categoryOfWeapon.replaceAll('&quot;', '"'));
 // log div selected + default log to use
-const logDiv = document.getElementById('logs');
-const logLine = document.createElement('p');
-logLine.classList.add('logLine');
-const logNames = document.createElement('span');
+const logDiv = document.getElementById("logs");
+const logLine = document.createElement("p");
+logLine.classList.add("logLine");
 // set max value to show
 const maxAllyHp = allyData.personnage.Life.toString();
 const maxEnnemieHp = ennemieData.personnage.Life.toString();
@@ -25,8 +24,10 @@ var energyActionEnough = true;
 // value to check if accessory action in ongoing
 var accessoryActionAlly = 'none';
 var accessoryActionEnnemie = 'none';
-//value of damaged reduced
-var reducedDamge = 0;
+//value of damaged reduced and damage done on turn and action type if set
+var turnDamage = 0;
+var reducedDamage = 0;
+var accessoryAction = 'none';
 // inialize the turn to wait to 0
 var waitSkillAlly = 0;
 var waitActionAlly = 0;
@@ -43,21 +44,23 @@ function allyAttack()
     if(accessoryActionEnnemie == 'Réduction de dégâts')
     {
         reduc = 1 - (ennemieData.accessory.StatAction * 0.01);
+        accessoryAction = accessoryActionEnnemie;
         accessoryActionEnnemie = 'none';
-        console.log('atk ally redu');
     }
     let rawDamage = calculRawDamage('ally', 'base');
     let damage = Math.round(rawDamage * checkActionElement('baseAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
     
     if(reduc != 1)
     {
-        reducedDamge = (Math.round(rawDamage * checkActionElement('baseAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage;
+        reducedDamage = ((Math.round(rawDamage * checkActionElement('baseAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage);
     }
+    turnDamage = damage;
 
     damageInflict('AllyToEnnemie', damage);
     rechargeEnergy('ally');
 
     setAllyTurn();
+    actionLogs('ally','attack');
     useEnnemieAction();
 }
 
@@ -67,28 +70,27 @@ function allySkill()
     if(accessoryActionEnnemie == 'Réduction de dégâts')
     {
         reduc = 1 - (ennemieData.accessory.StatAction * 0.01);
+        accessoryAction = accessoryActionEnnemie;
         accessoryActionEnnemie = 'none';
-        console.log('skill ally redu');
     }
     let rawDamage = calculRawDamage('ally', 'skill');
     let damage = Math.round(rawDamage * checkActionElement('skillAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
 
     if(reduc != 1)
     {
-        reducedDamge = (Math.round(rawDamage * checkActionElement('skillAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage;
+        reducedDamage = (Math.round(rawDamage * checkActionElement('skillAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage;
+        turnDamage = damage;
     }
+    turnDamage = damage;
 
     // here check if energy is suffisent, if not break, keep the check even with made the disable function
     actualAllyEnergy = actualAllyEnergy - allyData.weapon.EnergyCost;
 
-    // console.log(actualAllyEnergy);
-
     damageInflict('AllyToEnnemie', damage);
     rechargeEnergy('ally');
 
-    // console.log(actualAllyEnergy);
-
     setAllyTurn();
+    actionLogs('ally','skill');
     useEnnemieAction();
 }
 
@@ -113,6 +115,7 @@ function allyAction()
 
     setAllyEnergy();
 
+    actionLogs('ally','action');
     useEnnemieAction();
 }
 
@@ -137,7 +140,6 @@ function useEnnemieAction() // function to select randomly enemys action
     switch(Math.floor(Math.random() * action))
     {
         case 0 :
-            console.log('actionAtk');
             ennemieAttack();
             break;
         case 1 :
@@ -146,31 +148,22 @@ function useEnnemieAction() // function to select randomly enemys action
                 switch(what)
                 {
                     case 'skill' :
-                        console.log('actionSkill case1 switch');
                         ennemieSkill();
                         break;
                     case 'action' :
-                        console.log('actionAcc case1 switch');
                         ennemieAction();
                         break;
                 };
             }
             else
             {
-                console.log('actionSkill case1 else');
                 ennemieSkill();
                 break;
             };
         case 2 :
             ennemieAction();
-            console.log('actionAcc case2');
             break;
     };
-    // let actions = [ennemieAttack(), ennemieSkill()];
-    // actions[Math.floor(Math.random() * actions.length)];
-    // console.log('random');
-    // console.log(actions[Math.floor(Math.random() * actions.length)]);
-    // return actions[Math.floor(Math.random() * actions.length)];
 }
 
 function ennemieAttack()
@@ -179,20 +172,22 @@ function ennemieAttack()
     if(accessoryActionAlly == 'Réduction de dégâts')
     {
         reduc = 1 - (allyData.accessory.StatAction * 0.01);
+        accessoryAction = accessoryActionAlly;
         accessoryActionAlly = 'none';
-        console.log('atk ennemy reduc');
     }
     let rawDamage = calculRawDamage('ennemie', 'base');
     let damage = Math.round(rawDamage * checkActionElement('baseEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
 
     if(reduc != 1)
     {
-        reducedDamge = (Math.round(rawDamage * checkActionElement('baseEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'))) - damage;
+        reducedDamage = (Math.round(rawDamage * checkActionElement('baseEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'))) - damage;
     }
+    turnDamage = damage;
 
     damageInflict('EnnemieToAlly', damage);
     rechargeEnergy('ennemie');
 
+    actionLogs('ennemie','attack');
     setEnnemieTurn();
 }
 
@@ -202,27 +197,25 @@ function ennemieSkill()
     if(accessoryActionAlly == 'Réduction de dégâts')
     {
         reduc = 1 - (allyData.accessory.StatAction * 0.01);
+        accessoryAction = accessoryActionAlly;
         accessoryActionAlly = 'none';
-        console.log('skill ennemy reduc');
     }
     let rawDamage = calculRawDamage('ennemie', 'skill');
     let damage = Math.round(rawDamage * checkActionElement('skillEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
 
     if(reduc != 1)
     {
-        reducedDamge = (Math.round(rawDamage * checkActionElement('skillEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'))) - damage;
+        reducedDamage = (Math.round(rawDamage * checkActionElement('skillEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'))) - damage;
     }
+    turnDamage = damage;
 
     // here check if energy is suffisent, if not break, keep the check even with made the disable function
     actualEnnemieEnergy = actualEnnemieEnergy - ennemieData.weapon.EnergyCost;
 
-    // console.log(actualAllyEnergy);
-
     damageInflict('EnnemieToAlly', damage);
     rechargeEnergy('ennemie');
 
-    // console.log(actualAllyEnergy);
-
+    actionLogs('ennemie','skill');
     setEnnemieTurn();
 }
 
@@ -245,6 +238,7 @@ function ennemieAction()
 
     rechargeEnergy('ennemie');
 
+    actionLogs('ennemie','action');
     setEnnemieEnergy();
 }
 
@@ -540,14 +534,14 @@ function calculRawDamage(who, what) // function to calculate damage depending th
             if(accessoryActionEnnemie == 'Protection Magique')
             {
                 resiMagic = 1 - (ennemieData.accessory.StatAction * 0.01);
-                accessoryActionEnnemie ='none';
-                console.log('ally magi res');
+                accessoryAction = accessoryActionEnnemie;
+                accessoryActionEnnemie = 'none';
             };
             if(accessoryActionEnnemie == 'Protection Physique')
             {
                 resiPhysic = 1 - (ennemieData.accessory.StatAction * 0.01);
-                accessoryActionEnnemie ='none';
-                console.log('ally atck res');
+                accessoryAction = accessoryActionEnnemie;
+                accessoryActionEnnemie = 'none';
             };
             break;
         case 'ennemie' :
@@ -556,14 +550,14 @@ function calculRawDamage(who, what) // function to calculate damage depending th
             if(accessoryActionAlly == 'Protection Magique')
             {
                 resiMagic = 1 - (perso.accessory.StatAction * 0.01);
+                accessoryAction = accessoryActionAlly;
                 accessoryActionAlly = 'none';
-                console.log('ennemy magi res');
             };
             if(accessoryActionAlly == 'Protection Physique')
             {
                 resiPhysic = 1 - (perso.accessory.StatAction * 0.01);
+                accessoryAction = accessoryActionAlly;
                 accessoryActionAlly = 'none';
-                console.log('ennemy atck res');
             };
             break;
     }
@@ -588,11 +582,11 @@ function calculRawDamage(who, what) // function to calculate damage depending th
 
     if(resiPhysic != 1)
     {
-        reducedDamge = (physic - adversaire.accessory.Defense) - physicDamage;
+        reducedDamage = (physic - adversaire.accessory.Defense) - physicDamage;
     }
     else if(resiMagic != 1)
     {
-        reducedDamge = (magic - adversaire.accessory.Resistance) - magicDamage;
+        reducedDamage = (magic - adversaire.accessory.Resistance) - magicDamage;
     } 
 
     if(physicDamage < 0)
@@ -653,61 +647,141 @@ function damageInflict(who, damage) // function to inflict the damage and check 
 // log creation
 
 
-function actionLogs(who, what, damage)
+function actionLogs(who, what)
 {
     let newLogs = logLine.cloneNode();
-    let firstUser = logNames.cloneNode();
-    let otherUser = logNames.cloneNode();
-    let accessoryOpposed;
-    if(!damage) { //If the optional argument is not there, create a new variable with that name.
-		let damage = "none";
-	}
+    let firstUser;
+    let otherUser;
+    let firstUserData;
+    let accessoryOpposed = accessoryAction;
+    let accessoryUsed;
+
+    
+    // console.log(allyData)
+    // switch(who)
+    // {
+    //     case 'ally' :
+    //         firstUserData = allyData;
+    //         accessoryUsed = accessoryActionAlly;
+    //         break;
+    //     case 'ennemie' :
+    //         firstUserData = ennemieData;
+    //         accessoryUsed = accessoryActionEnnemie;
+    //         break;
+    // }
+
     switch(who)
     {
         case 'ally' :
-            firstUser.innerText = allyData.personnage.Name;
-            firstUser.classList.add('persoUser');
-            otherUser.innerText = ennemieData.personnage.Name;
-            otherUser.classList.add('ennemieUser');
-            accessoryOpposed = accessoryActionEnnemie;
+            firstUserData = allyData;
+            accessoryUsed = accessoryActionAlly;
+            // firstUser.innerText = allyData.personnage.Name;
+            firstUser = '<span class="persoUser">'+allyData.personnage.Name+'</span>';
+            // firstUser.classList.add('persoUser');
+            // otherUser.innerText = ennemieData.personnage.Name;
+            otherUser = '<span class="persoUser">'+ennemieData.personnage.Name+'</span>';
+            // otherUser.classList.add('ennemieUser');
             break;
         case 'ennemie' :
-            firstUser.innerText = ennemieData.personnage.Name;
-            firstUser.classList.add('ennemieUser');
-            otherUser.innerText = allyData.personnage.Name;
-            otherUser.classList.add('persoUser');
-            accessoryOpposed = accessoryActionAlly;
+            firstUserData = ennemieData;
+            accessoryUsed = accessoryActionEnnemie;
+            // firstUser.innerText = ennemieData.personnage.Name;
+            firstUser = '<span class="persoUser">'+ennemieData.personnage.Name+'</span>';
+            // firstUser.classList.add('ennemieUser');
+            // otherUser.innerText = allyData.personnage.Name;
+            otherUser = '<span class="persoUser">'+allyData.personnage.Name+'</span>';
+            // otherUser.classList.add('persoUser');
             break;
     }
+    // newLogs.appendChild(otherUser);
+    
     switch(what)
+    {
+        case 'attack' :
+            switch(accessoryOpposed)
             {
-                case 'attack' :
-                    switch(accessoryOpposed)
-                    {
-                        case "Réduction de dégâts" :
-                            newLogs.innerText = firstUser + ' ';
-                            break;
-                        case "Protection Magique" :
-                            break;
-                        case "Protection Physique" :
-                            break;
-                        case "none" :
-                            break;
-                    };
-                case 'skill' :
-                    switch(accessoryOpposed)
-                    {
-                        case "Réduction de dégâts" :
-                            break;
-                        case "Protection Magique" :
-                            break;
-                        case "Protection Physique" :
-                            break;
-                        case "none" :
-                            break;
-                    };
-                case 'action' :
-            }
+                case "Réduction de dégâts" :
+                    newLogs.innerHTML = firstUser + ' a fait ' + turnDamage + ' de dégats avec une resistance au dégat totaux de ' + reducedDamage + ' à ' + otherUser;
+                    accessoryAction = 'none';
+                    turnDamage = 0;
+                    reducedDamage = 0;
+                    break;
+                    case "Protection Magique" :
+                        newLogs.innerHTML = firstUser + ' a fait ' + turnDamage + ' de dégats avec une resistance au dégats magique pure de ' + reducedDamage + ' à ' + otherUser;
+                        accessoryAction = 'none';
+                        turnDamage = 0;
+                    reducedDamage = 0;
+                    break;
+                    case "Protection Physique" :
+                        newLogs.innerHTML = firstUser + '  a fait ' + turnDamage + ' de dégats avec une resistance au dégats physique pure de ' + reducedDamage + ' à  ' + otherUser;
+                    
+                        accessoryAction = 'none';
+                        turnDamage = 0;
+                        reducedDamage = 0;
+                        break;
+                    case "none" :
+                        newLogs.innerHTML = firstUser + ' a fait ' + turnDamage + ' de dégats à ' + otherUser;
+                        text = ' a fait ' + turnDamage + ' de dégats à ';
+                        break;
+            };
+
+            break;
+        case 'skill' :
+            switch(accessoryOpposed)
+            {
+                case "Réduction de dégâts" :
+                    newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.weapon.skillName + ' sur ' + otherUser + ', il a infliger ' + turnDamage + ' de dégats avec une resistance au dégat totaux de ' + reducedDamage;
+                    
+                    accessoryAction = 'none';
+                    turnDamage = 0;
+                    reducedDamage = 0;
+                    break;
+                case "Protection Magique" :
+                    newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.weapon.skillName + ' sur ' + otherUser + ', il a infliger ' + turnDamage + ' de dégats avec une resistance au dégats magique pure de ' + reducedDamage;
+                    
+                    accessoryAction = 'none';
+                    turnDamage = 0;
+                    reducedDamage = 0;
+                    break;
+                case "Protection Physique" :
+                    newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.weapon.skillName + ' sur ' + otherUser + ', il a infliger ' + turnDamage + ' de dégats avec une resistance au dégats physique pure de ' + reducedDamage;
+                    
+                    accessoryAction = 'none';
+                    turnDamage = 0;
+                    reducedDamage = 0;
+                    break;
+                case "none" :
+                    newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.weapon.skillName + ' sur ' + otherUser + ', il a infliger ' + turnDamage;
+                    
+                    break;
+            };
+
+            
+            break;
+        case 'action' :
+            switch(accessoryUsed)
+            {
+                case "Réduction de dégâts" :
+                    newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.accessory.actionName + ' il aura le bonus ' + accessoryUsed;
+                    
+                    accessoryUsed = 'none';
+                    break;
+                case "Protection Magique" :
+                    newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.accessory.actionName + ' il aura le bonus ' + accessoryUsed;
+                    
+                    accessoryUsed = 'none';
+                    break;
+                case "Protection Physique" :
+                    newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.accessory.actionName + ' il aura le bonus ' + accessoryUsed;
+                    
+                    accessoryUsed = 'none';
+                    break;
+            };
+
+            break;
+    }
+    logDiv.appendChild(newLogs);
+    
 }
 
 
