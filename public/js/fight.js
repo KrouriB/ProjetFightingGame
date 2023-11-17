@@ -48,6 +48,11 @@ function allyAttack()
     }
     let rawDamage = calculRawDamage('ally', 'base');
     let damage = Math.round(rawDamage * checkActionElement('baseAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
+    
+    if(reduc != 1)
+    {
+        reducedDamge = (Math.round(rawDamage * checkActionElement('baseAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage;
+    }
 
     damageInflict('AllyToEnnemie', damage);
     rechargeEnergy('ally');
@@ -67,6 +72,11 @@ function allySkill()
     }
     let rawDamage = calculRawDamage('ally', 'skill');
     let damage = Math.round(rawDamage * checkActionElement('skillAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
+
+    if(reduc != 1)
+    {
+        reducedDamge = (Math.round(rawDamage * checkActionElement('skillAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage;
+    }
 
     // here check if energy is suffisent, if not break, keep the check even with made the disable function
     actualAllyEnergy = actualAllyEnergy - allyData.weapon.EnergyCost;
@@ -175,6 +185,11 @@ function ennemieAttack()
     let rawDamage = calculRawDamage('ennemie', 'base');
     let damage = Math.round(rawDamage * checkActionElement('baseEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
 
+    if(reduc != 1)
+    {
+        reducedDamge = (Math.round(rawDamage * checkActionElement('baseEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'))) - damage;
+    }
+
     damageInflict('EnnemieToAlly', damage);
     rechargeEnergy('ennemie');
 
@@ -192,6 +207,11 @@ function ennemieSkill()
     }
     let rawDamage = calculRawDamage('ennemie', 'skill');
     let damage = Math.round(rawDamage * checkActionElement('skillEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
+
+    if(reduc != 1)
+    {
+        reducedDamge = (Math.round(rawDamage * checkActionElement('skillEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'))) - damage;
+    }
 
     // here check if energy is suffisent, if not break, keep the check even with made the disable function
     actualEnnemieEnergy = actualEnnemieEnergy - ennemieData.weapon.EnergyCost;
