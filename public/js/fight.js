@@ -1,10 +1,14 @@
 // creation of constant and variable
-
 const ennemieData = JSON.parse(ennemie.replaceAll('&quot;', '"'));
 const allyData = JSON.parse(ally.replaceAll('&quot;', '"'));
 var elements = JSON.parse(element.replaceAll('&quot;', '"'));
 var types = JSON.parse(typeOfWeapon.replaceAll('&quot;', '"'));
 var categorys = JSON.parse(categoryOfWeapon.replaceAll('&quot;', '"'));
+// log div selected + default log to use
+const logDiv = document.getElementById('logs');
+const logLine = document.createElement('p');
+logLine.classList.add('logLine');
+const logNames = document.createElement('span');
 // set max value to show
 const maxAllyHp = allyData.personnage.Life.toString();
 const maxEnnemieHp = ennemieData.personnage.Life.toString();
@@ -21,6 +25,8 @@ var energyActionEnough = true;
 // value to check if accessory action in ongoing
 var accessoryActionAlly = 'none';
 var accessoryActionEnnemie = 'none';
+//value of damaged reduced
+var reducedDamge = 0;
 // inialize the turn to wait to 0
 var waitSkillAlly = 0;
 var waitActionAlly = 0;
@@ -542,6 +548,15 @@ function calculRawDamage(who, what) // function to calculate damage depending th
     let physicDamage = (physic - adversaire.accessory.Defense) * resiPhysic;
     let magicDamage = (magic - adversaire.accessory.Resistance) * resiMagic;
 
+    if(resiPhysic != 1)
+    {
+        reducedDamge = (physic - adversaire.accessory.Defense) - physicDamage;
+    }
+    else if(resiMagic != 1)
+    {
+        reducedDamge = (magic - adversaire.accessory.Resistance) - magicDamage;
+    } 
+
     if(physicDamage < 0)
     {
         physicDamage = 0;
@@ -596,7 +611,70 @@ function damageInflict(who, damage) // function to inflict the damage and check 
     }
 }
 
+
+// log creation
+
+
+function actionLogs(who, what, damage)
+{
+    let newLogs = logLine.cloneNode();
+    let firstUser = logNames.cloneNode();
+    let otherUser = logNames.cloneNode();
+    let accessoryOpposed;
+    if(!damage) { //If the optional argument is not there, create a new variable with that name.
+		let damage = "none";
+	}
+    switch(who)
+    {
+        case 'ally' :
+            firstUser.innerText = allyData.personnage.Name;
+            firstUser.classList.add('persoUser');
+            otherUser.innerText = ennemieData.personnage.Name;
+            otherUser.classList.add('ennemieUser');
+            accessoryOpposed = accessoryActionEnnemie;
+            break;
+        case 'ennemie' :
+            firstUser.innerText = ennemieData.personnage.Name;
+            firstUser.classList.add('ennemieUser');
+            otherUser.innerText = allyData.personnage.Name;
+            otherUser.classList.add('persoUser');
+            accessoryOpposed = accessoryActionAlly;
+            break;
+    }
+    switch(what)
+            {
+                case 'attack' :
+                    switch(accessoryOpposed)
+                    {
+                        case "Réduction de dégâts" :
+                            newLogs.innerText = firstUser + ' ';
+                            break;
+                        case "Protection Magique" :
+                            break;
+                        case "Protection Physique" :
+                            break;
+                        case "none" :
+                            break;
+                    };
+                case 'skill' :
+                    switch(accessoryOpposed)
+                    {
+                        case "Réduction de dégâts" :
+                            break;
+                        case "Protection Magique" :
+                            break;
+                        case "Protection Physique" :
+                            break;
+                        case "none" :
+                            break;
+                    };
+                case 'action' :
+            }
+}
+
+
 // when loading the page
+
 
 setAllyHp();
 setEnnemieHp();
