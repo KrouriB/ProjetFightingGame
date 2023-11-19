@@ -14,6 +14,11 @@
 
             {{ form_start(perso) }}
             {{ form_end(perso) }}
+            {# faire chque ligne form row #}
         </div>
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('/js/creation.js') }}"></script>
 {% endblock %}
