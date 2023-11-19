@@ -89,6 +89,8 @@ function allySkill()
     damageInflict('AllyToEnnemie', damage);
     rechargeEnergy('ally');
 
+    waitSkillAlly = allyData.weapon.turnWait;
+
     setAllyTurn();
     actionLogs('ally','skill');
     useEnnemieAction();
@@ -113,6 +115,8 @@ function allyAction()
 
     rechargeEnergy('ally');
 
+    waitActionAlly = allyData.accessory.turnWait;
+
     setAllyEnergy();
 
     actionLogs('ally','action');
@@ -127,16 +131,33 @@ function useEnnemieAction() // function to select randomly enemys action
 {
     let action = 1;
     let what;
-    if(actualEnnemieEnergy >= ennemieData.weapon.EnergyCost)
+
+    if(actualEnnemieEnergy >= ennemieData.weapon.EnergyCost && waitSkillEnnemie == 0)
     {
         action += 1;
         what = 'skill';
     }
-    if(actualEnnemieEnergy >= ennemieData.accessory.EnergyCost)
+    else
+    {
+        if(waitSkillEnnemie > 0)
+        {
+            waitSkillEnnemie = waitSkillEnnemie--; // reduce skill wait turn
+        };
+    };
+
+    if(actualEnnemieEnergy >= ennemieData.accessory.EnergyCost && waitActionEnnemie == 0)
     {
         action += 1;
         what = 'action';
     }
+    else
+    {
+        if(waitActionEnnemie > 0)
+        {
+            waitActionEnnemie = waitActionEnnemie--; // reduce action wait turn
+        };
+    };
+
     switch(Math.floor(Math.random() * action))
     {
         case 0 :
@@ -215,6 +236,8 @@ function ennemieSkill()
     damageInflict('EnnemieToAlly', damage);
     rechargeEnergy('ennemie');
 
+    waitSkillEnnemie = ennemieData.weapon.turnWait
+
     actionLogs('ennemie','skill');
     setEnnemieTurn();
 }
@@ -237,6 +260,8 @@ function ennemieAction()
     actualEnnemieEnergy = actualEnnemieEnergy - ennemieData.accessory.EnergyCost;
 
     rechargeEnergy('ennemie');
+
+    waitActionEnnemie = ennemieData.accessory.turnWait;
 
     actionLogs('ennemie','action');
     setEnnemieEnergy();
@@ -271,40 +296,64 @@ function setAllyEnergy()
     switch(energyActionEnough)
     {
         case true :
-            if(actualAllyEnergy < allyData.accessory.EnergyCost)
+            if(actualAllyEnergy < allyData.accessory.EnergyCost || waitActionAlly > 0)
             {
                 actionButton.classList.add('disabled');
                 actionButton.setAttribute('onclick','');
                 energyActionEnough = false;
+
+                if(waitActionAlly > 0)
+                {
+                    waitActionAlly = waitActionAlly--;
+                };
             };
+
             break;
         case false :
-            if(actualAllyEnergy >= allyData.accessory.EnergyCost)
+            if(actualAllyEnergy >= allyData.accessory.EnergyCost && waitActionAlly == 0)
             {
                 actionButton.classList.remove('disabled');
                 actionButton.setAttribute('onclick','');
                 energyActionEnough = true;
             };
+
+            if(waitActionAlly > 0)
+            {
+                waitActionAlly = waitActionAlly--;
+            };
+
             break;
     }
     // test pour activer/desactiver la compétance
     switch(energySkillEnough)
     {
         case true :
-            if(actualAllyEnergy < allyData.weapon.EnergyCost)
+            if(actualAllyEnergy < allyData.weapon.EnergyCost || waitSkillAlly > 0)
             {
                 skillButton.classList.add('disabled');
                 skillButton.setAttribute('onclick','');
                 energySkillEnough = false;
+                
+                if(waitSkillAlly > 0)
+                {
+                    waitSkillAlly = waitSkillAlly--;
+                };
             };
+
             break;
         case false :
-            if(actualAllyEnergy >= allyData.weapon.EnergyCost)
+            if(actualAllyEnergy >= allyData.weapon.EnergyCost && waitSkillAlly == 0)
             {
                 skillButton.classList.remove('disabled');
                 skillButton.setAttribute('onclick','allySkill()');
                 energySkillEnough = true;
             };
+
+            if(waitSkillAlly > 0)
+            {
+                waitSkillAlly = waitSkillAlly--;
+            };
+            
             break;
     }
 }
