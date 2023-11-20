@@ -25,15 +25,15 @@ INSERT INTO `accessory` (`id`, `type_stat_action_id`, `name`, `min_life`, `defen
 	(1, 1, 'Armure en Cuir Dur', 200, 2, 2, 1, 1, 18, 0, 'Position Boule', 12, 1, 1);
 
 INSERT INTO `weapon` (`id`, `weapon_type_id`, `weapon_category_id`, `weapon_element_id`, `skill_element_id`, `name`, `attack_stat`, `magic_stat`, `attack_skill`, `magic_skill`, `energy_skill`, `wait_skill`, `cost`, `name_skill`) VALUES
-	(1, 1, 1, 6, 6, 'Hache Neutre', 20, 20, 50, 50, 30, 1, 0, 'Coup Sauté'),
-	(2, 2, 1, 6, 6, 'Épée Neutre', 20, 20, 50, 50, 30, 1, 0, 'Coup Sauté'),
-	(3, 3, 1, 6, 6, 'Lance Neutre', 20, 20, 50, 50, 30, 1, 0, 'Coup Sauté'),
-	(4, 1, 2, 6, 6, 'Tatouage Neutre', 20, 20, 50, 50, 30, 1, 0, 'Jet Arcanique'),
-	(5, 2, 2, 6, 6, 'Tome Neutre', 20, 20, 50, 50, 30, 1, 0, 'Jet Arcanique'),
-	(6, 3, 2, 6, 6, 'Sceptre Neutre', 20, 20, 50, 50, 30, 1, 0, 'Jet Arcanique'),
-	(7, 1, 3, 6, 6, 'Gantelet Neutre', 20, 20, 50, 50, 30, 1, 0, 'Attaque Sournoise'),
-	(8, 2, 3, 6, 6, 'Dague Neutre', 20, 20, 50, 50, 30, 1, 0, 'Attaque Sournoise'),
-	(9, 3, 3, 6, 6, 'Arc Neutre', 20, 20, 50, 50, 30, 1, 0, 'Attaque Sournoise');
+	(1, 1, 1, 6, 6, 'Hache Neutre', 200, 200, 500, 500, 30, 1, 0, 'Coup Sauté'),
+	(2, 2, 1, 6, 6, 'Épée Neutre', 200, 200, 500, 500, 30, 1, 0, 'Coup Sauté'),
+	(3, 3, 1, 6, 6, 'Lance Neutre', 200, 200, 500, 500, 30, 1, 0, 'Coup Sauté'),
+	(4, 1, 2, 6, 6, 'Tatouage Neutre', 200, 200, 500, 500, 30, 1, 0, 'Jet Arcanique'),
+	(5, 2, 2, 6, 6, 'Tome Neutre', 200, 200, 500, 500, 30, 1, 0, 'Jet Arcanique'),
+	(6, 3, 2, 6, 6, 'Sceptre Neutre', 200, 200, 500, 500, 30, 1, 0, 'Jet Arcanique'),
+	(7, 1, 3, 6, 6, 'Gantelet Neutre', 200, 200, 500, 500, 30, 1, 0, 'Attaque Sournoise'),
+	(8, 2, 3, 6, 6, 'Dague Neutre', 200, 200, 500, 500, 30, 1, 0, 'Attaque Sournoise'),
+	(9, 3, 3, 6, 6, 'Arc Neutre', 200, 200, 500, 500, 30, 1, 0, 'Attaque Sournoise');
 
 INSERT INTO `personnage` (`id`, `element_id`, `type_id`, `category_id`, `name`, `attack`, `magic`, `energy`, `life`) VALUES
 	(1, 1, 1, 1, 'Hache Feu', 10, 10, 30, 200),
