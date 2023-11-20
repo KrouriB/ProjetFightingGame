@@ -13,8 +13,138 @@
             {{ form_errors(weapon) }}
 
             {{ form_start(weapon) }}
+                <div class="leftCreation">
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.weaponType) }}
+                            {{ form_widget(weapon.weaponType) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.weaponCategory) }}
+                            {{ form_widget(weapon.weaponCategory) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.weaponElement) }}
+                            {{ form_widget(weapon.weaponElement) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.skillElement) }}
+                            {{ form_widget(weapon.skillElement) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="shortSide rightCreation">
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.name) }}
+                        </div>
+                        <div class="ligneMid">
+                            {{ form_widget(weapon.name) }}
+                        </div>
+                        <div class="ligneInf">
+                            {{ form_errors(weapon.name) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.nameSkill) }}
+                        </div>
+                        <div class="ligneMid">
+                            {{ form_widget(weapon.nameSkill) }}
+                        </div>
+                        <div class="ligneInf">
+                            {{ form_errors(weapon.nameSkill) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <p>Cout en or : <span id="cost"></span></p>
+                        {{ form_widget(weapon.cost) }}
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.attackStat) }}
+                            <a class="buttonStat statMinus grey" id="atkStatMinus" onclick="lessAtkStatWeapon()" disabled>-</a>
+                            {{ form_widget(weapon.attackStat) }}
+                            <a class="buttonStat statPlus" id="atkStatPlus" onclick="moreAtkStatWeapon()">+</a>
+                        </div>
+                        <div class="ligneInf infoStat">
+                            {{ form_help(weapon.attackStat) }}
+                            {{ form_errors(weapon.attackStat) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.magicStat) }}
+                            <a class="buttonStat statMinus grey" id="magStatMinus" onclick="lessMagStatWeapon()">-</a>
+                            {{ form_widget(weapon.magicStat) }}
+                            <a class="buttonStat statPlus" id="magStatPlus" onclick="moreMagStatWeapon()">+</a>
+                        </div>
+                        <div class="ligneInf infoStat">
+                            {{ form_help(weapon.magicStat) }}
+                            {{ form_errors(weapon.magicStat) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.attackSkill) }}
+                            <a class="buttonStat statMinus grey" id="atkSkillMinus" onclick="lessAtkSkillWeapon()">-</a>
+                            {{ form_widget(weapon.attackSkill) }}
+                            <a class="buttonStat statPlus" id="atkSkillPlus" onclick="moreAtkSkillWeapon()">+</a>
+                        </div>
+                        <div class="ligneInf infoStat">
+                            {{ form_help(weapon.attackSkill) }}
+                            {{ form_errors(weapon.attackSkill) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.magicSkill) }}
+                            <a class="buttonStat statMinus grey" id="magSkillMinus" onclick="lessMagSkillWeapon()">-</a>
+                            {{ form_widget(weapon.magicSkill) }}
+                            <a class="buttonStat statPlus" id="magSkillPlus" onclick="moreMagSkillWeapon()">+</a>
+                        </div>
+                        <div class="ligneInf infoStat">
+                            {{ form_help(weapon.magicSkill) }}
+                            {{ form_errors(weapon.magicSkill) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.energySkill) }}
+                            <a class="buttonStat statMinus grey" id="energySkillMinus" onclick="lessEnergySkillWeapon()">-</a>
+                            {{ form_widget(weapon.energySkill) }}
+                            <a class="buttonStat statPlus" id="energySkillPlus" onclick="moreEnergySkillWeapon()">+</a>
+                        </div>
+                        <div class="ligneInf infoStat">
+                            {{ form_help(weapon.energySkill) }}
+                            {{ form_errors(weapon.energySkill) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(weapon.waitSkill) }}
+                            <a class="buttonStat statMinus grey" id="waitSkillMinus" onclick="lessWaitSkillWeapon()">-</a>
+                            {{ form_widget(weapon.waitSkill) }}
+                            <a class="buttonStat statPlus" id="waitSkillPlus" onclick="moreWaitSkillWeapon()">+</a>
+                        </div>
+                        <div class="ligneInf infoStat">
+                            {{ form_help(weapon.waitSkill) }}
+                            {{ form_errors(weapon.waitSkill) }}
+                        </div>
+                    </div>
+                    <div class="zoneValidate">
+                        <a onclick="validate()">Valider</a>
+                        {{ form_widget(weapon.valider) }}
+                    </div>
+                </div>
             {{ form_end(weapon) }}
-            {# ajouter les suffix sur certain partie du form quand plus personaliser #}
+            {# ajouter les suffix sur certain partie du form quand plus weaponnaliser #}
         </div>
     </main>
 {% endblock %}
