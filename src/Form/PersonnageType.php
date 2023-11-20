@@ -35,12 +35,14 @@ class PersonnageType extends AbstractType
                 IntegerType::class,
                 [
                     'attr' => [
-                        'class' => 'form-control',
+                        'class' => 'disabled centered',
                         'min' => 200,
                         'max' => 500,
                         'step' => 20,
                         'value' => 200
-                    ]
+                    ],
+                    'label' => "Point de Vie : ",
+                    'help' => "Min : 200, Max : 500, 1pt = 20 PV"
                 ]
             )
             ->add(
@@ -48,12 +50,14 @@ class PersonnageType extends AbstractType
                 IntegerType::class,
                 [
                     'attr' => [
-                        'class' => 'form-control',
+                        'class' => 'disabled centered',
                         'min' => 0,
                         'max' => 40,
                         'step' => 4,
                         'value' => 0
-                    ]
+                    ],
+                    'label' => "Attaque : ",
+                    'help' => "Min : 0, Max : 40, 1pt = 4 Atk"
                 ]
             )
             ->add(
@@ -61,12 +65,14 @@ class PersonnageType extends AbstractType
                 IntegerType::class,
                 [
                     'attr' => [
-                        'class' => 'form-control',
+                        'class' => 'disabled centered',
                         'min' => 0,
                         'max' => 40,
                         'step' => 4,
                         'value' => 0
-                    ]
+                    ],
+                    'label' => "Magie : ",
+                    'help' => "Min : 0, Max : 40, 1pt = 4 Mag"
                 ]
             )
             ->add(
@@ -74,12 +80,14 @@ class PersonnageType extends AbstractType
                 IntegerType::class,
                 [
                     'attr' => [
-                        'class' => 'form-control',
+                        'class' => 'disabled centered',
                         'min' => 60,
                         'max' => 180,
                         'step' => 6,
                         'value' => 60
-                    ]
+                    ],
+                    'label' => "Energie : ",
+                    'help' => "Min : 60, Max : 180, 1pt = 8 Energie"
                 ]
             )
             ->add(
@@ -94,7 +102,8 @@ class PersonnageType extends AbstractType
                     },
                     'attr' => [
                         'class' => 'form-control'
-                    ]
+                    ],
+                    'label' => 'Element : '
                 ]
             )
             ->add(
