@@ -23,6 +23,7 @@
                 <div class="menuButton"><a href="{{ path('app_creation_personnage') }}">{{ 'création'|upper }}</a></div>
                 <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
                 <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
+                <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
             </nav>
         </section>
         <section class="longSide">
@@ -30,7 +31,15 @@
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>
                 </div>
-                <div class="menuButton mobile"><a href="">{{ 'start'|upper }}</a></div>
+                <div class="teamSelector mobile">
+                    {{ form_errors(teammate) }}
+
+                    {{ form_start(teammate) }}
+                        {{ form_widget(teammate.Start) }}
+                        {{ form_widget(teammate.equipe) }}
+                    {{ form_end(teammate) }}
+                    {# {{ dump(teammate) }} #}
+                </div>
                 <div class="teamSelector desktop">
                     {{ form_errors(teammate) }}
 
