@@ -131,7 +131,7 @@ class PersonnageType extends AbstractType
                 SubmitType::class,
                 [
                     'attr' => [
-                        'class' => 'btn btn-success hidden'
+                        'class' => 'hidden'
                     ]
                 ]
             )
