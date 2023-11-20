@@ -30,7 +30,12 @@ class WeaponType extends AbstractType
             )
             ->add(
                 'cost',
-                IntegerType::class
+                IntegerType::class,
+                [
+                    'attr' => [
+                        'class' => 'hidden'
+                    ]
+                ]
             )
             ->add(
                 'weaponType',
@@ -68,11 +73,13 @@ class WeaponType extends AbstractType
                 [
                     'attr' => [
                         'class' => 'form-control',
-                        'min' => 20,
-                        'max' => 200,
-                        'step' => 1,
-                        'value' => 20
-                    ]
+                        'min' => 200,
+                        'max' => 2000,
+                        'step' => 10,
+                        'value' => 200
+                    ],
+                    'label' => "Atk. Base : ",
+                    'help' => "Min : 20%, Max : 2000%, 5 or = 1%",
                 ]
             )
             ->add(
@@ -81,11 +88,13 @@ class WeaponType extends AbstractType
                 [
                     'attr' => [
                         'class' => 'form-control',
-                        'min' => 20,
-                        'max' => 200,
-                        'step' => 1,
-                        'value' => 20
-                    ]
+                        'min' => 200,
+                        'max' => 2000,
+                        'step' => 10,
+                        'value' => 200
+                    ],
+                    'label' => "Mag. Base : ",
+                    'help' => "Min : 200%, Max : 2000%, 5 or = 10%",
                 ]
             )
             ->add(
@@ -113,11 +122,13 @@ class WeaponType extends AbstractType
                 [
                     'attr' => [
                         'class' => 'form-control',
-                        'min' => 50,
-                        'max' => 500,
-                        'step' => 1,
-                        'value' => 50
-                    ]
+                        'min' => 500,
+                        'max' => 5000,
+                        'step' => 10,
+                        'value' => 500
+                    ],
+                    'label' => "Atk. Comp. : ",
+                    'help' => "Min : 500%, Max : 5000%, 15 or = 10%",
                 ]
             )
             ->add(
@@ -126,11 +137,13 @@ class WeaponType extends AbstractType
                 [
                     'attr' => [
                         'class' => 'form-control',
-                        'min' => 50,
-                        'max' => 500,
-                        'step' => 1,
-                        'value' => 50
-                    ]
+                        'min' => 500,
+                        'max' => 5000,
+                        'step' => 10,
+                        'value' => 500
+                    ],
+                    'label' => "Mag. Comp. : ",
+                    'help' => "Min : 500%, Max : 5000%, 15 or = 10%",
                 ]
             )
             ->add(
@@ -143,7 +156,9 @@ class WeaponType extends AbstractType
                         'max' => 180,
                         'step' => 1,
                         'value' => 30
-                    ]
+                    ],
+                    'label' => "Nrj. Comp. : ",
+                    'help' => "Min : 30, Max : 180, - 15 or = + 1 Nrj",
                 ]
             )
             ->add(
@@ -156,7 +171,9 @@ class WeaponType extends AbstractType
                         'max' => 10,
                         'step' => 1,
                         'value' => 1
-                    ]
+                    ],
+                    'label' => "Tours Attente : ",
+                    'help' => "Min : 1, Max : 10, - 150 or = + 1 Tour",
                 ]
             )
             ->add(
@@ -164,7 +181,7 @@ class WeaponType extends AbstractType
                 SubmitType::class,
                 [
                     'attr' => [
-                        'class' => 'btn btn-success'
+                        'class' => 'hidden'
                     ]
                 ]
             )
