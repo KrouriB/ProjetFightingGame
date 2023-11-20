@@ -38,11 +38,12 @@ class PersonnageType extends AbstractType
                         'class' => 'disabled centered',
                         'min' => 200,
                         'max' => 500,
-                        'step' => 20,
+                        'step' => 25,
                         'value' => 200
                     ],
                     'label' => "Point de Vie : ",
-                    'help' => "Min : 200, Max : 500, 1pt = 20 PV"
+                    'help' => "Min : 200, Max : 500, 1pt = 25 PV",
+                    'disabled' => true
                 ]
             )
             ->add(
@@ -57,7 +58,8 @@ class PersonnageType extends AbstractType
                         'value' => 0
                     ],
                     'label' => "Attaque : ",
-                    'help' => "Min : 0, Max : 40, 1pt = 4 Atk"
+                    'help' => "Min : 0, Max : 40, 1pt = 4 Atk",
+                    'disabled' => true
                 ]
             )
             ->add(
@@ -72,7 +74,8 @@ class PersonnageType extends AbstractType
                         'value' => 0
                     ],
                     'label' => "Magie : ",
-                    'help' => "Min : 0, Max : 40, 1pt = 4 Mag"
+                    'help' => "Min : 0, Max : 40, 1pt = 4 Mag",
+                    'disabled' => true
                 ]
             )
             ->add(
@@ -87,7 +90,8 @@ class PersonnageType extends AbstractType
                         'value' => 60
                     ],
                     'label' => "Energie : ",
-                    'help' => "Min : 60, Max : 180, 1pt = 8 Energie"
+                    'help' => "Min : 60, Max : 180, 1pt = 8 Energie",
+                    'disabled' => true
                 ]
             )
             ->add(
