@@ -43,7 +43,6 @@ class PersonnageType extends AbstractType
                     ],
                     'label' => "Point de Vie : ",
                     'help' => "Min : 200, Max : 500, 1pt = 25 PV",
-                    'disabled' => true
                 ]
             )
             ->add(
@@ -59,7 +58,6 @@ class PersonnageType extends AbstractType
                     ],
                     'label' => "Attaque : ",
                     'help' => "Min : 0, Max : 40, 1pt = 4 Atk",
-                    'disabled' => true
                 ]
             )
             ->add(
@@ -75,7 +73,6 @@ class PersonnageType extends AbstractType
                     ],
                     'label' => "Magie : ",
                     'help' => "Min : 0, Max : 40, 1pt = 4 Mag",
-                    'disabled' => true
                 ]
             )
             ->add(
@@ -86,12 +83,11 @@ class PersonnageType extends AbstractType
                         'class' => 'disabled centered',
                         'min' => 60,
                         'max' => 180,
-                        'step' => 6,
+                        'step' => 8,
                         'value' => 60
                     ],
                     'label' => "Energie : ",
                     'help' => "Min : 60, Max : 180, 1pt = 8 Energie",
-                    'disabled' => true
                 ]
             )
             ->add(
@@ -135,7 +131,7 @@ class PersonnageType extends AbstractType
                 SubmitType::class,
                 [
                     'attr' => [
-                        'class' => 'btn btn-success'
+                        'class' => 'btn btn-success hidden'
                     ]
                 ]
             )
