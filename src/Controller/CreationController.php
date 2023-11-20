@@ -58,6 +58,32 @@ class CreationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $perso = $form->getData();
+            dd($perso);
+
+            // test si les valeurs envoyer ont été modifier en trichant
+            if($perso->getAttack() % 4 != 0)
+            {
+                return $this->redirectToRoute('app_creation_personnage');
+            }
+            elseif($perso->getMagic() % 4 != 0)
+            {
+                return $this->redirectToRoute('app_creation_personnage');
+            }
+            elseif(($perso->getEnergy() - 60) % 8 != 0)
+            {
+                return $this->redirectToRoute('app_creation_personnage');
+            }
+            elseif(($perso->getLife() - 200) % 25 != 0)
+            {
+                return $this->redirectToRoute('app_creation_personnage');
+            }
+            elseif((($perso->getMagic() / 4) + ($perso->getAttack() / 4) + (($perso->getEnergy() - 60) / 8) + (($perso->getLife() - 200) / 25)) > 31)
+            {
+                return $this->redirectToRoute('app_creation_personnage');
+            }
+            
+            $perso->setUserCreator($this->getUser());
+
             $entityManager->persist($perso);
             $entityManager->flush();
 
