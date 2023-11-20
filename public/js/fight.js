@@ -141,7 +141,7 @@ function useEnnemieAction() // function to select randomly enemys action
     {
         if(waitSkillEnnemie > 0)
         {
-            waitSkillEnnemie = waitSkillEnnemie--; // reduce skill wait turn
+            waitSkillEnnemie = waitSkillEnnemie - 1; // reduce skill wait turn
         };
     };
 
@@ -154,7 +154,7 @@ function useEnnemieAction() // function to select randomly enemys action
     {
         if(waitActionEnnemie > 0)
         {
-            waitActionEnnemie = waitActionEnnemie--; // reduce action wait turn
+            waitActionEnnemie = waitActionEnnemie - 1; // reduce action wait turn
         };
     };
 
@@ -287,6 +287,7 @@ function setEnnemieHp()
 
 function setAllyEnergy()
 {
+    console.log(waitActionAlly,waitSkillAlly);
     let skillButton = document.getElementById('skillButton');
     let actionButton = document.getElementById('actionButton');
     var allyEnergyInfo = actualAllyEnergy + "/" + maxAllyEnergy;
@@ -296,30 +297,37 @@ function setAllyEnergy()
     switch(energyActionEnough)
     {
         case true :
+            console.log('energyActionEnough : ' + energyActionEnough);
             if(actualAllyEnergy < allyData.accessory.EnergyCost || waitActionAlly > 0)
             {
                 actionButton.classList.add('disabled');
+                actionButton.disabled = true;
                 actionButton.setAttribute('onclick','');
                 energyActionEnough = false;
 
                 if(waitActionAlly > 0)
                 {
-                    waitActionAlly = waitActionAlly--;
+                    waitActionAlly = waitActionAlly - 1;
                 };
             };
 
             break;
         case false :
+            console.log('energyActionEnough : ' + energyActionEnough);
+            console.log(actualAllyEnergy);
+            console.log(waitActionAlly);
+
             if(actualAllyEnergy >= allyData.accessory.EnergyCost && waitActionAlly == 0)
             {
                 actionButton.classList.remove('disabled');
-                actionButton.setAttribute('onclick','');
+                actionButton.disabled = false;
+                actionButton.setAttribute('onclick','allyAction()');
                 energyActionEnough = true;
             };
-
+            console.log(waitActionAlly > 0);
             if(waitActionAlly > 0)
             {
-                waitActionAlly = waitActionAlly--;
+                waitActionAlly = waitActionAlly - 1;
             };
 
             break;
@@ -331,12 +339,13 @@ function setAllyEnergy()
             if(actualAllyEnergy < allyData.weapon.EnergyCost || waitSkillAlly > 0)
             {
                 skillButton.classList.add('disabled');
+                skillButton.disabled = true;
                 skillButton.setAttribute('onclick','');
                 energySkillEnough = false;
                 
                 if(waitSkillAlly > 0)
                 {
-                    waitSkillAlly = waitSkillAlly--;
+                    waitSkillAlly = waitSkillAlly - 1;
                 };
             };
 
@@ -345,13 +354,14 @@ function setAllyEnergy()
             if(actualAllyEnergy >= allyData.weapon.EnergyCost && waitSkillAlly == 0)
             {
                 skillButton.classList.remove('disabled');
+                skillButton.disabled = false;
                 skillButton.setAttribute('onclick','allySkill()');
                 energySkillEnough = true;
             };
 
             if(waitSkillAlly > 0)
             {
-                waitSkillAlly = waitSkillAlly--;
+                waitSkillAlly = waitSkillAlly - 1;
             };
             
             break;
@@ -673,20 +683,34 @@ function rechargeEnergy(who) // function to recover energy and make no overflow 
 
 function damageInflict(who, damage) // function to inflict the damage and check if 0 hp
 {
+    let attackButton = document.getElementById('attackButton');
+    let skillButton = document.getElementById('skillButton');
+    let actionButton = document.getElementById('actionButton');
+    let loseButton = document.getElementById('loseButton');
     switch(who)
     {
         case 'EnnemieToAlly' :
             actualAllyHp = parseFloat(actualAllyHp) - parseFloat(damage);
             if(actualAllyHp <= 0)
             {
-                actualAllyHp = allyData.personnage.Hp; // here Game over to do
+                attackButton.disabled = true;
+                skillButton.disabled = true;
+                actionButton.disabled = true;
+                loseButton.disabled = true;
+                window.location = "fight/lose" 
+                window.location.replace();
             };
             break;
         case 'AllyToEnnemie' :
             actualEnnemieHp = parseFloat(actualEnnemieHp) - parseFloat(damage);
             if(actualEnnemieHp <= 0)
             {
-                actualEnnemieHp = ennemieData.personnage.Hp; // here Game over to do
+                attackButton.disabled = true;
+                skillButton.disabled = true;
+                actionButton.disabled = true;
+                loseButton.disabled = true;
+                window.location = "fight/win"
+                window.location.replace();
             };
             break;
     }
