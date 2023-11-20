@@ -16,14 +16,13 @@
                 <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
             </nav>
             <nav class="mobile">
-                <div class="pseudo">{{ app.user.userIdentifier }}</div>
+                <span class="pseudo">{{ app.user.userIdentifier }}</span>
                 <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
                 <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
                 <div class="menuButton"><a href="{{ path('app_stock_personnage') }}">{{ 'inventaire'|upper }}</a></div>
                 <div class="menuButton"><a href="{{ path('app_creation_personnage') }}">{{ 'création'|upper }}</a></div>
                 <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
                 <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
-                <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
             </nav>
         </section>
         <section class="longSide">
@@ -31,22 +30,12 @@
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>
                 </div>
-                <div class="teamSelector mobile">
-                    {{ form_errors(teammate) }}
+                {{ form_errors(teammate) }}
 
-                    {{ form_start(teammate) }}
-                        {{ form_widget(teammate.Start) }}
-                        {{ form_widget(teammate.equipe) }}
-                    {{ form_end(teammate) }}
-                    {# {{ dump(teammate) }} #}
-                </div>
-                <div class="teamSelector desktop">
-                    {{ form_errors(teammate) }}
-
-                    {{ form_start(teammate) }}
-                    {{ form_end(teammate) }}
-                    {# {{ dump(teammate) }} #}
-                </div>
+                {{ form_start(teammate, { 'attr' : { 'class': 'teamSelector' } }) }}
+                    {{ form_widget(teammate.Start) }}
+                    {{ form_widget(teammate.equipe) }}
+                {{ form_end(teammate) }}
                 <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
                 <div class="parameter"></div>
             </header>
