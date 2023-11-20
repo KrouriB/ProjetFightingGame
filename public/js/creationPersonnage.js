@@ -3,7 +3,7 @@
 
 
 // constant and variable
-var pointsPersonnage = 31;
+var points = 31;
 const hpPerso = document.getElementById("personnage_life");
 const atkPerso = document.getElementById("personnage_attack");
 const magPerso = document.getElementById("personnage_magic");
@@ -11,7 +11,7 @@ const nrjPerso = document.getElementById("personnage_energy");
 
 
 // calculate point
-function showPointsPersonnage(pts)
+function showPoints(pts)
 {
     let spanPts = document.getElementById("pointAllouable");
     spanPts.innerText = pts + '/31';
@@ -32,10 +32,10 @@ function moreHpPerso()
 
     let value = parseInt(hpPerso.value, 10);
     value = isNaN(value) ? 200 : value;
-    if(value < 500 && pointsPersonnage > 0)
+    if(value < 500 && points > 0)
     {
         value = value + 25;
-        showPointsPersonnage(--pointsPersonnage);
+        showPoints(--points);
     }
 
     hpPerso.value = value;
@@ -61,10 +61,10 @@ function moreAtkPerso()
 
     let value = parseInt(atkPerso.value, 10);
     value = isNaN(value) ? 0 : value;
-    if(value < 40 && pointsPersonnage > 0)
+    if(value < 40 && points > 0)
     {
         value = value + 4;
-        showPointsPersonnage(--pointsPersonnage);
+        showPoints(--points);
     }
 
     atkPerso.value = value;
@@ -90,10 +90,10 @@ function moreMagPerso()
 
     let value = parseInt(magPerso.value, 10);
     value = isNaN(value) ? 0 : value;
-    if(value < 40 && pointsPersonnage > 0)
+    if(value < 40 && points > 0)
     {
         value = value + 4;
-        showPointsPersonnage(--pointsPersonnage);
+        showPoints(--points);
     }
 
     magPerso.value = value;
@@ -119,10 +119,10 @@ function moreNrjPerso()
 
     let value = parseInt(nrjPerso.value, 10);
     value = isNaN(value) ? 60 : value;
-    if(value < 180 && pointsPersonnage > 0)
+    if(value < 180 && points > 0)
     {
         value = value + 8;
-        showPointsPersonnage(--pointsPersonnage);
+        showPoints(--points);
     }
 
     nrjPerso.value = value;
@@ -156,7 +156,7 @@ function lessHpPerso()
     if(value > 200)
     {
         value = value - 25;
-        showPointsPersonnage(++pointsPersonnage);
+        showPoints(++points);
     }
 
     hpPerso.value = value;
@@ -186,7 +186,7 @@ function lessAtkPerso()
     if(value > 0)
     {
         value = value - 4;
-        showPointsPersonnage(++pointsPersonnage);
+        showPoints(++points);
     }
 
     atkPerso.value = value;
@@ -216,7 +216,7 @@ function lessMagPerso()
     if(value > 0)
     {
         value = value - 4;
-        showPointsPersonnage(++pointsPersonnage);
+        showPoints(++points);
     }
 
     magPerso.value = value;
@@ -245,7 +245,7 @@ function lessNrjPerso()
     if(value > 60)
     {
         value = value - 8;
-        showPointsPersonnage(++pointsPersonnage);
+        showPoints(++points);
     }
 
     nrjPerso.value = value;
@@ -280,5 +280,5 @@ async function validate()
 
 // initialize
 
-showPointsPersonnage(pointsPersonnage);
+showPoints(points);
 makeNotDisable(true);
