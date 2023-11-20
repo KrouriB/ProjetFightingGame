@@ -13,8 +13,97 @@
             {{ form_errors(perso) }}
 
             {{ form_start(perso) }}
+                <div class="leftCreation">
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(perso.element) }}
+                            {{ form_widget(perso.element) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(perso.type) }}
+                            {{ form_widget(perso.type) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(perso.category) }}
+                            {{ form_widget(perso.category) }}
+                        </div>
+                        {# <div class="ligneInf">
+                        </div> #}
+                    </div>
+                </div>
+                <div class="shortSide rightCreation">
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(perso.name) }}
+                        </div>
+                        <div class="ligneMid">
+                            {{ form_widget(perso.name) }}
+                        </div>
+                        <div class="ligneInf">
+                            {{ form_errors(perso.name) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <p>Nombre de point allouable : <span class="pointAllouable"></span></p>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(perso.life) }}
+                            <a class="buttonStatMinus" onclick="lessHpPerso()">-</a>
+                            {{ form_widget(perso.life) }}
+                            <a class="buttonStatPlus" onclick="moreHpPerso()">+</a>
+                        </div>
+                        <div class="ligneInf infoStat">
+                            {{ form_help(perso.life) }}
+                            {{ form_errors(perso.life) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(perso.attack) }}
+                            <a class="buttonStatMinus" onclick="">-</a>
+                            {{ form_widget(perso.attack) }}
+                            <a class="buttonStatPlus" id="hpPlus" onclick="">+</a>
+                        </div>
+                        </div>
+                        <div class="ligneInf infoStat">
+                            {{ form_help(perso.attack) }}
+                            {{ form_errors(perso.attack) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(perso.magic) }}
+                            <a class="buttonStatMinus" onclick="">-</a>
+                            {{ form_widget(perso.magic) }}
+                            <a class="buttonStatPlus" onclick="">+</a>
+                        </div>
+                        <div class="ligneInf infoStat">
+                            {{ form_help(perso.magic) }}
+                            {{ form_errors(perso.magic) }}
+                        </div>
+                    </div>
+                    <div class="ligne">
+                        <div class="ligneSup">
+                            {{ form_label(perso.energy) }}
+                            <a class="buttonStatMinus" onclick="">-</a>
+                            {{ form_widget(perso.energy) }}
+                            <a class="buttonStatPlus" onclick="">+</a>
+                        </div>
+                        <div class="ligneInf infoStat">
+                            {{ form_help(perso.energy) }}
+                            {{ form_errors(perso.energy) }}
+                        </div>
+                    </div>
+                    <div class="zoneValidate">
+                        {{ form_widget(perso.valider) }}
+                    </div>
+                </div>
             {{ form_end(perso) }}
-            {# faire chque ligne form row #}
         </div>
     </main>
 {% endblock %}
