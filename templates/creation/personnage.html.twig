@@ -53,9 +53,9 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.life) }}
-                            <a class="buttonStatMinus" onclick="lessHpPerso()">-</a>
+                            <a class="buttonStat statMinus" id="hpMinus" onclick="lessHpPerso()" disabled>-</a>
                             {{ form_widget(perso.life) }}
-                            <a class="buttonStatPlus" onclick="moreHpPerso()">+</a>
+                            <a class="buttonStat statPlus" id="hpPlus" onclick="moreHpPerso()">+</a>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(perso.life) }}
@@ -65,9 +65,9 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.attack) }}
-                            <a class="buttonStatMinus" onclick="">-</a>
+                            <a class="buttonStat statMinus" id="atkMinus" onclick="">-</a>
                             {{ form_widget(perso.attack) }}
-                            <a class="buttonStatPlus" id="hpPlus" onclick="">+</a>
+                            <a class="buttonStat statPlus" id="atkPlus" onclick="">+</a>
                         </div>
                         </div>
                         <div class="ligneInf infoStat">
@@ -78,9 +78,9 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.magic) }}
-                            <a class="buttonStatMinus" onclick="">-</a>
+                            <a class="buttonStat statMinus" id="magMinus"  onclick="">-</a>
                             {{ form_widget(perso.magic) }}
-                            <a class="buttonStatPlus" onclick="">+</a>
+                            <a class="buttonStat statPlus" id="magPlus"  onclick="">+</a>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(perso.magic) }}
@@ -90,9 +90,9 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.energy) }}
-                            <a class="buttonStatMinus" onclick="">-</a>
+                            <a class="buttonStat statMinus" id="nrjMinus"  onclick="">-</a>
                             {{ form_widget(perso.energy) }}
-                            <a class="buttonStatPlus" onclick="">+</a>
+                            <a class="buttonStat statPlus" id="nrjPlus"  onclick="">+</a>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(perso.energy) }}
