@@ -1,3 +1,29 @@
 .hidden{
     visibility: hidden;
 }
+
+@media(orientation: landscape)
+{
+    .desktop
+    {
+        visibility: visible;
+    }
+
+    .mobile
+    {
+        visibility: hidden;
+    }
+}
+
+@media(orientation: portrait)
+{
+    .desktop
+    {
+        visibility: hidden;
+    }
+
+    .mobile
+    {
+        visibility: visible;
+    }
+}
