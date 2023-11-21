@@ -54,12 +54,10 @@ class AccessoryRepository extends ServiceEntityRepository
      */
     public function findAccessorysAdapted(Personnage $personnage): array
     {
-        $life = $personnage->getLife();
-
         return $this->createQueryBuilder('a')
             ->andWhere('a.minLife <= :life')
             ->andWhere('a.userCreator IS NULL')
-            ->setParameter('life', $life)
+            ->setParameter('life', $personnage->getLife())
             ->getQuery()
             ->getResult()
         ;

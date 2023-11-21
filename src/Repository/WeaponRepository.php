@@ -55,10 +55,6 @@ class WeaponRepository extends ServiceEntityRepository
      */
     public function findWeaponsAdapted(Personnage $personnage): array
     {
-        $type = $personnage->getType()->getId();
-        $category = $personnage->getCategory()->getId();
-        $element = $personnage->getElement()->getId();
-
         return $this->createQueryBuilder('w')
             ->InnerJoin('w.weaponType', 'wt')
             ->InnerJoin('w.weaponCategory', 'wc')
@@ -69,9 +65,9 @@ class WeaponRepository extends ServiceEntityRepository
             ->andWhere('wc.id = :category')
             ->andWhere('wt.id = :type')
             ->andWhere('w.userCreator IS NULL')
-            ->setParameter('type', $type)
-            ->setParameter('category', $category)
-            ->setParameter('element', $element)
+            ->setParameter('type', $personnage->getType()->getId())
+            ->setParameter('category', $personnage->getCategory()->getId())
+            ->setParameter('element', $personnage->getElement()->getId())
             ->getQuery()
             ->getResult()
         ;
