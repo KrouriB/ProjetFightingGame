@@ -18,16 +18,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FightController extends AbstractController
 {
     #[Route('/fight/lose', name: 'app_lose')]
-    public function lose(): Response
+    public function lose(Request $request): Response
     {
+        $request->getSession()->set('in fight', 'no');
+
         $this->getUser()->loseGame();
 
         return $this->redirectToRoute('app_main');
     }
     
     #[Route('/fight/win', name: 'app_win')]
-    public function win(): Response
+    public function win(Request $request): Response
     {
+        $request->getSession()->set('in fight', 'no');
+
         $this->getUser()->winGame();
 
         return $this->redirectToRoute('app_main');
@@ -38,6 +42,7 @@ class FightController extends AbstractController
         Request $request,
         CreateRandom $createRandom,
         JsonBuilder $jsonBuilder,
+        CheckFight $check,
         PersonnageRepository $personnageRepository,
         WeaponRepository $weaponRepository,
         AccessoryRepository $accessoryRepository,
@@ -46,6 +51,16 @@ class FightController extends AbstractController
     {
         $session = $request->getSession();
         $mate = $session->get('selected_teammate'); // here we retive the object Equipe selectioned by the user where all the value except the id are null
+        if($mate == 'none' || $mate = null) // here test if the user is coming from the menu or if he have refreshed the fight
+        {
+            $check->checkIfInFight();
+            
+            return $this->redirectToRoute('app_main');
+        }
+        $session->set('selected_teammate', 'none'); // here set selectedTeammate to 'none' so you cannot access to the fighting scene out of the menu ans cannot refresh the fight
+        $session->set('in fight', 'yes');
+
+        
         $ally = $equipeRepository->find($mate->getId()); // with the id of the precedent Object Equipe we find the same object with all the correct value
 
 
