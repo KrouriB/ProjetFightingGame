@@ -20,10 +20,18 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class MenuController extends AbstractController
 {
+    private CheckFight $check;
+
+    public function __construct(CheckFight $check)
+    {
+        $this->check = $check;
+    }
     
     #[Route('/menu/stock/personnage', name: 'app_stock_personnage')]
     public function stockPersonnage(StockPersonnageRepository $personnageRepository): Response
     {
+        $this->check->checkIfInFight();
+
         $personnages = $personnageRepository->findPersonnagesOfUser($this->getUser()->getId());
         // dd($personnages);
         return $this->render('menu/stock/personnage.html.twig', [
@@ -34,6 +42,8 @@ class MenuController extends AbstractController
     #[Route('/menu/stock/weapon', name: 'app_stock_weapon')]
     public function stockWeapon(StockWeaponRepository $weaponRepository): Response
     {
+        $this->check->checkIfInFight();
+
         $weapons = $weaponRepository->findWeaponsOfUser($this->getUser()->getId());
         // dd($weapons);
         return $this->render('menu/stock/weapon.html.twig', [
@@ -44,6 +54,8 @@ class MenuController extends AbstractController
     #[Route('/menu/stock/accessory', name: 'app_stock_accessory')]
     public function stockAccessory(StockAccessoryRepository $accessoryRepository): Response
     {
+        $this->check->checkIfInFight();
+        
         $accessorys = $accessoryRepository->findAccessorysOfUser($this->getUser()->getId());
         return $this->render('menu/stock/accessory.html.twig', [
             'accessorys' => $accessorys,
@@ -53,6 +65,8 @@ class MenuController extends AbstractController
     #[Route('/menu/rank', name: 'app_rank')]
     public function rank(UserRepository $userRepository): Response
     {
+        $this->check->checkIfInFight();
+        
         $users = $userRepository->findBy(['id' => 'DESC']);
         return $this->render('menu/rank.html.twig', [
             'users' => $users,
@@ -63,6 +77,8 @@ class MenuController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function teammate(EquipeRepository $equipeRepository): Response
     {
+        $this->check->checkIfInFight();
+        
         $equipes = $equipeRepository->findBy(['assosiatedUser' => $this->getUser()->getId()]);
         return $this->render('menu/teammate.html.twig', [
             'equipes' => $equipes,
@@ -73,6 +89,8 @@ class MenuController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function main(Request $request, EquipeRepository $equipeRepository): Response
     {
+        $this->check->checkIfInFight();
+        
         $session = $request->getSession();
         
         $equipes = $equipeRepository->findBy(['assosiatedUser' => $this->getUser()->getId()]);
@@ -109,6 +127,7 @@ class MenuController extends AbstractController
     {
         if($this->getUser() == true)
         {
+            $this->check->checkIfInFight();
             return $this->redirectToRoute('app_main');
         }
         else
