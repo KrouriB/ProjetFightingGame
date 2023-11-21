@@ -1,9 +1,9 @@
 // creation of constant and variable
 const ennemieData = JSON.parse(ennemie.replaceAll('&quot;', '"'));
 const allyData = JSON.parse(ally.replaceAll('&quot;', '"'));
-var elements = JSON.parse(element.replaceAll('&quot;', '"'));
-var types = JSON.parse(typeOfWeapon.replaceAll('&quot;', '"'));
-var categorys = JSON.parse(categoryOfWeapon.replaceAll('&quot;', '"'));
+const elements = JSON.parse(element.replaceAll('&quot;', '"'));
+const types = JSON.parse(typeOfWeapon.replaceAll('&quot;', '"'));
+const categorys = JSON.parse(categoryOfWeapon.replaceAll('&quot;', '"'));
 // log div selected + default log to use
 const logDiv = document.getElementById("logs");
 const logLine = document.createElement("p");
@@ -25,9 +25,9 @@ var energyActionEnough = true;
 var accessoryActionAlly = 'none';
 var accessoryActionEnnemie = 'none';
 //value of damaged reduced and damage done on turn and action type if set
+var accessoryAction = 'none';
 var turnDamage = 0;
 var reducedDamage = 0;
-var accessoryAction = 'none';
 // inialize the turn to wait to 0
 var waitSkillAlly = 0;
 var waitActionAlly = 0;
@@ -79,7 +79,6 @@ function allySkill()
     if(reduc != 1)
     {
         reducedDamage = (Math.round(rawDamage * checkActionElement('skillAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage;
-        turnDamage = damage;
     }
     turnDamage = damage;
 
@@ -273,24 +272,23 @@ function ennemieAction()
 
 function setAllyHp()
 {
-    var allyHealthInfo = actualAllyHp + "/" + maxAllyHp;
+    var allyHealthInfo = actualAllyHp + "/" + allyData.personnage.Life;
     let bar = document.getElementById('actualAllyHp');
     bar.innerText = allyHealthInfo;
 }
 
 function setEnnemieHp()
 {
-    var ennemieHealthInfo = actualEnnemieHp + "/" + maxEnnemieHp;
+    var ennemieHealthInfo = actualEnnemieHp + "/" + ennemieData.personnage.Life;
     let bar = document.getElementById('actualEnnemieHp');
     bar.innerText = ennemieHealthInfo;
 }
 
 function setAllyEnergy()
 {
-    console.log(waitActionAlly,waitSkillAlly);
     let skillButton = document.getElementById('skillButton');
     let actionButton = document.getElementById('actionButton');
-    var allyEnergyInfo = actualAllyEnergy + "/" + maxAllyEnergy;
+    var allyEnergyInfo = actualAllyEnergy + "/" + allyData.personnage.Energy;
     let bar = document.getElementById('actualAllyEnergy');
     bar.innerText = allyEnergyInfo;
     // test pour activer/desactiver l'action
@@ -313,10 +311,6 @@ function setAllyEnergy()
 
             break;
         case false :
-            console.log('energyActionEnough : ' + energyActionEnough);
-            console.log(actualAllyEnergy);
-            console.log(waitActionAlly);
-
             if(actualAllyEnergy >= allyData.accessory.EnergyCost && waitActionAlly == 0)
             {
                 actionButton.classList.remove('disabled');
@@ -324,7 +318,7 @@ function setAllyEnergy()
                 actionButton.setAttribute('onclick','allyAction()');
                 energyActionEnough = true;
             };
-            console.log(waitActionAlly > 0);
+
             if(waitActionAlly > 0)
             {
                 waitActionAlly = waitActionAlly - 1;
@@ -370,7 +364,7 @@ function setAllyEnergy()
 
 function setEnnemieEnergy()
 {
-    var ennemieEnergyInfo = actualEnnemieEnergy + "/" + maxEnnemieEnergy;
+    var ennemieEnergyInfo = actualEnnemieEnergy + "/" + ennemieData.personnage.Energy;
     let bar = document.getElementById('actualEnnemieEnergy');
     bar.innerText = ennemieEnergyInfo;
 }
@@ -728,20 +722,6 @@ function actionLogs(who, what)
     let firstUserData;
     let accessoryOpposed = accessoryAction;
     let accessoryUsed;
-
-    
-    // console.log(allyData)
-    // switch(who)
-    // {
-    //     case 'ally' :
-    //         firstUserData = allyData;
-    //         accessoryUsed = accessoryActionAlly;
-    //         break;
-    //     case 'ennemie' :
-    //         firstUserData = ennemieData;
-    //         accessoryUsed = accessoryActionEnnemie;
-    //         break;
-    // }
 
     switch(who)
     {
