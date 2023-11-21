@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\CheckFight;
 use App\Repository\UserRepository;
 use App\Form\TeammateSelectionType;
 use App\Repository\EquipeRepository;

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Equipe;
+use App\Services\CheckFight;
 use App\Services\JsonBuilder;
 use App\Services\CreateRandom;
 use App\Repository\EquipeRepository;
