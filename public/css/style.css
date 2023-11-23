@@ -16,6 +16,10 @@
     --third: #CD7F32;
     --unselected: #ff000066;
     --selected: #001AFF99;
+    --healthAllyInfo: 100%;
+    --healthEnnemieInfo: 100%;
+    --energyAllyInfo: 100%;
+    --energyEnnemieInfo: 100%;
 }
 
 *
