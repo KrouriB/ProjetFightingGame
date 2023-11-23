@@ -33,6 +33,11 @@ var waitSkillAlly = 0;
 var waitActionAlly = 0;
 var waitSkillEnnemie = 0;
 var waitActionEnnemie = 0;
+// value pourcent of life and enregy for bar
+var pourecentAllyHp = 1;
+var pourecentEnnemieHp = 1;
+var pourecentAllyEnergy = 1;
+var pourecentEnnemieEnergy = 1;
 
 
 // Ally Actions
@@ -48,11 +53,11 @@ function allyAttack()
         accessoryActionEnnemie = 'none';
     }
     let rawDamage = calculRawDamage('ally', 'base');
-    let damage = Math.round(rawDamage * checkActionElement('baseAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
+    let damage = Math.round(rawDamage * checkActionElement('atkFromAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
     
     if(reduc != 1)
     {
-        reducedDamage = ((Math.round(rawDamage * checkActionElement('baseAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage);
+        reducedDamage = ((Math.round(rawDamage * checkActionElement('atkFromAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage);
     }
     turnDamage = damage;
 
@@ -74,21 +79,21 @@ function allySkill()
         accessoryActionEnnemie = 'none';
     }
     let rawDamage = calculRawDamage('ally', 'skill');
-    let damage = Math.round(rawDamage * checkActionElement('skillAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
+    let damage = Math.round(rawDamage * checkActionElement('skillFromAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
 
     if(reduc != 1)
     {
-        reducedDamage = (Math.round(rawDamage * checkActionElement('skillAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage;
+        reducedDamage = (Math.round(rawDamage * checkActionElement('skillFromAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage;
     }
     turnDamage = damage;
 
     // here check if energy is suffisent, if not break, keep the check even with made the disable function
     actualAllyEnergy = actualAllyEnergy - allyData.weapon.EnergyCost;
+    waitSkillAlly = allyData.weapon.turnWait;
 
     damageInflict('AllyToEnnemie', damage);
     rechargeEnergy('ally');
 
-    waitSkillAlly = allyData.weapon.turnWait;
 
     setAllyTurn();
     actionLogs('ally','skill');
@@ -111,10 +116,10 @@ function allyAction()
     };
 
     actualAllyEnergy = actualAllyEnergy - allyData.accessory.EnergyCost;
+    waitActionAlly = allyData.accessory.turnWait;
 
     rechargeEnergy('ally');
 
-    waitActionAlly = allyData.accessory.turnWait;
 
     setAllyEnergy();
 
@@ -128,7 +133,7 @@ function allyAction()
 
 function useEnnemieAction() // function to select randomly enemys action
 {
-    let action = 1;
+    let action = 0;
     let what;
 
     if(actualEnnemieEnergy >= ennemieData.weapon.EnergyCost && waitSkillEnnemie == 0)
@@ -196,11 +201,11 @@ function ennemieAttack()
         accessoryActionAlly = 'none';
     }
     let rawDamage = calculRawDamage('ennemie', 'base');
-    let damage = Math.round(rawDamage * checkActionElement('baseEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
+    let damage = Math.round(rawDamage * checkActionElement('atkFromEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
 
     if(reduc != 1)
     {
-        reducedDamage = (Math.round(rawDamage * checkActionElement('baseEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'))) - damage;
+        reducedDamage = (Math.round(rawDamage * checkActionElement('atkFromEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'))) - damage;
     }
     turnDamage = damage;
 
@@ -221,21 +226,21 @@ function ennemieSkill()
         accessoryActionAlly = 'none';
     }
     let rawDamage = calculRawDamage('ennemie', 'skill');
-    let damage = Math.round(rawDamage * checkActionElement('skillEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
+    let damage = Math.round(rawDamage * checkActionElement('skillFromEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly') * reduc);
 
     if(reduc != 1)
     {
-        reducedDamage = (Math.round(rawDamage * checkActionElement('skillEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'))) - damage;
+        reducedDamage = (Math.round(rawDamage * checkActionElement('skillFromEnnemie') * checkActionType('EnnemieToAlly') * checkActionCategory('EnnemieToAlly'))) - damage;
     }
     turnDamage = damage;
 
     // here check if energy is suffisent, if not break, keep the check even with made the disable function
     actualEnnemieEnergy = actualEnnemieEnergy - ennemieData.weapon.EnergyCost;
+    waitSkillEnnemie = ennemieData.weapon.turnWait
 
     damageInflict('EnnemieToAlly', damage);
     rechargeEnergy('ennemie');
 
-    waitSkillEnnemie = ennemieData.weapon.turnWait
 
     actionLogs('ennemie','skill');
     setEnnemieTurn();
@@ -246,21 +251,21 @@ function ennemieAction()
     switch(ennemieData.accessory.NomTypeAction)
     {
         case "Réduction de dégâts" :
-            accessoryActionEnnemie = "Réduction de dégâts";
+            accessoryActionEnnemie = ennemieData.accessory.NomTypeAction;
             break;
         case "Protection Magique" :
-            accessoryActionEnnemie = "Protection Magique";
+            accessoryActionEnnemie = ennemieData.accessory.NomTypeAction;
             break;
         case "Protection Physique" :
-            accessoryActionEnnemie = "Protection Physique";
+            accessoryActionEnnemie = ennemieData.accessory.NomTypeAction;
             break;
     };
 
     actualEnnemieEnergy = actualEnnemieEnergy - ennemieData.accessory.EnergyCost;
+    waitActionEnnemie = ennemieData.accessory.turnWait;
 
     rechargeEnergy('ennemie');
 
-    waitActionEnnemie = ennemieData.accessory.turnWait;
 
     actionLogs('ennemie','action');
     setEnnemieEnergy();
@@ -272,25 +277,22 @@ function ennemieAction()
 
 function setAllyHp()
 {
-    var allyHealthInfo = actualAllyHp + "/" + allyData.personnage.Life;
     let bar = document.getElementById('actualAllyHp');
-    bar.innerText = allyHealthInfo;
+    bar.innerText = actualAllyHp + "/" + allyData.personnage.Life;
 }
 
 function setEnnemieHp()
 {
-    var ennemieHealthInfo = actualEnnemieHp + "/" + ennemieData.personnage.Life;
     let bar = document.getElementById('actualEnnemieHp');
-    bar.innerText = ennemieHealthInfo;
+    bar.innerText = actualEnnemieHp + "/" + ennemieData.personnage.Life;
 }
 
 function setAllyEnergy()
 {
     let skillButton = document.getElementById('skillButton');
     let actionButton = document.getElementById('actionButton');
-    var allyEnergyInfo = actualAllyEnergy + "/" + allyData.personnage.Energy;
     let bar = document.getElementById('actualAllyEnergy');
-    bar.innerText = allyEnergyInfo;
+    bar.innerText = actualAllyEnergy + "/" + allyData.personnage.Energy;
     // test pour activer/desactiver l'action
     switch(energyActionEnough)
     {
@@ -317,9 +319,8 @@ function setAllyEnergy()
                 actionButton.disabled = false;
                 actionButton.setAttribute('onclick','allyAction()');
                 energyActionEnough = true;
-            };
-
-            if(waitActionAlly > 0)
+            }
+            else if(waitActionAlly > 0)
             {
                 waitActionAlly = waitActionAlly - 1;
             };
@@ -351,9 +352,8 @@ function setAllyEnergy()
                 skillButton.disabled = false;
                 skillButton.setAttribute('onclick','allySkill()');
                 energySkillEnough = true;
-            };
-
-            if(waitSkillAlly > 0)
+            }
+            else if(waitSkillAlly > 0)
             {
                 waitSkillAlly = waitSkillAlly - 1;
             };
@@ -364,9 +364,8 @@ function setAllyEnergy()
 
 function setEnnemieEnergy()
 {
-    var ennemieEnergyInfo = actualEnnemieEnergy + "/" + ennemieData.personnage.Energy;
     let bar = document.getElementById('actualEnnemieEnergy');
-    bar.innerText = ennemieEnergyInfo;
+    bar.innerText = actualEnnemieEnergy + "/" + ennemieData.personnage.Energy;
 }
 
 // function to apply each offensive action
@@ -391,103 +390,86 @@ function setEnnemieTurn()
 
 function checkActionElement(action) // method to send element multiplicator depending of the case
 {
+    let selfBonus = 1;
+    let elementeWeapon;
+    let elementOpposant;
     switch (action)
     {
-        case 'baseAlly' :
+        case 'atkFromAlly' :
+            elementeWeapon = elements.filter((elem) => elem.name == allyData.weapon.ElementBase);
+            elementOpposant = elements.filter((elem) => elem.name == ennemieData.personnage.Element);
             if(allyData.weapon.Element == allyData.weapon.ElementBase)
             {
-                return 1.5;
-            }
-            else
-            {
-                return 1;
+                selfBonus = 1.5;
             };
-        case 'skillAlly' :
-            if(allyData.weapon.Element == allyData.weapon.ElementSkill)
+            if(elementeWeapon.advantage == elementOpposant.id)
             {
-                return 1.75;
+                return elementeWeapon.advantageMultiplicator * selfBonus;
+            }
+            else if(elementeWeapon.disadvantage == elementOpposant.id)
+            {
+                return elementeWeapon.disadvantageMultiplicator * selfBonus;
             }
             else
             {
-                return 1;
-            };
-        case 'baseEnnemie' :
-            if(ennemieData.weapon.Element == ennemieData.weapon.ElementBase)
-            {
-                return 1.5;
-            }
-            else
-            {
-                return 1;
-            };
-        case 'skillEnnemie' :
-            if(ennemieData.weapon.Element == ennemieData.weapon.ElementSkill)
-            {
-                return 1.75;
-            }
-            else
-            {
-                return 1;
-            };
-        case 'atkFromAlly' :
-            let elementWeaponBase = elements.filter((elem) => elem.name == allyData.weapon.ElementBase);
-            let elementEnnemieAtk = elements.filter((elem) => elem.name == ennemieData.personnage.Element);
-            if(elementWeaponBase.advantage == elementEnnemieAtk.id)
-            {
-                return elementWeaponBase.advantageMultiplicator;
-            }
-            else if(elementWeaponBase.disadvantage == elementEnnemieAtk.id)
-            {
-                return elementWeaponBase.disadvantageMultiplicator;
-            }
-            else
-            {
-                return 1;
+                return 1 * selfBonus;
             };
         case 'skillFromAlly' :
-            let elementWeaponSkill = elements.filter((elem) => elem.name == allyData.weapon.ElementSkill);
-            let elementEnnemieSkill = elements.filter((elem) => elem.name == ennemieData.personnage.Element);
-            if(elementWeaponSkill.advantage == elementEnnemieSkill.id)
+            elementeWeapon = elements.filter((elem) => elem.name == allyData.weapon.ElementSkill);
+            elementOpposant = elements.filter((elem) => elem.name == ennemieData.personnage.Element);
+            if(allyData.weapon.Element == allyData.weapon.ElementSkill)
             {
-                return elementWeaponSkill.advantageMultiplicator;
+                selfBonus = 1.75;
+            };
+            if(elementeWeapon.advantage == elementOpposant.id)
+            {
+                return elementeWeapon.advantageMultiplicator * selfBonus;
             }
-            else if(elementWeaponSkill.disadvantage == elementEnnemieSkill.id)
+            else if(elementeWeapon.disadvantage == elementOpposant.id)
             {
-                return elementWeaponSkill.disadvantageMultiplicator;
+                return elementeWeapon.disadvantageMultiplicator * selfBonus;
             }
             else
             {
-                return 1;
+                return 1 * selfBonus;
             };
         case 'atkFromEnnemie' :
-            let elementEnnemieWeaponBase = elements.filter((elem) => elem.name == ennemieData.weapon.ElementBase);
-            let elementAllyAtk = elements.filter((elem) => elem.name == allyData.personnage.Element);
-            if(elementEnnemieWeaponBase.advantage == elementAllyAtk.id)
+            elementeWeapon = elements.filter((elem) => elem.name == ennemieData.weapon.ElementBase);
+            elementOpposant = elements.filter((elem) => elem.name == allyData.personnage.Element);
+            if(ennemieData.weapon.Element == ennemieData.weapon.ElementBase)
             {
-                return elementEnnemieWeaponBase.advantageMultiplicator;
+                selfBonus = 1.5;
+            };
+            if(elementeWeapon.advantage == elementOpposant.id)
+            {
+                return elementeWeapon.advantageMultiplicator * selfBonus;
             }
-            else if(elementEnnemieWeaponBase.disadvantage == elementAllyAtk.id)
+            else if(elementeWeapon.disadvantage == elementOpposant.id)
             {
-                return elementEnnemieWeaponBase.disadvantageMultiplicator;
+                return elementeWeapon.disadvantageMultiplicator * selfBonus;
             }
             else
             {
-                return 1;
+                return 1 * selfBonus;
             };
         case 'skillFromEnnemie' :
-            let elementEnnemieWeaponSkill = elements.filter((elem) => elem.name == ennemieData.weapon.ElementSkill);
-            let elementAllySkill = elements.filter((elem) => elem.name == allyData.personnage.Element);
-            if(elementEnnemieWeaponSkill.advantage == elementAllySkill.id)
+            elementeWeapon = elements.filter((elem) => elem.name == ennemieData.weapon.ElementSkill);
+            elementOpposant = elements.filter((elem) => elem.name == allyData.personnage.Element);
+            if(ennemieData.weapon.Element == ennemieData.weapon.ElementSkill)
             {
-                return elementEnnemieWeaponSkill.advantageMultiplicator;
+                selfBonus = 1.75;
+            };
+            if(elementeWeapon.advantage == elementOpposant.id)
+            {
+                return elementeWeapon.advantageMultiplicator * selfBonus;
             }
-            else if(elementEnnemieWeaponSkill.disadvantage == elementAllySkill.id)
+            else if(elementeWeapon.disadvantage == elementOpposant.id)
             {
-                return elementEnnemieWeaponSkill.disadvantageMultiplicator;
+                return elementeWeapon.disadvantageMultiplicator * selfBonus;
             }
             else
             {
-                return 1;
+                return 1 * selfBonus;
             };
     }
 }
