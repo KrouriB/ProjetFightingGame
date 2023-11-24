@@ -673,7 +673,7 @@ function damageInflict(who, damage) // function to inflict the damage and check 
                 skillButton.disabled = true;
                 actionButton.disabled = true;
                 loseButton.disabled = true;
-                window.location = "fight/lose" 
+                window.location = "fight/lose";
                 window.location.replace();
             };
             break;
@@ -685,7 +685,7 @@ function damageInflict(who, damage) // function to inflict the damage and check 
                 skillButton.disabled = true;
                 actionButton.disabled = true;
                 loseButton.disabled = true;
-                window.location = "fight/win"
+                window.location = "fight/win";
                 window.location.replace();
             };
             break;
@@ -710,25 +710,16 @@ function actionLogs(who, what)
         case 'ally' :
             firstUserData = allyData;
             accessoryUsed = accessoryActionAlly;
-            // firstUser.innerText = allyData.personnage.Name;
             firstUser = '<span class="persoUser">'+allyData.personnage.Name+'</span>';
-            // firstUser.classList.add('persoUser');
-            // otherUser.innerText = ennemieData.personnage.Name;
             otherUser = '<span class="persoUser">'+ennemieData.personnage.Name+'</span>';
-            // otherUser.classList.add('ennemieUser');
             break;
         case 'ennemie' :
             firstUserData = ennemieData;
             accessoryUsed = accessoryActionEnnemie;
-            // firstUser.innerText = ennemieData.personnage.Name;
             firstUser = '<span class="persoUser">'+ennemieData.personnage.Name+'</span>';
-            // firstUser.classList.add('ennemieUser');
-            // otherUser.innerText = allyData.personnage.Name;
             otherUser = '<span class="persoUser">'+allyData.personnage.Name+'</span>';
-            // otherUser.classList.add('persoUser');
             break;
     }
-    // newLogs.appendChild(otherUser);
     
     switch(what)
     {
@@ -741,78 +732,51 @@ function actionLogs(who, what)
                     turnDamage = 0;
                     reducedDamage = 0;
                     break;
-                    case "Protection Magique" :
-                        newLogs.innerHTML = firstUser + ' a fait ' + turnDamage + ' de dégats avec une resistance au dégats magique pure de ' + reducedDamage + ' à ' + otherUser;
-                        accessoryAction = 'none';
-                        turnDamage = 0;
+                case "Protection Magique" :
+                    newLogs.innerHTML = firstUser + ' a fait ' + turnDamage + ' de dégats avec une resistance au dégats magique pure de ' + reducedDamage + ' à ' + otherUser;
+                    accessoryAction = 'none';
+                    turnDamage = 0;
                     reducedDamage = 0;
                     break;
-                    case "Protection Physique" :
-                        newLogs.innerHTML = firstUser + '  a fait ' + turnDamage + ' de dégats avec une resistance au dégats physique pure de ' + reducedDamage + ' à  ' + otherUser;
-                    
-                        accessoryAction = 'none';
-                        turnDamage = 0;
-                        reducedDamage = 0;
-                        break;
-                    case "none" :
-                        newLogs.innerHTML = firstUser + ' a fait ' + turnDamage + ' de dégats à ' + otherUser;
-                        text = ' a fait ' + turnDamage + ' de dégats à ';
-                        break;
+                case "Protection Physique" :
+                    newLogs.innerHTML = firstUser + '  a fait ' + turnDamage + ' de dégats avec une resistance au dégats physique pure de ' + reducedDamage + ' à  ' + otherUser;
+                    accessoryAction = 'none';
+                    turnDamage = 0;
+                    reducedDamage = 0;
+                    break;
+                case "none" :
+                    newLogs.innerHTML = firstUser + ' a fait ' + turnDamage + ' de dégats à ' + otherUser;
+                    break;
             };
-
             break;
         case 'skill' :
             switch(accessoryOpposed)
             {
                 case "Réduction de dégâts" :
                     newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.weapon.skillName + ' sur ' + otherUser + ', il a infliger ' + turnDamage + ' de dégats avec une resistance au dégat totaux de ' + reducedDamage;
-                    
                     accessoryAction = 'none';
                     turnDamage = 0;
                     reducedDamage = 0;
                     break;
                 case "Protection Magique" :
                     newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.weapon.skillName + ' sur ' + otherUser + ', il a infliger ' + turnDamage + ' de dégats avec une resistance au dégats magique pure de ' + reducedDamage;
-                    
                     accessoryAction = 'none';
                     turnDamage = 0;
                     reducedDamage = 0;
                     break;
                 case "Protection Physique" :
                     newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.weapon.skillName + ' sur ' + otherUser + ', il a infliger ' + turnDamage + ' de dégats avec une resistance au dégats physique pure de ' + reducedDamage;
-                    
                     accessoryAction = 'none';
                     turnDamage = 0;
                     reducedDamage = 0;
                     break;
                 case "none" :
                     newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.weapon.skillName + ' sur ' + otherUser + ', il a infliger ' + turnDamage;
-                    
                     break;
             };
-
-            
             break;
         case 'action' :
-            switch(accessoryUsed)
-            {
-                case "Réduction de dégâts" :
-                    newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.accessory.actionName + ' il aura le bonus ' + accessoryUsed;
-                    
-                    accessoryUsed = 'none';
-                    break;
-                case "Protection Magique" :
-                    newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.accessory.actionName + ' il aura le bonus ' + accessoryUsed;
-                    
-                    accessoryUsed = 'none';
-                    break;
-                case "Protection Physique" :
-                    newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.accessory.actionName + ' il aura le bonus ' + accessoryUsed;
-                    
-                    accessoryUsed = 'none';
-                    break;
-            };
-
+            newLogs.innerHTML = firstUser + ' a utiliser ' + firstUserData.accessory.actionName + ' il aura le bonus ' + accessoryUsed;
             break;
     }
     logDiv.appendChild(newLogs);
