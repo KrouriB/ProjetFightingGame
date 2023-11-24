@@ -33,6 +33,8 @@ class FightController extends AbstractController
     {
         $request->getSession()->set('in fight', 'no');
 
+        // ici test si la vie du personnage adverse et inferieur egale a 0
+
         $this->getUser()->winGame();
 
         return $this->redirectToRoute('app_main');
