@@ -12,7 +12,9 @@ use App\Repository\AccessoryRepository;
 use App\Repository\PersonnageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -21,7 +23,7 @@ class FightController extends AbstractController
     #[Route('/fight/lose', name: 'app_lose')]
     public function lose(Request $request): Response
     {
-        $request->getSession()->set('in fight', 'no');
+        // $request->getSession()->set('in fight', 'no');
 
         $this->getUser()->loseGame();
 
@@ -31,7 +33,7 @@ class FightController extends AbstractController
     #[Route('/fight/win', name: 'app_win')]
     public function win(Request $request): Response
     {
-        $request->getSession()->set('in fight', 'no');
+        // $request->getSession()->set('in fight', 'no');
 
         // ici test si la vie du personnage adverse et inferieur egale a 0
 
@@ -43,9 +45,9 @@ class FightController extends AbstractController
     #[Route('/fight', name: 'app_fight')]
     public function fight(
         Request $request,
+        RouterInterface $router,
         CreateRandom $createRandom,
         JsonBuilder $jsonBuilder,
-        CheckFight $check,
         PersonnageRepository $personnageRepository,
         WeaponRepository $weaponRepository,
         AccessoryRepository $accessoryRepository,
@@ -54,18 +56,22 @@ class FightController extends AbstractController
     {
         $session = $request->getSession();
         $mate = $session->get('selected_teammate'); // here we retive the object Equipe selectioned by the user where all the value except the id are null
-        if($mate == 'none' || $mate = null) // here test if the user is coming from the menu or if he have refreshed the fight
-        {
-            $check->checkIfInFight();
+        // if($mate == 'none' || $mate = null) // here test if the user is coming from the menu or if he have refreshed the fight
+        // {
+        //     // dd($mate->getId());
+        //     if($session->get('in fight') == 'yes')
+        //     {
+        //         return new RedirectResponse($router->generate('app_lose')); // if user was in fight when refresh/quit -> lose
+        //     }
             
-            return $this->redirectToRoute('app_main');
-        }
-        $session->set('selected_teammate', 'none'); // here set selectedTeammate to 'none' so you cannot access to the fighting scene out of the menu ans cannot refresh the fight
-        $session->set('in fight', 'yes');
+        //     return $this->redirectToRoute('app_main');
+        // }
 
-        
+        // $mate = $session->get('selected_teammate');
         $ally = $equipeRepository->find($mate->getId()); // with the id of the precedent Object Equipe we find the same object with all the correct value
-
+        
+        // $session->set('in fight', 'yes');
+        // $session->set('selected_teammate', null); // here set selectedTeammate to 'none' so you cannot access to the fighting scene out of the menu ans cannot refresh the fight
 
         // searching a random character in the db
         $personnages = $personnageRepository->findBy(['userCreator' => null]);
