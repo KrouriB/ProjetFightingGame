@@ -54,12 +54,14 @@ function allyAttack()
     }
     let rawDamage = calculRawDamage('ally', 'base');
     let damage = Math.round(rawDamage * checkActionElement('atkFromAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie') * reduc);
+    // console.log(checkActionElement('atkFromAlly'))
     
     if(reduc != 1)
     {
         reducedDamage = ((Math.round(rawDamage * checkActionElement('atkFromAlly') * checkActionType('AllyToEnnemie') * checkActionCategory('AllyToEnnemie'))) - damage);
     }
     turnDamage = damage;
+
 
     damageInflict('AllyToEnnemie', damage);
     rechargeEnergy('ally');
@@ -297,7 +299,6 @@ function setAllyEnergy()
     switch(energyActionEnough)
     {
         case true :
-            console.log('energyActionEnough : ' + energyActionEnough);
             if(actualAllyEnergy < allyData.accessory.EnergyCost || waitActionAlly > 0)
             {
                 actionButton.classList.add('disabled');
@@ -398,25 +399,32 @@ function checkActionElement(action) // method to send element multiplicator depe
         case 'atkFromAlly' :
             elementeWeapon = elements.filter((elem) => elem.name == allyData.weapon.ElementBase);
             elementOpposant = elements.filter((elem) => elem.name == ennemieData.personnage.Element);
+            elementeWeapon = elementeWeapon[0];
+            elementOpposant = elementOpposant[0];
             if(allyData.weapon.Element == allyData.weapon.ElementBase)
             {
                 selfBonus = 1.5;
             };
             if(elementeWeapon.advantage == elementOpposant.id)
             {
+                console.log('advantage', elementeWeapon, elementOpposant)
                 return elementeWeapon.advantageMultiplicator * selfBonus;
             }
             else if(elementeWeapon.disadvantage == elementOpposant.id)
             {
+                console.log('disadvantage')
                 return elementeWeapon.disadvantageMultiplicator * selfBonus;
             }
             else
             {
+                console.log(selfBonus)
                 return 1 * selfBonus;
             };
         case 'skillFromAlly' :
             elementeWeapon = elements.filter((elem) => elem.name == allyData.weapon.ElementSkill);
             elementOpposant = elements.filter((elem) => elem.name == ennemieData.personnage.Element);
+            elementeWeapon = elementeWeapon[0];
+            elementOpposant = elementOpposant[0];
             if(allyData.weapon.Element == allyData.weapon.ElementSkill)
             {
                 selfBonus = 1.75;
@@ -436,6 +444,8 @@ function checkActionElement(action) // method to send element multiplicator depe
         case 'atkFromEnnemie' :
             elementeWeapon = elements.filter((elem) => elem.name == ennemieData.weapon.ElementBase);
             elementOpposant = elements.filter((elem) => elem.name == allyData.personnage.Element);
+            elementeWeapon = elementeWeapon[0];
+            elementOpposant = elementOpposant[0];
             if(ennemieData.weapon.Element == ennemieData.weapon.ElementBase)
             {
                 selfBonus = 1.5;
@@ -455,6 +465,8 @@ function checkActionElement(action) // method to send element multiplicator depe
         case 'skillFromEnnemie' :
             elementeWeapon = elements.filter((elem) => elem.name == ennemieData.weapon.ElementSkill);
             elementOpposant = elements.filter((elem) => elem.name == allyData.personnage.Element);
+            elementeWeapon = elementeWeapon[0];
+            elementOpposant = elementOpposant[0];
             if(ennemieData.weapon.Element == ennemieData.weapon.ElementSkill)
             {
                 selfBonus = 1.75;
@@ -610,8 +622,8 @@ function calculRawDamage(who, what) // function to calculate damage depending th
             break;
     }
 
-    let physic = (perso.personnage.Attack * (attackStat / 100) + perso.accessory.Attack);
-    let magic = (perso.personnage.Magic * (magicStat / 100) + perso.accessory.Magic);
+    let physic = (perso.personnage.Attack * (attackStat / 10) + perso.accessory.Attack);
+    let magic = (perso.personnage.Magic * (magicStat / 10) + perso.accessory.Magic);
     let physicDamage = (physic - adversaire.accessory.Defense) * resiPhysic;
     let magicDamage = (magic - adversaire.accessory.Resistance) * resiMagic;
 
