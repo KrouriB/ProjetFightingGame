@@ -39,6 +39,72 @@ body
     width: 100%;
 }
 
+/* color */
+
+.shortSide
+{
+    background-color: var(--secondary);
+}
+
+.statMinus
+{
+    background-color: var(--negative);
+}
+
+.statPlus
+{
+    background-color: var(--positive);
+}
+
+.grey
+{
+    background-color: var(--tertiary);
+}
+
+.greenBar
+{
+    background-color: var(--healthBar);
+}
+
+.redBar
+{
+    background-color: var(--underhealthBar);
+    width: 100%;
+}
+
+.blueBar
+{
+    background-color: var(--energyBar);
+}
+
+.blackBar
+{
+    background-color: var(--underEnergyBar);
+    width: 100%;
+}
+
+/* sizeBar */
+
+.ennemieHealthBar
+{
+    width: var(--healthEnnemieInfo);
+}
+
+.ennemieEnergyBar
+{
+    width: var(--energyEnnemieInfo);
+}
+
+.allyHealthBar
+{
+    width: var(--healthAllyInfo);
+}
+
+.allyEnergyBar
+{
+    width: var(--energyAllyInfo);
+}
+
 @media(orientation: landscape)
 {
     /* choose on what to show */
