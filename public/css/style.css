@@ -150,7 +150,11 @@ body
         display: flex;
     }
 
-
+    .creationPage
+    {
+        display: flex;
+        flex-direction: row;
+    }
 }
 
 @media(orientation: portrait)
