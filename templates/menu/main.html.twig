@@ -6,7 +6,7 @@
     <main class='flex'>
         {# {{ dump(selected) }} #}
         <section class="shortSide">
-            <nav class="desktop">
+            <nav class="desktopFlex">
                 {# <div class="menuButton"><a href="">{{ 'start'|upper }}</a></div> #}
                 <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
                 <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
@@ -15,7 +15,7 @@
                 <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
                 <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
             </nav>
-            <nav class="mobile">
+            <nav class="mobileFlex">
                 <span class="pseudo">{{ app.user.userIdentifier }}</span>
                 <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
                 <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
