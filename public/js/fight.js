@@ -728,8 +728,8 @@ function actionLogs(who, what)
         case 'ennemie' :
             firstUserData = ennemieData;
             accessoryUsed = accessoryActionEnnemie;
-            firstUser = '<span class="persoUser">'+ennemieData.personnage.Name+'</span>';
-            otherUser = '<span class="persoBot">'+allyData.personnage.Name+'</span>';
+            firstUser = '<span class="persoBot">'+ennemieData.personnage.Name+'</span>';
+            otherUser = '<span class="persoUser">'+allyData.personnage.Name+'</span>';
             break;
     }
     
