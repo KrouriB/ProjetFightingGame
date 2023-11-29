@@ -3,17 +3,17 @@
 {% block title %}New Teammate{% endblock %}
 
 {% block body %}
-    <main>
-        <div class="shortSide">
+    <main class='flex'>
+        <div class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
             {% include "/nav/navMenuMobile.html.twig" %}
         </div>
 
-        <div class="longSide">
+        <div class="longSide creationPage">
             {{ form_errors(perso) }}
 
             {{ form_start(perso) }}
-                <div class="leftCreation">
+                <div class="leftCreation flex creationPart">
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.element) }}
@@ -35,7 +35,7 @@
                         </div> #}
                     </div>
                 </div>
-                <div class="shortSide rightCreation">
+                <div class="shortSide rightCreation flex creationPart">
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.name) }}
@@ -47,15 +47,21 @@
                             {{ form_errors(perso.name) }}
                         </div>
                     </div>
-                    <div class="ligne">
+                    <div class="ligne separation">
                         <p>Nombre de point allouable : <span id="pointAllouable"></span></p>
                     </div>
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.life) }}
-                            <a class="buttonStat statMinus grey" id="hpMinus" onclick="lessHpPerso()" disabled>-</a>
-                            {{ form_widget(perso.life) }}
-                            <a class="buttonStat statPlus" id="hpPlus" onclick="moreHpPerso()">+</a>
+                            <div class="statLigne flex">
+                                <div class='flex'>
+                                    <a class="buttonStat statMinus grey" id="hpMinus" onclick="lessHpPerso()" disabled>-</a>
+                                </div>
+                                {{ form_widget(perso.life) }}
+                                <div class='flex'>
+                                    <a class="buttonStat statPlus" id="hpPlus" onclick="moreHpPerso()">+</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(perso.life) }}
@@ -65,9 +71,15 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.attack) }}
-                            <a class="buttonStat statMinus grey" id="atkMinus" onclick="lessAtkPerso()">-</a>
-                            {{ form_widget(perso.attack) }}
-                            <a class="buttonStat statPlus" id="atkPlus" onclick="moreAtkPerso()">+</a>
+                            <div class="statLigne flex">
+                                <div class='flex'>
+                                    <a class="buttonStat statMinus grey" id="atkMinus" onclick="lessAtkPerso()">-</a>
+                                </div>
+                                {{ form_widget(perso.attack) }}
+                                <div class='flex'>
+                                    <a class="buttonStat statPlus" id="atkPlus" onclick="moreAtkPerso()">+</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(perso.attack) }}
@@ -77,9 +89,15 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.magic) }}
-                            <a class="buttonStat statMinus grey" id="magMinus"  onclick="lessMagPerso()">-</a>
-                            {{ form_widget(perso.magic) }}
-                            <a class="buttonStat statPlus" id="magPlus"  onclick="moreMagPerso()">+</a>
+                            <div class="statLigne flex">
+                                <div class='flex'>
+                                    <a class="buttonStat statMinus grey" id="magMinus"  onclick="lessMagPerso()">-</a>
+                                </div>
+                                {{ form_widget(perso.magic) }}
+                                <div class='flex'>
+                                    <a class="buttonStat statPlus" id="magPlus"  onclick="moreMagPerso()">+</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(perso.magic) }}
@@ -89,9 +107,15 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.energy) }}
-                            <a class="buttonStat statMinus grey" id="nrjMinus"  onclick="lessNrjPerso()">-</a>
-                            {{ form_widget(perso.energy) }}
-                            <a class="buttonStat statPlus" id="nrjPlus"  onclick="moreNrjPerso()">+</a>
+                            <div class="statLigne flex">
+                                <div class='flex'>
+                                    <a class="buttonStat statMinus grey" id="nrjMinus"  onclick="lessNrjPerso()">-</a>
+                                </div>
+                                {{ form_widget(perso.energy) }}
+                                <div class='flex'>
+                                    <a class="buttonStat statPlus" id="nrjPlus"  onclick="moreNrjPerso()">+</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(perso.energy) }}
