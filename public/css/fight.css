@@ -116,7 +116,6 @@
 
 .bar
 {
-    width: 40%;
     text-align: center;
     position: relative;
     border-radius: 16px;
@@ -126,15 +125,12 @@
 
 .bar > span
 {
-    /* position: absolute; */
     background-color: transparent;
 }
 
 .ennemieName
 {
     flex-direction: column;
-    align-items: flex-end;
-    text-align: end;
 }
 
 
@@ -163,6 +159,17 @@
 
 @media(orientation: landscape)
 {
+    .bar
+    {
+        width: 40%;
+    }
+
+    .ennemieName
+    {
+        align-items: flex-end;
+        text-align: end;
+    }
+
     #actionBar
     {
         gap: 40px;
@@ -177,6 +184,31 @@
 
 @media(orientation: portrait)
 {
+    .bars
+    {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .bar
+    {
+        width: 90%;
+    }
+
+    .ennemieName
+    {
+        align-items: center;
+        text-align: center;
+    }
+
+    .allyName
+    {
+        margin-top: 40px;
+        align-items: center;
+        text-align: center;
+    }
+
     #actionBar
     {
         gap: 40px;
