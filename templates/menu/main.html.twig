@@ -5,7 +5,7 @@
 {% block body %}
     <main class='flex'>
         {# {{ dump(selected) }} #}
-        <section class="shortSide">
+        <section class="shortSide flex">
             <nav class="desktopFlex">
                 {# <div class="menuButton"><a href="">{{ 'start'|upper }}</a></div> #}
                 <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
@@ -37,7 +37,7 @@
                     {{ form_widget(teammate.equipe) }}
                 {{ form_end(teammate) }}
                 <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
-                <div class="parameter">gear</div>
+                <div class="parameter"><i class="fa-solid fa-gear"></i></div>
             </header>
             <div id="menuMain">
                 {# <div>
