@@ -4,44 +4,44 @@
 
 {% block body %}
     <main class='flex'>
-        <section class="longSide">
-            <div id="scene">
-                <div class="ennemiesSide">
-                    <div>
+        <section class="longSide flex fightPart">
+            <div id="scene" class="flex">
+                <div class="ennemieSide flex aSide">
+                    <div class="ennemieName flex">
                         <span>{{ ennemie.personnage.getName }}</span>
                         <ul>
                             <li>{{ ennemie.weapon.getName }}</li>
                             <li>{{ ennemie.accessory.getName }}</li>
                         </ul>
                     </div>
-                    <div>
-                        <div class="healthBar">
+                    <div class="bars flex">
+                        <div class="healthBar bar">
                             <div class="greenBar ennemieHealthBar"></div>
                             <div class="redBar"></div>
                             <span id="actualEnnemieHp"></span>
                         </div>
-                        <div class="energyBar">
+                        <div class="energyBar bar">
                             <div class="blueBar ennemieEnergyBar"></div>
                             <div class="blackBar"></div>
                             <span id="actualEnnemieEnergy"></span>
                         </div>
                     </div>
                 </div>
-                <div class="allySide">
-                    <div>
+                <div class="allySide flex aSide">
+                    <div class="allyName">
                         <span>{{ ally.personnage.getName }}</span>
                         <ul>
                             <li>{{ ally.weapon.getName }}</li>
                             <li>{{ ally.accessory.getName }}</li>
                         </ul>
                     </div>
-                    <div>
-                        <div class="energyBar">
+                    <div class="bars flex">
+                        <div class="energyBar bar">
                             <div class="blueBar allyEnergyBar"></div>
                             <div class="blackBar"></div>
                             <span id="actualAllyEnergy"></span>
                         </div>
-                        <div class="healthBar">
+                        <div class="healthBar bar">
                             <div class="greenBar allyHealthBar"></div>
                             <div class="redBar"></div>
                             <span id="actualAllyHp"></span>
@@ -49,11 +49,15 @@
                     </div>
                 </div>
             </div>
-            <div id="actionBar">
-                <button type="button" class="buttonFight" id="attackButton" onclick="allyAttack()">Attaque</button>
-                <button type="button" class="buttonFight" id="skillButton" onclick="allySkill()">{{ ally.weapon.getNameSkill }}</button>
-                <button type="button" class="buttonFight" id="actionButton" onclick="allyAction()">{{ ally.accessory.getNameAction }}</button>
-                <button type="button" class="buttonFight" id="actionButton" onclick="lose()">Abandonné</button>
+            <div id="actionBar" class="flex">
+                <div class="flex">
+                    <button type="button" class="buttonFight" id="attackButton" onclick="allyAttack()">Attaque</button>
+                    <button type="button" class="buttonFight" id="skillButton" onclick="allySkill()">{{ ally.weapon.getNameSkill }}</button>
+                </div>
+                <div class="flex">
+                    <button type="button" class="buttonFight" id="actionButton" onclick="allyAction()">{{ ally.accessory.getNameAction }}</button>
+                    <button type="button" class="buttonFight" id="loseButton" onclick="lose()">Abandonné</button>
+                </div>
                 <button type="button" class="mobile buttonFight">Log (icone fleche haut)</button>
             </div>
         </section>
