@@ -58,7 +58,7 @@ class CreationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $perso = $form->getData();
-            dd($perso);
+            // dd($perso);
 
             // test si les valeurs envoyer ont été modifier en trichant
             if($perso->getAttack() % 4 != 0)
