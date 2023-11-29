@@ -1,64 +1,4 @@
-:root
-{
-    --primary: #ffffff;
-    --secondary: #D9D9D9;
-    --tertiary: #3A3A3A;
-    --button: #4E4E4E;
-    --underhealthBar: #F00000;
-    --healthBar: #00D415;
-    --underEnergyBar: #3A3A3A;
-    --energyBar: #0066FF;
-    --money: #FFB800;
-    --positive: #0075FF;
-    --negative: #FF0000;
-    --frist: #FFB800;
-    --second: #C0C0C0;
-    --third: #CD7F32;
-    --unselected: #ff000066;
-    --selected: #001AFF99;
-    --text: #000000;
-    --textReverse: #FFFFFF;
-    --healthAllyInfo: 100%;
-    --healthEnnemieInfo: 100%;
-    --energyAllyInfo: 100%;
-    --energyEnnemieInfo: 100%;
-}
-
-
-
-*
-{
-    margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-    font-family: 'Cousine', monospace;
-}
-
-
-
-.hidden
-{
-    visibility: hidden;
-}
-
-.flex
-{
-    display: flex;
-}
-
-
-
-body
-{
-    width: 100%;
-}
-
-main
-{
-    width: 100%;
-    height: 100%;
-    font-size: 2em;
-}
+@import "root.css";
 
 
 
@@ -107,151 +47,12 @@ nav
     justify-content: center;
 }
 
-.statMinus
-{
-    color: var(--negative);
-    width: 1em;
-    height: 1em;
-    cursor: pointer;
-}
-
-.statPlus
-{
-    color: var(--positive);
-    width: 1em;
-    height: 1em;
-    cursor: pointer;
-}
-
-.grey
-{
-    color: var(--tertiary);
-    font-family: 'Noto Sans Pahawh Hmong', sans-serif;
-    cursor: not-allowed;
-}
-
-.greenBar
-{
-    background-color: var(--healthBar);
-}
-
-.redBar
-{
-    background-color: var(--underhealthBar);
-    width: 100%;
-}
-
-.blueBar
-{
-    background-color: var(--energyBar);
-}
-
-.blackBar
-{
-    background-color: var(--underEnergyBar);
-    width: 100%;
-}
-
-
-
-/* sizeBar */
-
-
-
-.ennemieHealthBar
-{
-    width: var(--healthEnnemieInfo);
-}
-
-.ennemieEnergyBar
-{
-    width: var(--energyEnnemieInfo);
-}
-
-.allyHealthBar
-{
-    width: var(--healthAllyInfo);
-}
-
-.allyEnergyBar
-{
-    width: var(--energyAllyInfo);
-}
-
-
-
-/* creation */
-
-
-
-.statLigne
-{
-    justify-content: space-evenly;
-    align-items: center
-}
-
-.statLigne > div
-{
-    width: 1em;
-    height: 100%;
-}
-
-.statLigne > div > a
-{
-    text-align: center;
-    width: 100%;
-    height: 100%;
-}
-
-.ligneSup input, .ligneSup select, .ligneMid input
+.teamSelector > *
 {
     font-size: 1em;
+    padding: 4px;
 }
 
-.ligneSup input
-{
-    text-align: center;
-}
-
-.help-text
-{
-    font-size: 1em;
-}
-
-.separation
-{
-    border-bottom: 1px solid black;
-}
-
-.creationPart
-{
-    width: 50%;
-    flex-direction: column;
-    padding: 40px 20px;
-    justify-content: space-evenly;
-}
-
-.zoneValidate
-{
-    align-self: flex-end;
-    background-color: var(--button);
-    position: relative;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 8px;
-}
-
-.zoneValidate a
-{
-    color: var(--textReverse);
-}
-
-.zoneValidate button
-{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
 
 @media(orientation: landscape)
 {
@@ -263,39 +64,15 @@ nav
         min-height: 100vh;
     }
 
-    .desktop
-    {
-        display: block;
-    }
-
-    .desktopFlex
-    {
-        display: flex;
-    }
-
-    .mobile
-    {
-        display: none;
-    }
-
-    .mobileFlex
-    {
-        display: none;
-    }
-
     /* witdh of my 2 principal element */
 
     .shortSide
     {
-        /* flex-basis: 33%; */
-        /* max-width: 33%; */
         width: 33%;
     }
 
     .longSide
     {
-        /* flex-basis: 66%; */
-        /* max-width: 67%; */
         width: 67%;
     }
 
@@ -306,20 +83,8 @@ nav
 
     .topBar
     {
-        display: flex;
+        padding: 20px 20px 0 20px;
         justify-content: space-between;
-    }
-
-    .creationPage form
-    {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        height: 100%;
-    }
-
-    .leftCreation
-    {
         align-items: center;
     }
 }
@@ -331,26 +96,6 @@ nav
     main
     {
         flex-direction: column;
-    }
-
-    .desktop
-    {
-        display: none;
-    }
-
-    .desktopFlex
-    {
-        display: none;
-    }
-
-    .mobile
-    {
-        display: block;
-    }
-
-    .mobileFlex
-    {
-        display: flex;
     }
 
     .teamSelector
