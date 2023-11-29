@@ -795,6 +795,16 @@ function actionLogs(who, what)
     
 }
 
+function lose()
+{
+    attackButton.disabled = true;
+    skillButton.disabled = true;
+    actionButton.disabled = true;
+    loseButton.disabled = true;
+    window.location = "fight/lose";
+    window.location.replace();
+}
+
 
 // when loading the page
 
