@@ -69,9 +69,16 @@
     color: var(--negative);
 }
 
+.fightPart
+{
+    max-height: 100vh;
+
+}
+
 .logSide
 {
     border-left: 2px solid black;
+    overflow: scroll;
 }
 
 
@@ -79,7 +86,7 @@
 {
     padding: 16px;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 100%;
 }
 
@@ -103,6 +110,7 @@
 {
     flex-direction: column;
     height: 35%;
+    gap: 18px;
 }
 
 .ennemieName span, .allyName span
@@ -113,7 +121,6 @@
 .bars
 {
     justify-content: space-around;
-    gap: 26px;
 }
 
 .bar
@@ -134,7 +141,6 @@
 {
     flex-direction: column;
 }
-
 
 #logs
 {

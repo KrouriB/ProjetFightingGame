@@ -61,7 +61,7 @@ ul li
 
 @media(orientation: landscape)
 {
-
+    html, body {margin: 0; height: 100%; overflow: hidden}
 
     .desktop
     {
