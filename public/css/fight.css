@@ -1,0 +1,46 @@
+@import "root.css";
+
+
+
+
+.greenBar
+{
+    background-color: var(--healthBar);
+}
+
+.redBar
+{
+    background-color: var(--underhealthBar);
+    width: 100%;
+}
+
+.blueBar
+{
+    background-color: var(--energyBar);
+}
+
+.blackBar
+{
+    background-color: var(--underEnergyBar);
+    width: 100%;
+}
+
+.ennemieHealthBar
+{
+    width: var(--healthEnnemieInfo);
+}
+
+.ennemieEnergyBar
+{
+    width: var(--energyEnnemieInfo);
+}
+
+.allyHealthBar
+{
+    width: var(--healthAllyInfo);
+}
+
+.allyEnergyBar
+{
+    width: var(--energyAllyInfo);
+}
