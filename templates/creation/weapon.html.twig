@@ -4,12 +4,12 @@
 
 {% block body %}
     <main class='flex'>
-        <div class="shortSide flex">
+        <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
             {% include "/nav/navMenuMobile.html.twig" %}
-        </div>
+        </section>
 
-        <div class="longSide">
+        <section class="longSide">
             {{ form_errors(weapon) }}
 
             {{ form_start(weapon) }}
@@ -145,7 +145,7 @@
                 </div>
             {{ form_end(weapon) }}
             {# ajouter les suffix sur certain partie du form quand plus weaponnaliser #}
-        </div>
+        </section>
     </main>
 {% endblock %}
 

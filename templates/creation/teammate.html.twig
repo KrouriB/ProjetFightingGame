@@ -4,16 +4,16 @@
 
 {% block body %}
     <main class='flex'>
-        <div class="shortSide flex">
+        <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
             {% include "/nav/navMenuMobile.html.twig" %}
-        </div>
+        </section>
 
-        <div class="longSide">
+        <section class="longSide">
             {{ form_errors(equipe) }}
 
             {{ form_start(equipe) }}
             {{ form_end(equipe) }}
-        </div>
+        </section>
     </main>
 {% endblock %}

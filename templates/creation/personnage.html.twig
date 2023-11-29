@@ -4,12 +4,12 @@
 
 {% block body %}
     <main class='flex'>
-        <div class="shortSide flex">
+        <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
             {% include "/nav/navMenuMobile.html.twig" %}
-        </div>
+        </section>
 
-        <div class="longSide creationPage">
+        <section class="longSide creationPage">
             {{ form_errors(perso) }}
 
             {{ form_start(perso) }}
@@ -128,7 +128,7 @@
                     </div>
                 </div>
             {{ form_end(perso) }}
-        </div>
+        </section>
     </main>
 {% endblock %}
 

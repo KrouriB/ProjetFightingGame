@@ -4,19 +4,19 @@
 
 {% block body %}
     <main class='flex'>
-        <div class="shortSide flex">
+        <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
             {% include "/nav/navMenuMobile.html.twig" %}
-        </div>
+        </section>
 
-        <div class="longSide">
+        <section class="longSide">
             {{ form_errors(accessory) }}
 
             {{ form_start(accessory) }}
             {{ form_end(accessory) }}
             {# ajouter les suffix sur certain partie du form quand plus personaliser #}
             {# + 300 gold reduc wait turn / + 50 gold par energy action supplementaire #}
-        </div>
+        </section>
     </main>
 {% endblock %}
 

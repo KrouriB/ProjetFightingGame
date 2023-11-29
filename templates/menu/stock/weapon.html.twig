@@ -4,11 +4,11 @@
 
 {% block body %}
     <main class='flex'>
-        <div class="shortSide flex">
+        <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
             {% include "/nav/navMenuMobile.html.twig" %}
-        </div>
-        <div class="longSide">
+        </section>
+        <section class="longSide">
             <header class="topBar flex">
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>
@@ -42,6 +42,6 @@
                     </div>
                 {% endfor %}
             </div>
-        </div>
+        </section>
     </main>
 {% endblock %}
