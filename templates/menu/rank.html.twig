@@ -3,7 +3,7 @@
 {% block title %}Classemant{% endblock %}
 
 {% block body %}
-    <main>
+    <main class='flex'>
         <section class="shortSide">
             {% if app.user %}
                 {% include "/nav/navMenuDesktop.html.twig" %}
@@ -13,7 +13,7 @@
             {% endif %}
         </section>
         <section class="longSide">
-            <header class="topBar">
+            <header class="topBar flex">
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>
                 </div>

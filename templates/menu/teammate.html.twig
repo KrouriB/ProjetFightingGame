@@ -3,13 +3,13 @@
 {% block title %}{{ 'é'|upper }}quipier{% endblock %}
 
 {% block body %}
-    <main>
+    <main class='flex'>
         <section class="shortSide">
             {% include "/nav/navMenuDesktop.html.twig" %}
             {% include "/nav/navMenuMobile.html.twig" %}
         </section>
         <section class="longSide">
-            <header class="topBar">
+            <header class="topBar flex">
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>
                 </div>

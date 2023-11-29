@@ -3,7 +3,7 @@
 {% block title %}Menu{% endblock %}
 
 {% block body %}
-    <main>
+    <main class='flex'>
         {# {{ dump(selected) }} #}
         <section class="shortSide">
             <nav class="desktop">
@@ -26,13 +26,13 @@
             </nav>
         </section>
         <section class="longSide">
-            <header class="topBar">
+            <header class="topBar flex">
                 <div class="buttonNav mobile">
                     <span></span><span></span><span></span>
                 </div>
                 {{ form_errors(teammate) }}
 
-                {{ form_start(teammate, { 'attr' : { 'class': 'teamSelector' } }) }}
+                {{ form_start(teammate, { 'attr' : { 'class': 'teamSelector flex' } }) }}
                     {{ form_widget(teammate.Start) }}
                     {{ form_widget(teammate.equipe) }}
                 {{ form_end(teammate) }}
