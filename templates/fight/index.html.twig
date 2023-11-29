@@ -53,11 +53,11 @@
                 <button type="button" class="buttonFight" id="attackButton" onclick="allyAttack()">Attaque</button>
                 <button type="button" class="buttonFight" id="skillButton" onclick="allySkill()">{{ ally.weapon.getNameSkill }}</button>
                 <button type="button" class="buttonFight" id="actionButton" onclick="allyAction()">{{ ally.accessory.getNameAction }}</button>
-                <a href="{{ path('app_lose') }}" class="buttonFight" id="loseButton">Abandonné</a>
+                <button type="button" class="buttonFight" id="actionButton" onclick="lose()">Abandonné</button>
                 <button type="button" class="mobile buttonFight">Log (icone fleche haut)</button>
             </div>
         </section>
-        <section class="shortSide">
+        <section class="shortSide flex logSide">
             <div id="logs">
 
             </div>
