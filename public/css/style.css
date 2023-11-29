@@ -16,49 +16,118 @@
     --third: #CD7F32;
     --unselected: #ff000066;
     --selected: #001AFF99;
+    --text: #000000;
+    --textReverse: #FFFFFF;
     --healthAllyInfo: 100%;
     --healthEnnemieInfo: 100%;
     --energyAllyInfo: 100%;
     --energyEnnemieInfo: 100%;
 }
 
+
+
 *
 {
     margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+    font-family: 'Cousine', monospace;
 }
+
+
 
 .hidden
 {
     visibility: hidden;
 }
 
+.flex
+{
+    display: flex;
+}
+
+
+
 body
 {
     width: 100%;
 }
 
+main
+{
+    width: 100%;
+    height: 100%;
+    font-size: 2em;
+}
+
+
+
+nav
+{
+    font-family: 'Noto Sans Pahawh Hmong', sans-serif;
+    font-size: 2em;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 90%;
+}
+
+@media(orientation: landscape) and (max-width: 1440px)
+{
+    nav
+    {
+        font-size: 1em;
+    }
+}
+
+.menuButton
+{
+    background-color: var(--primary);
+    border-radius: 8px;
+    border:solid 1px var(--text);
+    text-align: center;
+    padding-top: 8px;
+}
+
+.menuButton a
+{
+    color: var(--text);
+    text-decoration: none;
+}
+
+
+
 /* color */
+
+
 
 .shortSide
 {
     background-color: var(--secondary);
+    justify-content: center;
 }
 
 .statMinus
 {
-    background-color: var(--negative);
+    color: var(--negative);
+    width: 1em;
+    height: 1em;
+    cursor: pointer;
 }
 
 .statPlus
 {
-    background-color: var(--positive);
+    color: var(--positive);
+    width: 1em;
+    height: 1em;
+    cursor: pointer;
 }
 
 .grey
 {
-    background-color: var(--tertiary);
+    color: var(--tertiary);
+    font-family: 'Noto Sans Pahawh Hmong', sans-serif;
+    cursor: not-allowed;
 }
 
 .greenBar
@@ -83,7 +152,11 @@ body
     width: 100%;
 }
 
+
+
 /* sizeBar */
+
+
 
 .ennemieHealthBar
 {
@@ -105,16 +178,107 @@ body
     width: var(--energyAllyInfo);
 }
 
+
+
+/* creation */
+
+
+
+.statLigne
+{
+    justify-content: space-evenly;
+    align-items: center
+}
+
+.statLigne > div
+{
+    width: 1em;
+    height: 100%;
+}
+
+.statLigne > div > a
+{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.ligneSup input, .ligneSup select, .ligneMid input
+{
+    font-size: 1em;
+}
+
+.ligneSup input
+{
+    text-align: center;
+}
+
+.help-text
+{
+    font-size: 1em;
+}
+
+.separation
+{
+    border-bottom: 1px solid black;
+}
+
+.creationPart
+{
+    width: 50%;
+    flex-direction: column;
+    padding: 40px 20px;
+    justify-content: space-evenly;
+}
+
+.zoneValidate
+{
+    align-self: flex-end;
+    background-color: var(--button);
+    position: relative;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.zoneValidate a
+{
+    color: var(--textReverse);
+}
+
+.zoneValidate button
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
 @media(orientation: landscape)
 {
     /* choose on what to show */
+
+    main
+    {
+        flex-direction: row;
+        min-height: 100vh;
+    }
 
     .desktop
     {
         display: block;
     }
 
+    .desktopFlex
+    {
+        display: flex;
+    }
+
     .mobile
+    {
+        display: none;
+    }
+
+    .mobileFlex
     {
         display: none;
     }
@@ -123,20 +287,21 @@ body
 
     .shortSide
     {
-        flex-basis: 33,33%;
-        max-width: 33,33%;
+        /* flex-basis: 33%; */
+        /* max-width: 33%; */
+        width: 33%;
     }
 
     .longSide
     {
-        flex-basis: 66.66%;
-        max-width: 66.66%;
+        /* flex-basis: 66%; */
+        /* max-width: 67%; */
+        width: 67%;
     }
 
-    main
+    .longSide .shortSide
     {
-        display: flex;
-        width: 100%;
+        width: 50%;
     }
 
     .topBar
@@ -145,15 +310,17 @@ body
         justify-content: space-between;
     }
 
-    .teamSelector
-    {
-        display: flex;
-    }
-
-    .creationPage
+    .creationPage form
     {
         display: flex;
         flex-direction: row;
+        width: 100%;
+        height: 100%;
+    }
+
+    .leftCreation
+    {
+        align-items: center;
     }
 }
 
@@ -161,7 +328,17 @@ body
 {
     /* choose on what to show */
 
+    main
+    {
+        flex-direction: column;
+    }
+
     .desktop
+    {
+        display: none;
+    }
+
+    .desktopFlex
     {
         display: none;
     }
@@ -171,9 +348,13 @@ body
         display: block;
     }
 
-    .teamSelector
+    .mobileFlex
     {
         display: flex;
+    }
+
+    .teamSelector
+    {
         flex-direction: column;
     }
 }
