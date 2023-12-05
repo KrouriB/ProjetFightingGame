@@ -119,6 +119,12 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('app_register');
     }
 
+    #[Route('/agreeTerms', name: 'app_agreeTerms')]
+    public function agreeTerms()
+    {
+        return $this->render('terms.html.twig');
+    }
+
     public function createStockPersonnage()
     {
         $personnages = $this->personnageRepository->findFirstPersonnages();
