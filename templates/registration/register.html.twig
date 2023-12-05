@@ -2,6 +2,10 @@
 
 {% block title %}Register{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/regi_log.css') }}">
+{% endblock %}
+
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
@@ -17,7 +21,14 @@
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <div class="agreeTerms">
+            <div>
+                {{ form_label(registrationForm.agreeTerms) }}
+                {{ form_widget(registrationForm.agreeTerms) }}
+            </div>
+            <a href="{{ path('app_agreeTerms') }}">Lire les conditions générales</a>
+            {{ form_errors(registrationForm.agreeTerms) }}
+        </div>
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
