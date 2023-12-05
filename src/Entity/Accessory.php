@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AccessoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AccessoryRepository::class)]
@@ -60,6 +61,9 @@ class Accessory
 
     #[ORM\ManyToOne]
     private ?User $userCreator = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $imagePath = null;
 
     public function __construct()
     {
@@ -267,6 +271,18 @@ class Accessory
     public function setUserCreator(?User $userCreator): static
     {
         $this->userCreator = $userCreator;
+
+        return $this;
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function setImagePath(?string $imagePath): static
+    {
+        $this->imagePath = $imagePath;
 
         return $this;
     }
