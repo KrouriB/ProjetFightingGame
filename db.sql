@@ -81,3 +81,7 @@ INSERT INTO `personnage` (`id`, `element_id`, `type_id`, `category_id`, `name`, 
 	(43, 5, 1, 3, 'Gants Bois', 10, 10, 60, 200),
 	(44, 5, 2, 3, 'Dague Bois', 10, 10, 60, 200),
 	(45, 5, 3, 3, 'Arc Bois', 10, 10, 60, 200);
+
+/* UPDATE weapon
+SET attack_stat = 20, magic_stat = 20
+WHERE attack_stat = 200, magic_stat = 200 */
