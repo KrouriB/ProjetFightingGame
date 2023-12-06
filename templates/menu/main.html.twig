@@ -68,7 +68,7 @@
                     {{ form_widget(teammate.Start) }}
                     {{ form_widget(teammate.equipe) }}
                 {{ form_end(teammate) }}
-                <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
+                <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
                 <div class="parameter"><i class="fa-solid fa-gear"></i></div>
             </header>
             <div id="menuMain">
