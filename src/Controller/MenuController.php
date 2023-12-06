@@ -84,6 +84,18 @@ class MenuController extends AbstractController
         ]);
     }
 
+    #[Route('/menu/rule', name: 'app_rule')]
+    public function rule(/*, Request $request, RouterInterface $router*/): Response
+    {
+        // $session = $request->getSession();
+        // if($session->get('in fight') == 'yes')
+        // {
+        //     return new RedirectResponse($router->generate('app_lose')); // if user was in fight when refresh/quit -> lose
+        // }
+        
+        return $this->render('everyone/rule.html.twig');
+    }
+
     #[Route('/menu/teammate', name: 'app_teammate')]
     #[IsGranted('ROLE_USER')]
     public function teammate(EquipeRepository $equipeRepository/*, Request $request, RouterInterface $router*/): Response
