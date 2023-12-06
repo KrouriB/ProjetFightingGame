@@ -54,9 +54,19 @@ main
     font-size: 2em;
 }
 
+a
+{
+    color: var(--text);
+}
+
 ul li
 {
     list-style: none;
+}
+
+.scrollable
+{
+    overflow-y: scroll;
 }
 
 @media(orientation: landscape)

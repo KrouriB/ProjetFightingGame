@@ -35,6 +35,11 @@ nav
     text-decoration: none;
 }
 
+.imgFigure
+{
+    height: 140px;
+}
+
 
 
 /* color */
@@ -51,6 +56,100 @@ nav
 {
     font-size: 1em;
     padding: 4px;
+}
+
+
+/* inventory */
+
+#teammates
+{
+    display: flex;
+    flex-direction: column;
+    align-items : center;
+    height: 100%;
+}
+
+#inventory
+{
+    gap: 20px;
+}
+
+.invIco
+{
+    display: block;
+    height: 40px;
+    width: 40px;
+
+}
+
+.invIco > a
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: var(--text);
+}
+
+.invIco > a > img
+{
+    height: 100%;
+    width: 100%;
+}
+
+.selectedInventory
+{
+    filter: drop-shadow(0 0 16px blue);
+}
+
+.unselectedInventory
+{
+    filter: drop-shadow(0 0 16px red);
+}
+
+.cards
+{
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.cardInventory
+{
+    background-color: var(--tertiary);
+    width: 30%;
+    color: var(--primary);
+    border-radius: 12px;
+    padding: 12px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.topCard
+{
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.mainCard
+{
+    justify-content: space-between;
+}
+
+.leftCard
+{
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.leftCard span
+{
+    font-size: 0.7em;
+}
+
+.rifhtCard
+{
+    height: 100%;
 }
 
 
@@ -101,5 +200,21 @@ nav
     .teamSelector
     {
         flex-direction: column;
+    }
+
+    #teammates
+    {
+        padding-top: 20px;
+    }
+
+    #inventory
+    {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .mainCard
+    {
+        flex-direction: column-reverse;
     }
 }
