@@ -2,6 +2,10 @@
 
 {% block title %}Inventaire armes{% endblock %}
 
+{% block meta %}
+    <meta name="description" content="inventaire d'arme">
+{% endblock %}
+
 {% block body %}
     <main class='flex'>
         <section class="shortSide flex">
@@ -17,30 +21,32 @@
                 <div class="parameter"></div>
             </header>
             <div id="teammates">
-                <div id="inventory">
-                    <div class="personnagesIcone unselectedInventory"><a href="{{ path('app_stock_personnage') }}">image1</a></div>
-                    <div class="weaponsIcone selectedInventory">image2</div>
-                    <div class="accessoryIcone unselectedInventory"><a href="{{ path('app_stock_accessory') }}">image3</a></div>
+                <div id="inventory" class="flex">
+                    <div class="personnagesIcone unselectedInventory invIco"><a href="{{ path('app_stock_personnage') }}"><img src="{{ asset('img/icon/personnages.png') }}"/></a></div>
+                    <div class="weaponsIcone selectedInventory invIco"><a><img src="{{ asset('img/icon/weapon.png') }}"/></a></div>
+                    <div class="accessoryIcone unselectedInventory invIco"><a href="{{ path('app_stock_accessory') }}"><img src="{{ asset('img/icon/accessory.png') }}"/></a></div>
                 </div>
-                {% for weapon in weapons %}
-                    <div id="cardInventory">
-                        <div class="topCard">
-                            <div class="infoBulle">i</div>
-                            <div class="nameCard">{{ weapon.name }}</div>
-                        </div>
-                        <div class="mainCard">
-                            <div class="leftCard">
-                                <span>{{ weapon.weaponType.nameType }}</span>
-                                <span>{{ weapon.weaponCategory.nameCategory }}</span>
-                                <span>{{ weapon.weaponElement.nameElement }}</span>
-                                <span>{{ weapon.skillElement.nameElement }}</span>
+                <div class="cards flex scrollable">
+                    {% for weapon in weapons %}
+                        <div class="cardInventory flex">
+                            <div class="topCard flex">
+                                <button class="infoBulle">i</button>
+                                <div class="nameCard">{{ weapon.name }}</div>
+                            </div>
+                            <div class="mainCard flex">
+                                <div class="leftCard flex">
+                                    <span>{{ weapon.weaponType.nameType }}</span>
+                                    <span>{{ weapon.weaponCategory.nameCategory }}</span>
+                                    <span>{{ weapon.weaponElement.nameElement }}</span>
+                                    <span>{{ weapon.skillElement.nameElement }}</span>
+                                </div>
+                                <figure class="rightCard imgPerso">
+                                    <img class="imgFigure" src="{{ asset(weapon.imagePath) }}" alt="image du personnage">
+                                </figure>
                             </div>
                         </div>
-                        <!-- <div class="rightCard">
-                            <figure></figure>
-                        </div> -->
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </section>
     </main>

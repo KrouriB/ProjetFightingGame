@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block meta %}
+    <meta name="description" content="inventaire d'accéssoire">
+{% endblock %}
+
 {% block title %}Inventaire équipement{% endblock %}
 
 {% block body %}
@@ -17,37 +21,39 @@
                 <div class="parameter"></div>
             </header>
             <div id="teammates">
-                <div id="inventory">
-                    <div class="personnagesIcone unselectedInventory"><a href="{{ path('app_stock_personnage') }}">image1</a></div>
-                    <div class="weaponsIcone unselectedInventory"><a href="{{ path('app_stock_weapon') }}">image2</a></div>
-                    <div class="accessoryIcone selectedInventory">image3</div>
+                <div id="inventory" class="flex">
+                    <div class="personnagesIcone unselectedInventory invIco"><a href="{{ path('app_stock_personnage') }}"><img src="{{ asset('img/icon/personnages.png') }}"/></a></div>
+                    <div class="weaponsIcone unselectedInventory invIco"><a href="{{ path('app_stock_weapon') }}"><img src="{{ asset('img/icon/weapon.png') }}"/></a></div>
+                    <div class="accessoryIcone selectedInventory invIco"><a><img src="{{ asset('img/icon/accessory.png') }}"/></a></div>
                 </div>
-                {% for accessory in accessorys %}
-                    {# {% if accessory.statAction == 1 %}
-                        {% set rankStat = accessory.typeStatAction.rankStat1 %}
-                    {% elseif accessory.statAction == 2 %}
-                        {% set rankStat = accessory.typeStatAction.rankStat2 %}
-                    {% elseif accessory.statAction == 3 %}
-                        {% set rankStat = accessory.typeStatAction.rankStat3 %}
-                    {% else %}
-                        {% set rankStat = accessory.typeStatAction.rankStat4 %}
-                    {% endif %} #} <!-- when doing infobulle js -->
-                    <div id="cardInventory">
-                        <div class="topCard">
-                            <div class="infoBulle">i</div>
-                            <div class="nameCard">{{ accessory.name }}</div>
-                        </div>
-                        <div class="mainCard">
-                            <div class="leftCard">
-                                <span>{{ accessory.nameAction }}</span>
-                                <span>{{ accessory.typeStatAction.nomType }}</span>
+                <div class="cards flex scrollable">
+                    {% for accessory in accessorys %}
+                        {# {% if accessory.statAction == 1 %}
+                            {% set rankStat = accessory.typeStatAction.rankStat1 %}
+                        {% elseif accessory.statAction == 2 %}
+                            {% set rankStat = accessory.typeStatAction.rankStat2 %}
+                        {% elseif accessory.statAction == 3 %}
+                            {% set rankStat = accessory.typeStatAction.rankStat3 %}
+                        {% else %}
+                            {% set rankStat = accessory.typeStatAction.rankStat4 %}
+                        {% endif %} #} <!-- when doing infobulle js -->
+                        <div class="cardInventory flex">
+                            <div class="topCard flex">
+                                <button class="infoBulle">i</button>
+                                <div class="nameCard">{{ accessory.name }}</div>
                             </div>
-                            <!-- <div class="rightCard">
-                                <figure></figure>
-                            </div> -->
+                            <div class="mainCard flex">
+                                <div class="leftCard flex">
+                                    <span>{{ accessory.nameAction }}</span>
+                                    <span>{{ accessory.typeStatAction.nomType }}</span>
+                                </div>
+                                <figure class="rightCard imgPerso">
+                                    <img class="imgFigure" src="{{ asset(accessory.imagePath) }}" alt="image du personnage">
+                                </figure>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </section>
     </main>

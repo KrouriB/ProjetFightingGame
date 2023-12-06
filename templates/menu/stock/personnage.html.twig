@@ -2,6 +2,10 @@
 
 {% block title %}Classemant personnages{% endblock %}
 
+{% block meta %}
+    <meta name="description" content="inventaire de personnage">
+{% endblock %}
+
 {% block body %}
     <main class='flex'>
         <section class="shortSide flex">
@@ -17,29 +21,31 @@
                 <div class="parameter"></div>
             </header>
             <div id="teammates">
-                <div id="selectionPath">
-                    <div class="personnagesIcone selectedInventory">image1</div>
-                    <div class="weaponsIcone unselectedInventory"><a href="{{ path('app_stock_weapon') }}">image2</a></div>
-                    <div class="accessoryIcone unselectedInventory"><a href="{{ path('app_stock_accessory') }}">image3</a></div>
+                <div id="inventory" class="flex">
+                    <div class="invIco personnagesIcone selectedInventory"><a><img src="{{ asset('img/icon/personnages.png') }}"/></a></div>
+                    <div class="invIco weaponsIcone unselectedInventory"><a href="{{ path('app_stock_weapon') }}"><img src="{{ asset('img/icon/weapon.png') }}"/></a></div>
+                    <div class="invIco accessoryIcone unselectedInventory"><a href="{{ path('app_stock_accessory') }}"><img src="{{ asset('img/icon/accessory.png') }}"/></i></a></div>
                 </div>
-                {% for personnage in personnages %}
-                    <div id="cardInventory">
-                        <div class="topCard">
-                            <div class="infoBulle">i</div>
-                            <div class="nameCard">{{ personnage.name }}</div>
-                        </div>
-                        <div class="mainCard">
-                            <div class="leftCard">
-                                <span>{{ personnage.element.nameElement }}</span>
-                                <span>{{ personnage.type.nameType }}</span>
-                                <span>{{ personnage.category.nameCategory }}</span>
+                <div class="cards flex scrollable">
+                    {% for personnage in personnages %}
+                        <div class="cardInventory flex">
+                            <div class="topCard flex">
+                                <button class="infoBulle">i</button>
+                                <div class="nameCard">{{ personnage.name }}</div>
+                            </div>
+                            <div class="mainCard flex">
+                                <div class="leftCard flex">
+                                    <span>{{ personnage.element.nameElement }}</span>
+                                    <span>{{ personnage.type.nameType }}</span>
+                                    <span>{{ personnage.category.nameCategory }}</span>
+                                </div>
+                                <figure class="rightCard imgPerso">
+                                    <img class="imgFigure" src="{{ asset(personnage.imagePath) }}" alt="image du personnage">
+                                </figure>
                             </div>
                         </div>
-                        <!-- <div class="rightCard">
-                            <figure></figure>
-                        </div> -->
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </section>
     </main>
