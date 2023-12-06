@@ -69,6 +69,11 @@ ul li
     overflow-y: scroll;
 }
 
+.pad16
+{
+    padding: 16px;
+}
+
 @media(orientation: landscape)
 {
     html, body {margin: 0; height: 100%; overflow: hidden}
