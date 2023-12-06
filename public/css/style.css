@@ -37,7 +37,7 @@ nav
 
 .imgFigure
 {
-    height: 140px;
+    height: 128px;
 }
 
 
@@ -112,6 +112,7 @@ nav
     justify-content: center;
     padding: 20px;
     gap: 20px;
+    width: 100%;
 }
 
 .cardInventory
@@ -147,7 +148,7 @@ nav
     font-size: 0.7em;
 }
 
-.rifhtCard
+.rightCard
 {
     height: 100%;
 }
@@ -212,7 +213,10 @@ nav
         width: 100%;
         justify-content: center;
     }
+}
 
+@media(max-width: 1480px)
+{
     .mainCard
     {
         flex-direction: column-reverse;
