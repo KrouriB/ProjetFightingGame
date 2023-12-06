@@ -34,10 +34,20 @@ var waitActionAlly = 0;
 var waitSkillEnnemie = 0;
 var waitActionEnnemie = 0;
 // value pourcent of life and enregy for bar
-var pourecentAllyHp = 1;
-var pourecentEnnemieHp = 1;
-var pourecentAllyEnergy = 1;
-var pourecentEnnemieEnergy = 1;
+var pourecentMultiplicatorAllyHp = 1;
+var pourecentMultiplicatorEnnemieHp = 1;
+var pourecentMultiplicatorAllyEnergy = 1;
+var pourecentMultiplicatorEnnemieEnergy = 1;
+var pourecentAllyHp = "100%";
+var pourecentEnnemieHp = "100%";
+var pourecentAllyEnergy = "100%";
+var pourecentEnnemieEnergy = "100%";
+var infoFight = {
+    "--healthAllyInfo": pourecentAllyHp,
+    "--healthEnnemieInfo": pourecentEnnemieHp,
+    "--energyAllyInfo": pourecentAllyEnergy,
+    "--energyEnnemieInfo": pourecentEnnemieEnergy,
+}
 
 
 // Ally Actions
@@ -280,12 +290,16 @@ function ennemieAction()
 function setAllyHp()
 {
     let bar = document.getElementById('actualAllyHp');
+    pourecentAllyHp = ((actualAllyHp / maxAllyHp)*100) + "%";
+    document.documentElement.style.setProperty('--healthAllyInfo', pourecentAllyHp);
     bar.innerText = actualAllyHp + "/" + allyData.personnage.Life;
 }
 
 function setEnnemieHp()
 {
     let bar = document.getElementById('actualEnnemieHp');
+    pourecentEnnemieHp = ((actualEnnemieHp / maxEnnemieHp)*100) + "%";
+    document.documentElement.style.setProperty('--healthEnnemieInfo', pourecentEnnemieHp);
     bar.innerText = actualEnnemieHp + "/" + ennemieData.personnage.Life;
 }
 
@@ -294,6 +308,8 @@ function setAllyEnergy()
     let skillButton = document.getElementById('skillButton');
     let actionButton = document.getElementById('actionButton');
     let bar = document.getElementById('actualAllyEnergy');
+    pourecentAllyEnergy = ((actualAllyEnergy / maxAllyEnergy)*100) + "%";
+    document.documentElement.style.setProperty('--energyAllyInfo', pourecentAllyEnergy);
     bar.innerText = actualAllyEnergy + "/" + allyData.personnage.Energy;
     // test pour activer/desactiver l'action
     switch(energyActionEnough)
@@ -366,6 +382,8 @@ function setAllyEnergy()
 function setEnnemieEnergy()
 {
     let bar = document.getElementById('actualEnnemieEnergy');
+    pourecentEnnemieEnergy = ((actualEnnemieEnergy / maxEnnemieEnergy)*100) + "%";
+    document.documentElement.style.setProperty('--energyEnnemieInfo', pourecentEnnemieEnergy);
     bar.innerText = actualEnnemieEnergy + "/" + ennemieData.personnage.Energy;
 }
 
