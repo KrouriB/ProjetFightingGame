@@ -59,6 +59,30 @@ nav
 }
 
 
+/* user */
+
+
+.userPage
+{
+    padding: 24px;
+    flex-direction: column;
+}
+
+.userPage form
+{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.userPage button
+{
+    width: 20%;
+    align-self: flex-end;
+}
+
+
 /* inventory */
 
 #teammates
