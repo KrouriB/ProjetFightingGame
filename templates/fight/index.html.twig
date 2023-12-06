@@ -89,14 +89,14 @@
                     <button type="button" class="buttonFight" id="actionButton" onclick="allyAction()">{{ ally.accessory.getNameAction }}</button>
                     <button type="button" class="buttonFight" id="loseButton" onclick="lose()">Abandonné</button>
                 </div>
-                <button type="button" class="mobile buttonFight">Log (icone fleche haut)</button>
+                <button type="button" class="mobile buttonFight" onclick="showLogMobile()">Log <i class="fa-solid fa-arrow-up"></i></button>
             </div>
         </section>
-        <section class="shortSide flex logSide">
+        <section class="shortSide flex logSide" id="logPart">
             <div id="logs">
 
             </div>
-            <button type="button" class="mobile buttonFight">Combat (icone fleche bas)</button>
+            <button type="button" class="mobile buttonFight" onclick="noLogMobile()">Combat <i class="fa-solid fa-arrow-down"></i></button>
         </section>
     </main>
 {% endblock %}

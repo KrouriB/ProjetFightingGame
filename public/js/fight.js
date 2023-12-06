@@ -7,7 +7,7 @@ const categorys = JSON.parse(categoryOfWeapon.replaceAll('&quot;', '"'));
 // log div selected + default log to use
 const logDiv = document.getElementById("logs");
 const logLine = document.createElement("p");
-logLine.classList.add("logLine");
+logLine
 // set max value to show
 const maxAllyHp = allyData.personnage.Life.toString();
 const maxEnnemieHp = ennemieData.personnage.Life.toString();
@@ -821,6 +821,18 @@ function lose()
     loseButton.disabled = true;
     window.location = "fight/lose";
     window.location.replace();
+}
+
+function showLogMobile()
+{
+    let logs = document.getElementById('logPart');
+    logs.classList.add("mobileLog");
+}
+
+function noLogMobile()
+{
+    let logs = document.getElementById('logPart');
+    logs.classList.remove("mobileLog");
 }
 
 
