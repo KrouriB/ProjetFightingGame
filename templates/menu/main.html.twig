@@ -21,12 +21,8 @@
                 <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
             </nav>
             <nav class="mobileFlex">
-                <input id="menu__toggle" type="checkbox" />
-                <label class="menu__btn" for="menu__toggle">
-                    <span></span>
-                </label>
                 <a href="{{ path('app_user') }}" class="pseudo">{{ app.user.userIdentifier }}</a>
-                <ul>
+                <ul class="nav-list">
                     <li>
                         <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
                     </li>
@@ -59,8 +55,14 @@
         </section>
         <section class="longSide">
             <header class="topBar flex">
-                <div class="buttonNav mobile">
-                    <span></span><span></span><span></span>
+                
+                <input type="checkbox" id="nav-check">
+                <div class="nav-btn">
+                    <label for="nav-check">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
                 </div>
                 {{ form_errors(teammate) }}
 
