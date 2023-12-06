@@ -18,18 +18,18 @@
                 <div class="ennemieSide flex aSide">
                     <div class="ennemieName flex">
                         <figure class="imgPerso">
-                            <figcaption>{{ ennemie.personnage.getName }}</figcaption>
-                            <img class="imgFigure" src="{{ asset(ennemie.personnage.imagePath) }}" alt="personnage adverse">
+                            <figcaption class="desktop">{{ ennemie.personnage.getName }}</figcaption>
+                            <img class="imgFigurePerso" src="{{ asset(ennemie.personnage.imagePath) }}" alt="personnage adverse">
                         </figure>
-                        <ul>
+                        <ul class="flex">
                             <li class="blockItem">
                                 <figure>
-                                    <img class="imgFigure" src="{{ asset(ennemie.weapon.imagePath) }}" alt="personnage adverse">
+                                    <img class="imgFigure" src="{{ asset(ennemie.weapon.imagePath) }}" alt="arme adverse">
                                 </figure>
                             </li>
                             <li class="blockItem">
                                 <figure>
-                                    <img class="imgFigure" src="{{ asset(ennemie.accessory.imagePath) }}" alt="personnage adverse">
+                                    <img class="imgFigure" src="{{ asset(ennemie.accessory.imagePath) }}" alt="accessoire adverse">
                                 </figure>
                             </li>
                         </ul>
@@ -48,20 +48,20 @@
                     </div>
                 </div>
                 <div class="allySide flex aSide">
-                    <div class="allyName">
+                    <div class="allyName flex">
                         <figure class="imgPerso">
-                            <figcaption>{{ ally.personnage.getName }}</figcaption>
-                            <img class="imgFigure" src="{{ asset(ally.personnage.imagePath) }}" alt="personnage allié">
+                            <figcaption class="desktop">{{ ally.personnage.getName }}</figcaption>
+                            <img class="imgFigurePerso" src="{{ asset(ally.personnage.imagePath) }}" alt="personnage allié">
                         </figure>
-                        <ul>
+                        <ul class="flex">
                             <li class="blockItem">
                                 <figure>
-                                    <img class="imgFigure" src="{{ asset(ally.weapon.imagePath) }}" alt="personnage adverse">
+                                    <img class="imgFigure" src="{{ asset(ally.weapon.imagePath) }}" alt="arme allié">
                                 </figure>
                             </li>
                             <li class="blockItem">
                                 <figure>
-                                    <img class="imgFigure" src="{{ asset(ally.accessory.imagePath) }}" alt="personnage adverse">
+                                    <img class="imgFigure" src="{{ asset(ally.accessory.imagePath) }}" alt="accessoire allié">
                                 </figure>
                             </li>
                         </ul>
