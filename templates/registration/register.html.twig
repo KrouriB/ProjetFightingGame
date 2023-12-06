@@ -2,6 +2,10 @@
 
 {% block title %}Register{% endblock %}
 
+{% block meta %}
+    <meta name="description" content="page d'inscription">
+{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/regi_log.css') }}">
 {% endblock %}
@@ -30,6 +34,10 @@
             {{ form_errors(registrationForm.agreeTerms) }}
         </div>
 
-        <button type="submit" class="btn">Register</button>
+        <div class="bottomBlock">
+            <a href="{{ path('app_login') }}">Connexion</a>
+            <button type="submit" class="btn">Register</button>
+        </div>
+
     {{ form_end(registrationForm) }}
 {% endblock %}
