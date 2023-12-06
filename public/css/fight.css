@@ -79,6 +79,7 @@
 {
     border-left: 2px solid black;
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 
@@ -139,7 +140,18 @@
 
 .ennemieName
 {
-    flex-direction: column;
+    flex-direction: row-reverse;
+}
+
+.ennemieName ul
+{
+    flex-direction: row-reverse;
+    gap: 20px;
+}
+
+.allyName
+{
+    flex-direction: row;
 }
 
 #logs
@@ -167,6 +179,10 @@
     width: 192px;
 }
 
+.imgPerso figcaption{
+    text-align: center;
+}
+
 .imgFigurePerso{
     width: 100%;
 }
@@ -181,8 +197,15 @@
 
     .ennemieName
     {
-        align-items: flex-end;
+        align-items: center;
+        justify-content:space-around;
         text-align: end;
+    }
+
+    .allyName
+    {
+        align-items: center;
+        justify-content:space-around;
     }
 
     #actionBar
