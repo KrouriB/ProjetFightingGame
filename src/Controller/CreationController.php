@@ -58,7 +58,48 @@ class CreationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $perso = $form->getData();
-            // dd($perso);
+            switch($perso->getCategory())
+            {
+                case 1:
+                    switch($perso->getType())
+                    {
+                        case 1:
+                            $perso->setImagePath('/img/character/axesman.png');
+                            break;
+                        case 2:
+                            $perso->setImagePath('/img/character/swordsman.png');
+                            break;
+                        case 3:
+                            $perso->setImagePath('/img/character/spearsman.png');
+                            break;
+                    }
+                case 2:
+                    switch($perso->getType())
+                    {
+                        case 1:
+                            $perso->setImagePath('/img/character/mage_tattou_midJourney_modified.png');
+                            break;
+                        case 2:
+                            $perso->setImagePath('/img/character/mage_book_midjourney_modified.png');
+                            break;
+                        case 3:
+                            $perso->setImagePath('/img/character/mageWand.png');
+                            break;
+                    }
+                case 3:
+                    switch($perso->getType())
+                    {
+                        case 1:
+                            $perso->setImagePath('/img/character/fighter.png');
+                            break;
+                        case 2:
+                            $perso->setImagePath('/img/character/thief.png');
+                            break;
+                        case 3:
+                            $perso->setImagePath('/img/character/ranger.png');
+                            break;
+                    }
+            }
 
             // test si les valeurs envoyer ont été modifier en trichant
             if($perso->getAttack() % 4 != 0)
