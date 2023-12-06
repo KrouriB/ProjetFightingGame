@@ -43,7 +43,7 @@ class AccessoryRepository extends ServiceEntityRepository
     public function findFirstAccessory(): array
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.id = 1')
+            ->andWhere('a.id < 4')
             ->getQuery()
             ->getResult()
         ;
