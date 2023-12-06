@@ -25,7 +25,7 @@
                 <label class="menu__btn" for="menu__toggle">
                     <span></span>
                 </label>
-                <span class="pseudo">{{ app.user.userIdentifier }}</span>
+                <a href="{{ path('app_user') }}" class="pseudo">{{ app.user.userIdentifier }}</a>
                 <ul>
                     <li>
                         <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>

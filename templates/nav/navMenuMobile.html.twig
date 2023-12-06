@@ -1,6 +1,6 @@
 {% block body %}
     <nav class="mobileFlex">
-        <div class="pseudo">{{ app.user.userIdentifier }}</div>
+        <a href="{{ path('app_user') }}" class="pseudo">{{ app.user.userIdentifier }}</a>
         <ul>
             <li>
                 <div class="menuButton"><a href="{{ path('app_main') }}">{{ 'menu'|upper }}</a></div>

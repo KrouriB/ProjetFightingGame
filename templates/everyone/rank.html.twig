@@ -23,7 +23,7 @@
                     <span></span>
                 </label>
                 {% if app.user %}
-                    <div class="pseudo desktop">{{ app.user.userIdentifier }}</div>
+                    <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
                 {% endif %}
                 <div class="parameter"></div>
             </header>
