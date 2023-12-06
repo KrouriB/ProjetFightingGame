@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block meta %}
+    <meta name="description" content="menu principale du jeu une fois connecter">
+{% endblock %}
+
 {% block title %}Menu{% endblock %}
 
 {% block body %}
@@ -40,22 +44,11 @@
                 <div class="parameter"><i class="fa-solid fa-gear"></i></div>
             </header>
             <div id="menuMain">
-                {# <div>
-                    <div>
-                        <figure></figure>
-                        <figure></figure>
-                        <div>{{ selected.weapon.name }}</div>
-                        <div>{{ selected.accessory.name }}</div>
-                    </div>
-                    <figure>
-                        <figcaption>{{ selected.personnage.name }}</figcaption>
-                    </figure>
-                </div>
-                <div>
-                    <span>{{ selected.personnage.category.nameCategory }}</span>
-                    <span>|</span>
-                    <span>{{ selected.personnage.type.nameType }}</span>
-                </div> #}
+                <ol class="carousel__viewport">
+                    {% for equipier in equipes %}
+                        {# futur carousel #}
+                    {% endfor %}
+                </ol>
             </div>
         </section>
     </main>
