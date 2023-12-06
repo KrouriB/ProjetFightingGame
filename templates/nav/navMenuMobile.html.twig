@@ -1,12 +1,34 @@
 {% block body %}
     <nav class="mobileFlex">
         <div class="pseudo">{{ app.user.userIdentifier }}</div>
-        <div class="menuButton"><a href="{{ path('app_main') }}">{{ 'menu'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
-        <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_stock_personnage') }}">{{ 'inventaire'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_creation_personnage') }}">{{ 'création'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
+        <ul>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_main') }}">{{ 'menu'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_stock_personnage') }}">{{ 'inventaire'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_creation_personnage') }}">{{ 'créa. perso.'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_creation_weapon') }}">{{ 'créa. arme.'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_creation_accessory') }}">{{ 'créa. équip'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
+            </li>
+        </ul>
     </nav>
 {% endblock %}
