@@ -21,18 +21,21 @@
                 <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
                 <div class="parameter"></div>
             </header>
-            <div id="menuMain">
+            <div id="menuMain" class="flex">
                 {% for teammate in equipes %}
                     <div class="teammate">
-                        <div>
-                            <div>
-                                {# <figure></figure>
-                                <figure></figure> #}
-                                <div>{{ teammate.weapon.name }}</div>
-                                <div>{{ teammate.accessory.name }}</div>
+                        <span>{{ teammate.teamName }}</span>
+                        <div class="equipeSeparation flex">
+                            <div class="equipeObjet">
+                                <figure class="imgEquipe">
+                                    <img class="imgEquipeFigure" src="{{ asset(teammate.weapon.imagePath) }}" alt="image du Equipennage">
+                                </figure>
+                                <figure class="imgEquipe">
+                                    <img class="imgEquipeFigure" src="{{ asset(teammate.accessory.imagePath) }}" alt="image du personnage">
+                                </figure>
                             </div>
-                            <figure>
-                                <figcaption>{{ teammate.personnage.name }}</figcaption>
+                            <figure class="imgPerso">
+                                <img class="imgFigure" src="{{ asset(teammate.personnage.imagePath) }}" alt="image du personnage">
                             </figure>
                         </div>
                         <div>
@@ -43,7 +46,7 @@
                     </div>
                 {% endfor %}
                 <div class="teammate">
-                    <span><a href="{{ path('app_creation_teammate') }}">+</a></span>
+                    <a href="{{ path('app_creation_teammate') }}">+</a>
                 </div>
             </div>
         </section>

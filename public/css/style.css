@@ -178,6 +178,54 @@ nav
 }
 
 
+#menuMain
+{
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 24px;
+}
+
+.teammate
+{
+    background-color: var(--tertiary);
+    border-radius: 12px;
+    color: var(--textReverse);
+    flex-basis: 30%;
+    max-width: 30%;
+    padding: 12px;
+    font-size: 0.9em;
+}
+
+.teammate a
+{
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    color: var(--textReverse);
+}
+
+.equipeSeparation
+{
+    align-items: center;
+    justify-content: space-around;
+}
+
+.imgEquipe
+{
+    width: 80px;
+    background-color: var(--secondary);
+    padding: 8px;
+    border-radius: 8px;
+    border: solid 1px var(--text);
+}
+
+.imgEquipeFigure
+{
+    width: 100%;
+}
+
+
 @media(orientation: landscape)
 {
     /* choose on what to show */
