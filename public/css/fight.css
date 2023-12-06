@@ -163,6 +163,13 @@
     justify-content: space-between;
 }
 
+.imgPerso{
+    width: 192px;
+}
+
+.imgFigurePerso{
+    width: 100%;
+}
 
 
 @media(orientation: landscape)
