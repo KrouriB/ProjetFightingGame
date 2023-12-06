@@ -78,8 +78,8 @@ class MenuController extends AbstractController
         //     return new RedirectResponse($router->generate('app_lose')); // if user was in fight when refresh/quit -> lose
         // }
         
-        $users = $userRepository->findBy(['id' => 'DESC']);
-        return $this->render('menu/rank.html.twig', [
+        $users = $userRepository->findBy([],['winCount' => 'DESC']);
+        return $this->render('everyone/rank.html.twig', [
             'users' => $users,
         ]);
     }
@@ -113,9 +113,6 @@ class MenuController extends AbstractController
         $session = $request->getSession();
         
         $equipes = $equipeRepository->findBy(['assosiatedUser' => $this->getUser()->getId()]);
-        // $equipePlace = $request->get('place');
-        // $equipeSelect = $equipes[$equipePlace];
-        // $persoSelect = $equipeSelect->getPersonnage();
 
         $form = $this->createForm(TeammateSelectionType::class);
         $form->handleRequest($request);
