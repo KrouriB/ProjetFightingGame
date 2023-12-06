@@ -2,7 +2,7 @@
 <html lang="fr-fr" scroll="no">
     <head>
         <meta charset="UTF-8">
-        
+        {% block meta %}{% endblock %}
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,7 +10,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Cousine&family=Noto+Sans+Pahawh+Hmong&display=swap" rel="stylesheet">
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
-            <link rel="stylesheet" href="{{ asset('/css/fight.css') }}">
             <link rel="stylesheet" href="{{ asset('/css/creation.css') }}">
         {% endblock %}
 
