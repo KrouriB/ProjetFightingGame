@@ -59,7 +59,7 @@
 
 .help-text
 {
-    font-size: 1em;
+    font-size: 0.6em;
 }
 
 .separation
@@ -110,5 +110,23 @@
     .leftCreation
     {
         align-items: center;
+    }
+}
+
+@media(orientation: portrait)
+{
+    .rightCreation
+    {
+        width: 100%;
+    }
+
+    .ligne
+    {
+        margin: 12px 0;
+    }
+
+    .help-text
+    {
+        font-size: 0.8em;
     }
 }
