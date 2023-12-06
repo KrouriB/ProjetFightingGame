@@ -2,16 +2,36 @@
 
 {% block title %}Hello FightController!{% endblock %}
 
+{% block meta %}
+    <meta name="description" content="scène de combat">
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/fight.css') }}">
+{% endblock %}
+
 {% block body %}
     <main class='flex'>
         <section class="longSide flex fightPart">
             <div id="scene" class="flex">
                 <div class="ennemieSide flex aSide">
                     <div class="ennemieName flex">
-                        <span>{{ ennemie.personnage.getName }}</span>
+                        <figure class="imgPerso">
+                            <figcaption>{{ ennemie.personnage.getName }}</figcaption>
+                            <img class="imgFigure" src="{{ asset(ennemie.personnage.imagePath) }}" alt="personnage adverse">
+                        </figure>
                         <ul>
-                            <li>{{ ennemie.weapon.getName }}</li>
-                            <li>{{ ennemie.accessory.getName }}</li>
+                            <li class="blockItem">
+                                <figure>
+                                    <img class="imgFigure" src="{{ asset(ennemie.weapon.imagePath) }}" alt="personnage adverse">
+                                </figure>
+                            </li>
+                            <li class="blockItem">
+                                <figure>
+                                    <img class="imgFigure" src="{{ asset(ennemie.accessory.imagePath) }}" alt="personnage adverse">
+                                </figure>
+                            </li>
                         </ul>
                     </div>
                     <div class="bars flex">
@@ -29,10 +49,21 @@
                 </div>
                 <div class="allySide flex aSide">
                     <div class="allyName">
-                        <span>{{ ally.personnage.getName }}</span>
+                        <figure class="imgPerso">
+                            <figcaption>{{ ally.personnage.getName }}</figcaption>
+                            <img class="imgFigure" src="{{ asset(ally.personnage.imagePath) }}" alt="personnage allié">
+                        </figure>
                         <ul>
-                            <li>{{ ally.weapon.getName }}</li>
-                            <li>{{ ally.accessory.getName }}</li>
+                            <li class="blockItem">
+                                <figure>
+                                    <img class="imgFigure" src="{{ asset(ally.weapon.imagePath) }}" alt="personnage adverse">
+                                </figure>
+                            </li>
+                            <li class="blockItem">
+                                <figure>
+                                    <img class="imgFigure" src="{{ asset(ally.accessory.imagePath) }}" alt="personnage adverse">
+                                </figure>
+                            </li>
                         </ul>
                     </div>
                     <div class="bars flex">
