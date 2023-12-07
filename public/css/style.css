@@ -182,6 +182,7 @@
 {
     margin-top: 12px;
     justify-content: space-evenly;
+    font-size: 0.9em;
 }
 
 .newTeammate
@@ -198,6 +199,7 @@
 .imgEquipe
 {
     width: 80px;
+    height: 80px;
     background-color: var(--secondary);
     padding: 8px;
     border-radius: 8px;
