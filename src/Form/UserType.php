@@ -20,23 +20,8 @@ class UserType extends AbstractType
         $builder
             ->add('username', TextType::class)
             ->add('email', EmailType::class)
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
-                'mapped' => false,
-                'options' => ['attr' => ['class' => 'password-field', 'autocomplete' => 'new-password']],
-                'required' => true,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Regex([
-                        'pattern' => "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?! @$%^&* -]).{12,}$/",
-                        'message' => 'Le mot de passe doit avoir une longueur de 12 caractères, 1 Majuscule, 1 Miniscule, 1 Chiffre et 1 Caractère spécial',
-                    ]),
-                ],
-                'first_options'  => ['label' => 'Mot de Passe : '],
-                'second_options' => ['label' => 'Répéter le : '],
+            ->add('password', PasswordType::class, [
+                'mapped' => false, // This field is not mapped to the entity
             ])
         ;
     }
