@@ -113,6 +113,29 @@
     }
 }
 
+@media(max-width: 1480px) and (orientation: landscape)
+{
+    .ligneSup input, .ligneSup select, .ligneMid input
+    {
+        font-size: 0.8em;
+    }
+
+    .ligne
+    {
+        font-size: 0.8em;
+    }
+
+    .ligneMid input
+    {
+        width: 90%;
+    }
+
+    .leftCreation
+    {
+        padding: 20px 4px;
+    }
+}
+
 @media(orientation: portrait)
 {
     .rightCreation

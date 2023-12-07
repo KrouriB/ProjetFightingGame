@@ -103,7 +103,7 @@ class PersonnageType extends AbstractType
                     'attr' => [
                         'class' => 'form-control'
                     ],
-                    'label' => 'Element : '
+                    'label' => 'Element :  '
                 ]
             )
             ->add(
@@ -113,7 +113,8 @@ class PersonnageType extends AbstractType
                     'class' => TypeWeapon::class,
                     'attr' => [
                         'class' => 'form-control'
-                    ]
+                    ],
+                    'label' => 'Type :  '
                 ]
             )
             ->add(
@@ -123,7 +124,8 @@ class PersonnageType extends AbstractType
                     'class' => CategoryWeapon::class,
                     'attr' => [
                         'class' => 'form-control'
-                    ]
+                    ],
+                    'label' => 'Catégorie : '
                 ]
             )
             ->add(

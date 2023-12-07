@@ -8,14 +8,6 @@ nav
     font-size: 2em;
 }
 
-@media(orientation: landscape) and (max-width: 1440px)
-{
-    nav
-    {
-        font-size: 1em;
-    }
-}
-
 .menuButton
 {
     background-color: var(--primary);
@@ -281,6 +273,27 @@ nav
     }
 }
 
+
+
+@media(max-width: 1480px) and (orientation: landscape)
+{
+    .cardInventory
+    {
+        width: 40%;
+    }
+
+    .mainCard
+    {
+        flex-direction: column-reverse;
+    }
+
+    .teammate
+    {
+        min-width: 48%;
+        max-width: 100%;
+    }
+}
+
 @media(orientation: portrait)
 {
     /* choose on what to show */
@@ -341,25 +354,6 @@ nav
     .teammate
     {
         min-width: 60%;
-        max-width: 100%;
-    }
-}
-
-@media(max-width: 1480px) and (orientation: landscape)
-{
-    .cardInventory
-    {
-        width: 40%;
-    }
-
-    .mainCard
-    {
-        flex-direction: column-reverse;
-    }
-
-    .teammate
-    {
-        min-width: 48%;
         max-width: 100%;
     }
 }

@@ -13,21 +13,21 @@
             {{ form_errors(perso) }}
 
             {{ form_start(perso) }}
-                <div class="leftCreation flex creationPart">
+                <div class="creationPart leftCreation flex">
                     <div class="ligne">
-                        <div class="ligneSup">
+                        <div class="ligneSup flex">
                             {{ form_label(perso.element) }}
                             {{ form_widget(perso.element) }}
                         </div>
                     </div>
                     <div class="ligne">
-                        <div class="ligneSup">
+                        <div class="ligneSup flex">
                             {{ form_label(perso.type) }}
                             {{ form_widget(perso.type) }}
                         </div>
                     </div>
                     <div class="ligne">
-                        <div class="ligneSup">
+                        <div class="ligneSup flex">
                             {{ form_label(perso.category) }}
                             {{ form_widget(perso.category) }}
                         </div>
@@ -35,7 +35,7 @@
                         </div> #}
                     </div>
                 </div>
-                <div class="shortSide rightCreation flex creationPart">
+                <div class="shortSide creationPart rightCreation flex">
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(perso.name) }}
