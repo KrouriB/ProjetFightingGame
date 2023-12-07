@@ -12,7 +12,7 @@
             {% include "/nav/navMenuDesktop.html.twig" %}
             {% include "/nav/navMenuMobile.html.twig" %}
         </section>
-        <section class="longSide">
+        <section class="longSide inventoryPage">
             <header class="topBar flex">
                 
                 
@@ -38,7 +38,7 @@
                                     <span>{{ personnage.type.nameType }}</span>
                                     <span>{{ personnage.category.nameCategory }}</span>
                                 </div>
-                                <figure class="rightCard imgPerso">
+                                <figure class="rightCard imgPerso flex">
                                     <img class="imgFigure" src="{{ asset(personnage.imagePath) }}" alt="image du personnage">
                                 </figure>
                             </div>
