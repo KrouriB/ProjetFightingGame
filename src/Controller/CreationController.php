@@ -122,10 +122,17 @@ class CreationController extends AbstractController
             {
                 return $this->redirectToRoute('app_creation_personnage');
             }
+            elseif($this->getUser()->getGold() < 2000)
+            {
+                return $this->redirectToRoute('app_creation_personnage');
+            }
             
             $perso->setUserCreator($this->getUser());
 
+            $this->getUser()->createPersonnage();
+
             $entityManager->persist($perso);
+            $entityManager->persist($this->getUser());
             $entityManager->flush();
 
             return $this->redirectToRoute('app_main');
