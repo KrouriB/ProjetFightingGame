@@ -46,13 +46,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Element', 'fas fa-list', Element::class);
         yield MenuItem::linkToCrud('Categorie', 'fas fa-list', CategoryWeapon::class);
         yield MenuItem::linkToCrud('Type', 'fas fa-list', TypeWeapon::class);
-        yield MenuItem::linkToCrud("Stat et Type d'équipement", 'fas fa-list', TypeStatAction::class);
-        yield MenuItem::linkToCrud("Perso", 'fas fa-list', Personnage::class);
-        yield MenuItem::linkToCrud("Arme", 'fas fa-list', Weapon::class);
-        yield MenuItem::linkToCrud("Équipement", 'fas fa-list', Accessory::class);
-        yield MenuItem::linkToCrud("Équipier", 'fas fa-list', Equipe::class);
-        yield MenuItem::linkToCrud("Stock Personnage", 'fas fa-list', StockPersonnage::class);
-        yield MenuItem::linkToCrud("Stock d'Arme", 'fas fa-list', StockWeapon::class);
-        yield MenuItem::linkToCrud("Stock d'Equipement", 'fas fa-list', StockAccessory::class);
     }
 }
