@@ -4,6 +4,11 @@
     <meta name="description" content="vous retrouverez le classement des joueur ici">
 {% endblock %}
 
+{% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('/css/ranking.css') }}">
+{% endblock %}
+
 {% block title %}Classemant{% endblock %}
 
 {% block body %}
@@ -25,7 +30,7 @@
                 {% endif %}
                 <div class="parameter"></div>
             </header>
-            <div id="rankingTable">
+            <div id="rankingTable" class="flex">
                 <table>
                     <tr>
                         <th><div class="black"></div></th>
@@ -41,6 +46,15 @@
                         </tr>
                         {% set i = i + 1 %}
                     {% endfor %}
+                    {% if i < 10 %}
+                    {% for i in i..10 %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                    {% endif %}
                 </table>
             </div>
         </section>

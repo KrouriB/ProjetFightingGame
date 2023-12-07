@@ -1,0 +1,50 @@
+@import "root.css";
+
+#rankingTable
+{
+    justify-content: center;
+}
+
+table, td, th {
+    border: 2px solid var(--text);
+}
+
+table
+{
+    width: 90%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+td:first-child
+{
+    padding: 12px;
+    font-weight: 800;
+}
+
+table:first-child th
+{
+    padding: 8px 16px;
+    background-color: var(--tertiary);
+    color: var(--textReverse);
+}
+
+table:first-child th:first-child
+{
+    background-color: black;
+}
+
+tr:nth-child(2) 
+{
+    background-color: var(--first);
+}
+
+tr:nth-child(3) 
+{
+    background-color: var(--second);
+}
+
+tr:nth-child(4) 
+{
+    background-color: var(--third);
+}
