@@ -86,10 +86,10 @@ ul li
     border-bottom: 1px solid var(--text);
 }
 
-.nav > .nav-header
+.nav-header
 {
-    padding-left: 1rem;
-    
+    width: calc(100% - 60px);
+    justify-content: space-between;
 }
 
 .nav > .nav-list
@@ -113,6 +113,12 @@ ul li
 #nav-check
 {
     display: none;
+}
+
+.parameter
+{
+    background-color: inherit;
+    border: none;
 }
 
 @media(orientation: landscape)
@@ -170,29 +176,38 @@ ul li
 
     /* menu burger */
 
-    .nav {
+    .nav
+    {
         padding: 1rem;
     }
-    .nav > .nav-btn {
+
+    .nav > .nav-btn
+    {
         display: inline-block;
         position: absolute;
         left: 0;
         top: 0.2rem;
         padding-top: 0.2rem;
     }
-    .nav > .nav-btn > label {
+
+    .nav > .nav-btn > label
+    {
         display: inline-block;
         width: 50px;
         height: 50px;
         padding: 13px;
     }
-    .nav > .nav-btn > label > span {
+
+    .nav > .nav-btn > label > span
+    {
         display: block;
         width: 25px;
         height: 10px;
         border-top: 2px solid var(--button);
     }
-    .nav > .nav-list {
+
+    .nav > .nav-list
+    {
         position: absolute;
         display: flex;
         flex-direction: column;
@@ -207,10 +222,12 @@ ul li
         overflow: hidden;
         z-index: 2;
     }
+
     .nav > .nav-list > li {
         width: 90%;
         margin-top: 1rem;
     }
+
     .nav > #nav-check:checked ~ .nav-list {
         height: calc(100vh - 50px);
     }
