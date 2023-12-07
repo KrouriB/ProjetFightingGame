@@ -40,3 +40,14 @@ const themes = {
         "--textReverse": "#FFFFFF",
 	},
 };
+
+function deleteUser()
+{
+    let deleteAsk = prompt("Vous êtes sur de vouoir supprimer votre compte ? dans ce cas rentrer << Supprimer le compte >>");
+    if (deleteAsk == "Supprimer le compte") {
+        window.location = "deleteUser";
+        window.location.replace();
+    } else {
+        alert("La suppression du compte n'aura pas lieu");
+    }
+}
