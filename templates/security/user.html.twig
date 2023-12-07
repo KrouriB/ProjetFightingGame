@@ -30,7 +30,7 @@
                     }) }}
                 </div>
                 <div>
-                    {{ form_row(userInfo.plainPassword, {
+                    {{ form_row(userInfo.password, {
                         label: 'Mot de Passe : '
                     }) }}
                 </div>
@@ -39,7 +39,11 @@
 
                 <p>Nombre de win : {{ app.user.winCount }}</p>
 
-                <button type="submit" class="btn">Register</button>
+                <div class="actionUser">
+                    <a class="btnUser" onclick="deleteUser()">Supprimez le compte</a>
+                    <a href="{{ path('app_password') }}" class="btnUser">Changer de mot de passe</a>
+                    <button type="submit" class="btnUser">Register</button>
+                </div>
 
             {{ form_end(userInfo) }}
         </section>
