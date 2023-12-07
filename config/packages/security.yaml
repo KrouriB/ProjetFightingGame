@@ -50,6 +50,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: [ROLE_ADMIN] }
+        - { path: ^/delete, roles: [ROLE_ADMIN] }
+        - { path: ^/validate, roles: [ROLE_ADMIN] }
         - { path: ^/menu/notCo, roles: [PUBLIC_ACCESS] }
         - { path: ^/menu/rank, roles: [PUBLIC_ACCESS] }
         - { path: ^/menu/rule, roles: [PUBLIC_ACCESS] }
