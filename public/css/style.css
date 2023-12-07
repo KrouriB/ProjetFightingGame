@@ -6,10 +6,6 @@ nav
 {
     font-family: 'Noto Sans Pahawh Hmong', sans-serif;
     font-size: 2em;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 100%;
-    width: 90%;
 }
 
 @media(orientation: landscape) and (max-width: 1440px)
@@ -85,12 +81,18 @@ nav
 
 /* inventory */
 
+.inventoryPage
+{
+    padding-bottom: 36px;
+}
+
 #teammates
 {
     display: flex;
     flex-direction: column;
     align-items : center;
     height: 100%;
+    padding-bottom: 20px;
 }
 
 #inventory
@@ -190,8 +192,8 @@ nav
     background-color: var(--tertiary);
     border-radius: 12px;
     color: var(--textReverse);
-    flex-basis: 30%;
-    max-width: 30%;
+    flex-basis: 33%;
+    max-width: 33%;
     padding: 12px;
     font-size: 0.9em;
 }
@@ -230,6 +232,14 @@ nav
 {
     /* choose on what to show */
 
+    nav
+    {
+        height: 100%;
+        width: 90%;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
     main
     {
         flex-direction: row;
@@ -265,6 +275,7 @@ nav
 {
     /* choose on what to show */
 
+
     main
     {
         flex-direction: column;
@@ -285,10 +296,43 @@ nav
         width: 100%;
         justify-content: center;
     }
+
+    .cardInventory
+    {
+        width: 80%;
+        min-height: 280px;
+    }
+
+    .mainCard
+    {
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    .rightCard
+    {
+        align-items: center;
+    }
+
+    #menuMain
+    {
+        justify-content: center;
+    }
+
+    .teammate
+    {
+        min-width: 60%;
+        max-width: 100%;
+    }
 }
 
-@media(max-width: 1480px)
+@media(max-width: 1480px) and (orientation: landscape)
 {
+    .cardInventory
+    {
+        width: 40%;
+    }
+
     .mainCard
     {
         flex-direction: column-reverse;

@@ -76,6 +76,40 @@ ul li
 
 /* menu burger */
 
+.nav
+{
+    width: 100%;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-bottom: 1px solid var(--text);
+}
+
+.nav > .nav-header
+{
+    padding-left: 1rem;
+    
+}
+
+.nav > .nav-list
+{
+    display: flex;
+    gap: 2rem;
+}
+
+.nav > .nav-list > li
+{
+    list-style-type: none;
+}
+
+.nav-list > li a
+{
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+}
+
 #nav-check
 {
     display: none;
@@ -126,57 +160,58 @@ ul li
     .mobileFlex
     {
         display: flex;
+        min-width: 100%;
+    }
+
+    .nav-header > a , .parameter
+    {
+        font-size: 0.6em;
     }
 
     /* menu burger */
 
-    .nav-btn
-    {
+    .nav {
+        padding: 1rem;
+    }
+    .nav > .nav-btn {
         display: inline-block;
         position: absolute;
-        right: 0;
-        top: 0;
+        left: 0;
+        top: 0.2rem;
         padding-top: 0.2rem;
     }
-
-    .nav-btn > label
-    {
+    .nav > .nav-btn > label {
         display: inline-block;
         width: 50px;
         height: 50px;
         padding: 13px;
     }
-
-    .nav-btn > label > span
-    {
+    .nav > .nav-btn > label > span {
         display: block;
         width: 25px;
         height: 10px;
-        border-top: 2px solid #eee;
+        border-top: 2px solid var(--button);
     }
-
-    .nav-list
-    {
+    .nav > .nav-list {
         position: absolute;
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 1rem;
         width: 100%;
+        background-color: var(--secondary);
         height: 0;
         transition: all 0.3s ease-in;
-        top: 40px;
+        top: 77px;
         left: 0;
         overflow: hidden;
+        z-index: 2;
     }
-
-    .nav-list > li
-    {
-        width: 100%;
-        margin-top: 1.5rem;
+    .nav > .nav-list > li {
+        width: 90%;
+        margin-top: 1rem;
     }
-
-    #nav-check:checked ~ .nav-list
-    {
+    .nav > #nav-check:checked ~ .nav-list {
         height: calc(100vh - 50px);
     }
 }
