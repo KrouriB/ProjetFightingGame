@@ -58,10 +58,10 @@ class CreationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $perso = $form->getData();
-            switch($perso->getCategory())
+            switch($perso->getCategory()->getId())
             {
                 case 1:
-                    switch($perso->getType())
+                    switch($perso->getType()->getId())
                     {
                         case 1:
                             $perso->setImagePath('/img/character/axesman.png');
@@ -73,8 +73,9 @@ class CreationController extends AbstractController
                             $perso->setImagePath('/img/character/spearsman.png');
                             break;
                     }
+                    break;
                 case 2:
-                    switch($perso->getType())
+                    switch($perso->getType()->getId())
                     {
                         case 1:
                             $perso->setImagePath('/img/character/mage_tattou_midJourney_modified.png');
@@ -86,8 +87,9 @@ class CreationController extends AbstractController
                             $perso->setImagePath('/img/character/mageWand.png');
                             break;
                     }
+                    break;
                 case 3:
-                    switch($perso->getType())
+                    switch($perso->getType()->getId())
                     {
                         case 1:
                             $perso->setImagePath('/img/character/fighter.png');
@@ -99,6 +101,7 @@ class CreationController extends AbstractController
                             $perso->setImagePath('/img/character/ranger.png');
                             break;
                     }
+                    break;
             }
 
             // test si les valeurs envoyer ont été modifier en trichant
@@ -131,8 +134,14 @@ class CreationController extends AbstractController
 
             $this->getUser()->createPersonnage();
 
+            $stockPerso = $this->getUser()->getStockPersonnages();
+            $stockPerso[0]->addPersonnage($perso);
+
+            // dd($stockPerso);
+
             $entityManager->persist($perso);
             $entityManager->persist($this->getUser());
+            $entityManager->persist($stockPerso[0]);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_main');
