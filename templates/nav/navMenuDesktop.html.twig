@@ -1,11 +1,32 @@
 {% block body %}
-    <nav class="desktopFlex">
-        <div class="menuButton"><a href="{{ path('app_main') }}">{{ 'menu'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a></div>
-        <div class="menuButton"><a href="">{{ 'échoppe'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_stock_personnage') }}">{{ 'inventaire'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_creation_personnage') }}">{{ 'création'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a></div>
+    <nav class="desktopFlex sidebar">
+        <ul class="flex">
+            <li class="menuButton">
+                <a href="{{ path('app_main') }}">{{ 'menu'|upper }}</a>
+            </li>
+            <li class="menuButton">
+                <a href="{{ path('app_teammate') }}">{{ 'équipier'|upper }}</a>
+            </li>
+            <li class="menuButton">
+                <a href="">{{ 'échoppe'|upper }}</a>
+            </li>
+            <li class="menuButton">
+                <a href="{{ path('app_stock_personnage') }}">{{ 'inventaire'|upper }}</a>
+            </li>
+            <li class="menuButton dropdown">
+                <a href="#">{{ 'création'|upper }}</a>
+                <div class="dropdown-content">
+                    <a href="{{ path('app_creation_personnage') }}">{{ 'personnages'|upper }}</a>
+                    <a href="{{ path('app_creation_weapon') }}">{{ 'armes'|upper }}</a>
+                    <a href="{{ path('app_creation_accessory') }}">{{ 'équipement'|upper }}</a>
+                </div>
+            </li>
+            <li class="menuButton">
+                <a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a>
+            </li>
+            <li class="menuButton">
+                <a href="{{ path('app_logout') }}">{{ 'déconnexion'|upper }}</a>
+            </li>
+        </ul>
     </nav>
 {% endblock %}

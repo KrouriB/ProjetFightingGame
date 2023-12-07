@@ -36,14 +36,14 @@
                                 <img class="imgFigure" src="{{ asset(teammate.personnage.imagePath) }}" alt="image du personnage">
                             </figure>
                         </div>
-                        <div>
+                        <div class="infoTeammate flex">
                             <span>{{ teammate.personnage.category.nameCategory }}</span>
                             <span>|</span>
                             <span>{{ teammate.personnage.type.nameType }}</span>
                         </div>
                     </div>
                 {% endfor %}
-                <div class="teammate">
+                <div class="teammate flex newTeammate">
                     <a href="{{ path('app_creation_teammate') }}">+</a>
                 </div>
             </div>

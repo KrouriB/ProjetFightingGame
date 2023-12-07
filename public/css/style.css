@@ -192,8 +192,8 @@ nav
     background-color: var(--tertiary);
     border-radius: 12px;
     color: var(--textReverse);
-    flex-basis: 33%;
-    max-width: 33%;
+    flex-basis: 30%;
+    max-width: 30%;
     padding: 12px;
     font-size: 0.9em;
 }
@@ -205,6 +205,17 @@ nav
     text-align: center;
     text-decoration: none;
     color: var(--textReverse);
+}
+
+.infoTeammate
+{
+    margin-top: 12px;
+    justify-content: space-evenly;
+}
+
+.newTeammate
+{
+    align-items: center;
 }
 
 .equipeSeparation
@@ -235,7 +246,6 @@ nav
     nav
     {
         height: 100%;
-        width: 90%;
         flex-direction: column;
         justify-content: space-evenly;
     }
@@ -275,13 +285,22 @@ nav
 {
     /* choose on what to show */
 
-
-    main
+    .topBar
     {
+        margin-top: 36px;
+        justify-content: center;
         flex-direction: column;
+        align-items: center;
     }
 
     .teamSelector
+    {
+        width: 80%;
+        flex-direction: column-reverse;
+        gap: 60px;
+    }
+
+    main
     {
         flex-direction: column;
     }
@@ -336,5 +355,11 @@ nav
     .mainCard
     {
         flex-direction: column-reverse;
+    }
+
+    .teammate
+    {
+        min-width: 48%;
+        max-width: 100%;
     }
 }
