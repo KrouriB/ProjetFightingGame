@@ -47,7 +47,6 @@ body
     width: 100%;
 }
 
-
 nav
 {
     font-family: 'Noto Sans Pahawh Hmong', sans-serif;
@@ -140,6 +139,13 @@ li
 {
     background-color: inherit;
     border: none;
+    font-size: 1em;
+}
+
+.topBar a, .btnUser
+{
+    color: var(--text);
+    cursor: pointer;
 }
 
 @media(orientation: landscape)
