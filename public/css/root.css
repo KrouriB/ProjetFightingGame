@@ -11,7 +11,7 @@
     --money: #FFB800;
     --positive: #0075FF;
     --negative: #FF0000;
-    --frist: #FFB800;
+    --first: #FFB800;
     --second: #C0C0C0;
     --third: #CD7F32;
     --unselected: #ff000066;
@@ -45,6 +45,27 @@
 body
 {
     width: 100%;
+}
+
+
+nav
+{
+    font-family: 'Noto Sans Pahawh Hmong', sans-serif;
+    font-size: 2em;
+}
+
+.menuButton
+{
+    background-color: var(--primary);
+    border-radius: 8px;
+    border:solid 1px var(--text);
+    text-align: center;
+}
+
+.menuButton a
+{
+    color: var(--text);
+    text-decoration: none;
 }
 
 main
@@ -248,6 +269,11 @@ li
         font-size: 0.6em;
     }
 
+    .menuButton
+    {
+        padding: 4px 12px 0 12px;
+    }
+
     /* menu burger */
 
     .nav
@@ -304,6 +330,19 @@ li
 
     .nav > #nav-check:checked ~ .nav-list {
         height: calc(100vh - 50px);
+    }
+}
+
+@media(orientation: portrait) and (max-width: 500px)
+{
+    .menuButton
+    {
+        padding: 0 12px 8px 12px;
+    }
+
+    .menuButton a
+    {
+        font-size: 0.6em;
     }
 }
 

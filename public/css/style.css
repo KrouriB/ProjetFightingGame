@@ -2,27 +2,6 @@
 
 
 
-nav
-{
-    font-family: 'Noto Sans Pahawh Hmong', sans-serif;
-    font-size: 2em;
-}
-
-.menuButton
-{
-    background-color: var(--primary);
-    border-radius: 8px;
-    border:solid 1px var(--text);
-    text-align: center;
-    padding-top: 8px;
-}
-
-.menuButton a
-{
-    color: var(--text);
-    text-decoration: none;
-}
-
 .imgFigure
 {
     height: 128px;
@@ -297,6 +276,18 @@ nav
 @media(orientation: portrait)
 {
     /* choose on what to show */
+
+    .notCoPage
+    {
+        height: 100vh;
+    }
+
+    .notConnected
+    {
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 100%;
+    }
 
     .topBar
     {
