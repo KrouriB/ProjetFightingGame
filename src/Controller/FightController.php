@@ -10,6 +10,7 @@ use App\Repository\EquipeRepository;
 use App\Repository\WeaponRepository;
 use App\Repository\AccessoryRepository;
 use App\Repository\PersonnageRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
@@ -21,23 +22,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FightController extends AbstractController
 {
     #[Route('/fight/lose', name: 'app_lose')]
-    public function lose(Request $request): Response
+    public function lose(Request $request, EntityManagerInterface $entityManager): Response
     {
         // $request->getSession()->set('in fight', 'no');
 
         $this->getUser()->loseGame();
+        // dd($this->getUser()->getWinCount());
+        $entityManager->persist($this->getUser());
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_main');
     }
     
     #[Route('/fight/win', name: 'app_win')]
-    public function win(Request $request): Response
+    public function win(Request $request, EntityManagerInterface $entityManager): Response
     {
         // $request->getSession()->set('in fight', 'no');
 
         // ici test si la vie du personnage adverse et inferieur egale a 0
 
         $this->getUser()->winGame();
+        // dd($this->getUser()->getWinCount());
+        $entityManager->persist($this->getUser());
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_main');
     }
