@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Form\UserType;
 use App\Form\NewPasswordType;
+use App\Repository\WeaponRepository;
+use App\Repository\AccessoryRepository;
+use App\Repository\PersonnageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,6 +96,20 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    #[Route(path: '/admin/validation', name: 'app_validate')]
+    public function validate(AccessoryRepository $accessoryRepository, WeaponRepository $weaponRepository, PersonnageRepository $personnageRepository)
+    {
+        $accessorys = $accessoryRepository->findNotValid();
+        $weapons = $weaponRepository->findNotValid();
+        $personnages = $personnageRepository->findNotValid();
+
+        return $this->render('security/validate.html.twig', [
+            'accessorys' => $accessorys,
+            'weapons' => $weapons,
+            'personnages' => $personnages,
+        ]);
+    }
+
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
@@ -111,5 +128,45 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('app_not_co');
     }
 
+    #[Route(path: '/delete/personnage/{id}', name: 'app_delete_personnage')]
+    public function deletePersonnage(EntityManagerInterface $entityManager, PersonnageRepository $personnageRepository)
+    {
+        $entityManager->remove($personnage);
+        $entityManager->flush();
+    }
 
+    #[Route(path: '/delete/weapon/{id}', name: 'app_delete_weapon')]
+    public function deleteWeapon(EntityManagerInterface $entityManager, WeaponRepository $weaponRepository)
+    {
+        $entityManager->remove($weapon);
+        $entityManager->flush();
+    }
+
+    #[Route(path: '/delete/accessory/{id}', name: 'app_delete_accessory')]
+    public function deleteAccessory(EntityManagerInterface $entityManager, AccessoryRepository $accessoryRepository)
+    {
+        $entityManager->remove($accessory);
+        $entityManager->flush();
+    }
+
+    #[Route(path: '/validate/personnage/{id}', name: 'app_validate_personnage')]
+    public function validatePersonnage(EntityManagerInterface $entityManager, PersonnageRepository $personnageRepository)
+    {
+        $personnage->setUserCreator(null);
+        $entityManager->flush();
+    }
+
+    #[Route(path: '/validate/weapon/{id}', name: 'app_validate_weapon')]
+    public function validateWeapon(EntityManagerInterface $entityManager, WeaponRepository $weaponRepository)
+    {
+        $weapon->setUserCreator(null);
+        $entityManager->flush();
+    }
+
+    #[Route(path: '/validate/accessory/{id}', name: 'app_validate_accessory')]
+    public function validateAccessory(EntityManagerInterface $entityManager, AccessoryRepository $accessoryRepository)
+    {
+        $accessory->setUserCreator(null);
+        $entityManager->flush();
+    }
 }
