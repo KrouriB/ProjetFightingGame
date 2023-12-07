@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    <main class='flex'>
+    <main class='flex mainInventory'>
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
             {% include "/nav/navMenuMobile.html.twig" %}
@@ -41,6 +41,23 @@
                                 <figure class="rightCard imgPerso flex">
                                     <img class="imgFigure" src="{{ asset(personnage.imagePath) }}" alt="image du personnage">
                                 </figure>
+                            </div>
+                        </div>
+                        <div class="moreInfo notShowed">
+                            <figure>
+                                <figcaption>{{ personnage.name }}</figcaption>
+                                <img class="imgFigure" src="{{ asset(personnage.imagePath) }}" alt="image du personnage">
+                            </figure>
+                            <div class="block.Info">
+                                <span>{{ personnage.element.nameElement }}</span>
+                                <span>{{ personnage.type.nameType }}</span>
+                                <span>{{ personnage.category.nameCategory }}</span>
+                            </div>
+                            <div class="block.Stat">
+                                <span>Attaque : {{ personnage.life }}</span>
+                                <span>Attaque : {{ personnage.attack }}</span>
+                                <span>Attaque : {{ personnage.magic }}</span>
+                                <span>Attaque : {{ personnage.energy }}</span>
                             </div>
                         </div>
                     {% endfor %}
