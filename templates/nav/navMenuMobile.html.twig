@@ -1,16 +1,16 @@
 {% block body %}
-    <nav class="mobileFlex">
-        <header>
-            <input type="checkbox" id="nav-check">
-            <div class="nav-btn">
-                <label for="nav-check">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
-            </div>
+    <nav class="mobileFlex nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-btn">
+            <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+        <header class="nav-header flex">
             <a href="{{ path('app_user') }}" class="pseudo">{{ app.user.userIdentifier }}</a>
-            <div class="parameter"></div>
+            <button  class="parameter mobile"><i class="fa-solid fa-gear"></i></button>
         </header>
         <ul class="nav-list">
             <li>
