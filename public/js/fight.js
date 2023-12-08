@@ -640,8 +640,8 @@ function calculRawDamage(who, what) // function to calculate damage depending th
             break;
     }
 
-    let physic = (perso.personnage.Attack * (attackStat / 100) + perso.accessory.Attack);
-    let magic = (perso.personnage.Magic * (magicStat / 100) + perso.accessory.Magic);
+    let physic = (perso.personnage.Attack * (attackStat / 40) + perso.accessory.Attack);
+    let magic = (perso.personnage.Magic * (magicStat / 40) + perso.accessory.Magic);
     let physicDamage = (physic - adversaire.accessory.Defense) * resiPhysic;
     let magicDamage = (magic - adversaire.accessory.Resistance) * resiMagic;
 
