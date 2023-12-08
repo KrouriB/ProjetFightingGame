@@ -229,6 +229,10 @@
     flex-direction: column;
 }
 
+.notShowed
+{
+    display: none;
+}
 
 @media(orientation: landscape)
 {

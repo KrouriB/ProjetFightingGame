@@ -200,7 +200,6 @@ li
     
     a {
         text-decoration: none;
-        color: white;
         display: block;
     }
     
@@ -275,6 +274,11 @@ li
         min-width: 100%;
     }
 
+    main
+    {
+        position: relative;
+    }
+
     .nav-header > a , .parameter
     {
         font-size: 0.6em;
@@ -290,6 +294,8 @@ li
     .nav
     {
         padding: 1rem;
+        position: fixed;
+        top: 0;
     }
 
     .nav > .nav-btn
@@ -341,6 +347,11 @@ li
 
     .nav > #nav-check:checked ~ .nav-list {
         height: calc(100vh - 50px);
+    }
+
+    .longSide
+    {
+        margin-top: 77px;
     }
 }
 
