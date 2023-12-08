@@ -66,13 +66,13 @@ class CreationController extends AbstractController
                     switch($perso->getType()->getId())
                     {
                         case 1:
-                            $perso->setImagePath('/img/character/axesman.png');
+                            $perso->setImagePath('/img/character/axesman.webp');
                             break;
                         case 2:
-                            $perso->setImagePath('/img/character/swordsman.png');
+                            $perso->setImagePath('/img/character/swordsman.webp');
                             break;
                         case 3:
-                            $perso->setImagePath('/img/character/spearsman.png');
+                            $perso->setImagePath('/img/character/spearsman.webp');
                             break;
                     }
                     break;
@@ -80,13 +80,13 @@ class CreationController extends AbstractController
                     switch($perso->getType()->getId())
                     {
                         case 1:
-                            $perso->setImagePath('/img/character/mage_tattou_midJourney_modified.png');
+                            $perso->setImagePath('/img/character/mage_tattou_midJourney_modified.webp');
                             break;
                         case 2:
-                            $perso->setImagePath('/img/character/mage_book_midjourney_modified.png');
+                            $perso->setImagePath('/img/character/mage_book_midjourney_modified.webp');
                             break;
                         case 3:
-                            $perso->setImagePath('/img/character/mageWand.png');
+                            $perso->setImagePath('/img/character/mageWand.webp');
                             break;
                     }
                     break;
@@ -94,13 +94,13 @@ class CreationController extends AbstractController
                     switch($perso->getType()->getId())
                     {
                         case 1:
-                            $perso->setImagePath('/img/character/fighter.png');
+                            $perso->setImagePath('/img/character/fighter.webp');
                             break;
                         case 2:
-                            $perso->setImagePath('/img/character/thief.png');
+                            $perso->setImagePath('/img/character/thief.webp');
                             break;
                         case 3:
-                            $perso->setImagePath('/img/character/ranger.png');
+                            $perso->setImagePath('/img/character/ranger.webp');
                             break;
                     }
                     break;
