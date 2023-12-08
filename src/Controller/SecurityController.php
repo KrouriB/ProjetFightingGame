@@ -117,11 +117,29 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/deleteUser', name: 'app_delete_user')]
-    public function deleteCurrentUser(SessionInterface $session, EntityManagerInterface $entityManager)
+    public function deleteCurrentUser(SessionInterface $session, EntityManagerInterface $entityManager, PersonnageRepository $personnageRepository, WeaponRepository $weaponRepository, AccessoryRepository $accessoryRepository)
     {
         $user = $this->getUser();
         $session->invalidate();
         $session->migrate(true); // crete new session to prevent session fixation attacks
+
+        $personnages = $personnageRepository->findBy(['userCreatorId' => $this->getUser()->getId()]);
+        $weapons = $weaponRepository->findBy(['userCreatorId' => $this->getUser()->getId()]);
+        $accessorys = $accessoryRepository->findBy(['userCreatorId' => $this->getUser()->getId()]);
+
+        foreach($personnages as $personnage)
+        {
+            $entityManager->remove($personnage);
+        }
+        foreach($weapons as $weapon)
+        {
+            $entityManager->remove($weapon);
+        }
+        foreach($accessorys as $accessory)
+        {
+            $entityManager->remove($accessory);
+        }
+
         $entityManager->remove($user);
         $entityManager->flush();
 
