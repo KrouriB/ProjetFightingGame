@@ -51,3 +51,16 @@ function deleteUser()
         alert("La suppression du compte n'aura pas lieu");
     }
 }
+
+$(document).ready(function() {
+    var i = 5000
+    $(this).delay(1000)
+    $(".flash").each(function() {
+        if ($(this).text().length > 0) {
+            $(this).slideDown(500, function() {
+                $(this).delay(i).slideUp(500)
+                i += 625
+            })
+        }
+    })
+})
