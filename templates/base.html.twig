@@ -8,61 +8,83 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cousine&family=Noto+Sans+Pahawh+Hmong&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
         {% block stylesheets %}
-            <script src="{{ asset('/tarteaucitron.js-1.15.0/tarteaucitron.js') }}"></script>
-
-            <script>
-                tarteaucitron.init({
-                    "privacyUrl": "http://127.0.0.1:8000/agreeTerms", /* Privacy policy url */
-                    "bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
-
-                    "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
-                    "cookieName": "tarteaucitron", /* Cookie name */
-
-                    "orientation": "middle", /* Banner position (top - bottom - middle - popup) */
-
-                    "groupServices": false, /* Group services by category */
-                    "showDetailsOnClick": true, /* Click to expand the description */
-                    "serviceDefaultState": "wait", /* Default state (true - wait - false) */
-
-                    "showAlertSmall": false, /* Show the small banner on bottom right */
-                    "cookieslist": false, /* Show the cookie list */
-                    
-                    "showIcon": true, /* Show cookie icon to manage cookies */
-                    // "iconSrc": "", /* Optional: URL or base64 encoded image */
-                    "iconPosition": "BottomRight", /* Position of the icon between BottomRight, BottomLeft, TopRight and TopLeft */
-
-                    "adblocker": false, /* Show a Warning if an adblocker is detected */
-
-                    "DenyAllCta" : true, /* Show the deny all button */
-                    "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
-                    "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
-
-                    "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
-
-                    "removeCredit": false, /* Remove credit link */
-                    "moreInfoLink": true, /* Show more info link */
-                    "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
-                    "useExternalJs": false, /* If false, the tarteaucitron.services.js file will be loaded */
-
-                    // "cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for subdomain website */
-
-                    "readmoreLink": "", /* Change the default readmore link pointing to tarteaucitron.io */
-                    
-                    "mandatory": true, /* Show a message about mandatory cookies */
-                    "mandatoryCta": true, /* Show the disabled accept button when mandatory on */
-                    
-                    // "customCloserId": "" /* Optional a11y: Custom element ID used to open the panel */
-                });
-            </script>
-            <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
         {% endblock %}
 
     </head>
     <body>
+        <div id="flash-messages" class="flex">
+            {# flash message displaying #}
+            {% for message in app.flashes('success') %}
+                <div class="flash flash-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+    
+            {% for message in app.flashes('warning') %}
+                <div class="flash flash-warning">
+                    {{ message }}
+                </div>
+            {% endfor %}
+    
+            {% for message in app.flashes('error') %}
+                <div class="flash flash-error">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
         {% block body %}{% endblock %}
+        <script src="{{ asset('/tarteaucitron.js-1.15.0/tarteaucitron.js') }}"></script>
+
+        <script>
+            tarteaucitron.init({
+                "privacyUrl": "http://127.0.0.1:8000/agreeTerms", /* Privacy policy url */
+                "bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
+
+                "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+                "cookieName": "tarteaucitron", /* Cookie name */
+
+                "orientation": "middle", /* Banner position (top - bottom - middle - popup) */
+
+                "groupServices": false, /* Group services by category */
+                "showDetailsOnClick": true, /* Click to expand the description */
+                "serviceDefaultState": "wait", /* Default state (true - wait - false) */
+
+                "showAlertSmall": false, /* Show the small banner on bottom right */
+                "cookieslist": false, /* Show the cookie list */
+                
+                "showIcon": true, /* Show cookie icon to manage cookies */
+                // "iconSrc": "", /* Optional: URL or base64 encoded image */
+                "iconPosition": "BottomRight", /* Position of the icon between BottomRight, BottomLeft, TopRight and TopLeft */
+
+                "adblocker": false, /* Show a Warning if an adblocker is detected */
+
+                "DenyAllCta" : true, /* Show the deny all button */
+                "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
+                "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
+
+                "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+                "removeCredit": false, /* Remove credit link */
+                "moreInfoLink": true, /* Show more info link */
+                "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+                "useExternalJs": false, /* If false, the tarteaucitron.services.js file will be loaded */
+
+                // "cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for subdomain website */
+
+                "readmoreLink": "", /* Change the default readmore link pointing to tarteaucitron.io */
+                
+                "mandatory": true, /* Show a message about mandatory cookies */
+                "mandatoryCta": true, /* Show the disabled accept button when mandatory on */
+                
+                // "customCloserId": "" /* Optional a11y: Custom element ID used to open the panel */
+            });
+        </script>
+        <script src="https://kit.fontawesome.com/50e50e8630.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="{{ asset('/js/script.js') }}"></script>
         {% block javascripts %}
-            <script src="https://kit.fontawesome.com/50e50e8630.js" crossorigin="anonymous"></script>
         {% endblock %}
     </body>
 </html>
