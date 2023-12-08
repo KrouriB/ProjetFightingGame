@@ -234,6 +234,11 @@
     display: none;
 }
 
+a, button
+{
+    z-index: 2;
+}
+
 @media(orientation: landscape)
 {
     /* choose on what to show */

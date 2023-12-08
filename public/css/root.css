@@ -82,6 +82,7 @@ main
 a
 {
     color: var(--text);
+    z-index: 15;
 }
 
 li
@@ -274,11 +275,6 @@ li
         min-width: 100%;
     }
 
-    main
-    {
-        position: relative;
-    }
-
     .nav-header > a , .parameter
     {
         font-size: 0.6em;
@@ -294,8 +290,12 @@ li
     .nav
     {
         padding: 1rem;
+        height: 77px;
+    }
+
+    .nav input, .nav .nav-btn, .nav .nav-header
+    {
         position: fixed;
-        top: 0;
     }
 
     .nav > .nav-btn
@@ -337,7 +337,7 @@ li
         top: 77px;
         left: 0;
         overflow: hidden;
-        z-index: 2;
+        z-index: 20;
     }
 
     .nav > .nav-list > li {
