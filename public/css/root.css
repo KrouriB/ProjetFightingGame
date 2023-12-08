@@ -67,6 +67,11 @@ nav
     text-decoration: none;
 }
 
+img
+{
+object-fit: contain;
+}
+
 main
 {
     width: 100%;

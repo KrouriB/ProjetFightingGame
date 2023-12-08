@@ -110,8 +110,9 @@
 .aSide
 {
     flex-direction: column;
-    height: 35%;
+    height: 45%;
     gap: 18px;
+    justify-content: space-between;
 }
 
 .ennemieName span, .allyName span
@@ -180,7 +181,8 @@
 }
 
 .imgPerso{
-    width: 192px;
+    max-width: 192px;
+    min-height: 192px;
 }
 
 .imgPerso figcaption{
@@ -289,11 +291,13 @@
     .blockItem figure
     {
         height: 96px;
+        width: 96px;
     }
 
     .imgFigure
     {
         height: 100%;
+        width: 100%;
     }
 
     .buttonFight
