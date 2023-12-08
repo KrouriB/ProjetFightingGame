@@ -348,11 +348,6 @@ li
     .nav > #nav-check:checked ~ .nav-list {
         height: calc(100vh - 50px);
     }
-
-    .longSide
-    {
-        margin-top: 77px;
-    }
 }
 
 @media(orientation: portrait) and (max-width: 500px)

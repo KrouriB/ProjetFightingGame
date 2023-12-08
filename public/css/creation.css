@@ -97,11 +97,6 @@
     left: 50%;
 }
 
-a, button
-{
-    z-index: 2;
-}
-
 @media(orientation: landscape)
 {
     .creationPage form
