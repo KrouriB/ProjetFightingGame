@@ -145,9 +145,14 @@ class MenuController extends AbstractController
     }
 
     #[Route('/menu/notCo', name: 'app_not_co')]
-    public function mainUnConnected(): Response
+    public function mainUnConnected(CreateRandom $createRandom, PersonnageRepository $personnageRepository): Response
     {
-        return $this->render('menu/notCo.html.twig');
+        $personnages = $personnageRepository->findBy(['userCreator' => null]);
+        $personnage = $personnages[$createRandom->createSingleRandom(count($personnages))];
+
+        return $this->render('menu/notCo.html.twig', [
+            'personnage' => $personnage
+        ]);
     }
 
     #[Route('/', name: 'app_redirect_menu')]

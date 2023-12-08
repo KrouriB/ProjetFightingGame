@@ -123,9 +123,9 @@ class SecurityController extends AbstractController
         $session->invalidate();
         $session->migrate(true); // crete new session to prevent session fixation attacks
 
-        $personnages = $personnageRepository->findBy(['userCreatorId' => $this->getUser()->getId()]);
-        $weapons = $weaponRepository->findBy(['userCreatorId' => $this->getUser()->getId()]);
-        $accessorys = $accessoryRepository->findBy(['userCreatorId' => $this->getUser()->getId()]);
+        $personnages = $personnageRepository->findBy(['userCreator' => $this->getUser()->getId()]);
+        $weapons = $weaponRepository->findBy(['userCreator' => $this->getUser()->getId()]);
+        $accessorys = $accessoryRepository->findBy(['userCreator' => $this->getUser()->getId()]);
 
         foreach($personnages as $personnage)
         {
