@@ -32,6 +32,8 @@ class CreationController extends AbstractController
             $equipe->setAssosiatedUser($this->getUser());
             $entityManager->persist($equipe);
             $entityManager->flush();
+            
+            $this->addFlash('success', 'Vous avez créer votre équipier !');
 
             return $this->redirectToRoute('app_teammate');
         }
@@ -107,26 +109,32 @@ class CreationController extends AbstractController
             // test si les valeurs envoyer ont été modifier en trichant
             if($perso->getAttack() % 4 != 0)
             {
+                $this->addFlash('error', 'Votre Personnage a des valeur non valide');
                 return $this->redirectToRoute('app_creation_personnage');
             }
             elseif($perso->getMagic() % 4 != 0)
             {
+                $this->addFlash('error', 'Votre Personnage a des valeur non valide');
                 return $this->redirectToRoute('app_creation_personnage');
             }
             elseif(($perso->getEnergy() - 60) % 8 != 0)
             {
+                $this->addFlash('error', 'Votre Personnage a des valeur non valide');
                 return $this->redirectToRoute('app_creation_personnage');
             }
             elseif(($perso->getLife() - 200) % 25 != 0)
             {
+                $this->addFlash('error', 'Votre Personnage a des valeur non valide');
                 return $this->redirectToRoute('app_creation_personnage');
             }
             elseif((($perso->getMagic() / 4) + ($perso->getAttack() / 4) + (($perso->getEnergy() - 60) / 8) + (($perso->getLife() - 200) / 25)) > 31)
             {
+                $this->addFlash('error', 'Votre Personnage a des valeur non valide');
                 return $this->redirectToRoute('app_creation_personnage');
             }
             elseif($this->getUser()->getGold() < 2000)
             {
+                $this->addFlash('error', 'Vous n\'avez pas assez d\'argent pour faire ce personnage, il vous en faut 2000');
                 return $this->redirectToRoute('app_creation_personnage');
             }
             
@@ -144,6 +152,7 @@ class CreationController extends AbstractController
             $entityManager->persist($stockPerso[0]);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Vous avez créer votre personnage !');
             return $this->redirectToRoute('app_main');
         }
 

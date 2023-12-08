@@ -31,6 +31,8 @@ class FightController extends AbstractController
         $entityManager->persist($this->getUser());
         $entityManager->flush();
 
+        $this->addFlash('error', 'Perdu ! Vous allez rester sur une défaite ?');
+
         return $this->redirectToRoute('app_main');
     }
     
@@ -45,6 +47,8 @@ class FightController extends AbstractController
         // dd($this->getUser()->getWinCount());
         $entityManager->persist($this->getUser());
         $entityManager->flush();
+
+        $this->addFlash('success', 'Vous avez gagner la partie et reçu 500 gold !');
 
         return $this->redirectToRoute('app_main');
     }
