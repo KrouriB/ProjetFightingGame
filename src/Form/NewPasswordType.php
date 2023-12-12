@@ -22,7 +22,7 @@ class NewPasswordType extends AbstractType
             'type' => PasswordType::class,
             'invalid_message' => 'The password fields must match.',
             'mapped' => false,
-            'options' => ['attr' => ['class' => 'password-field', 'autocomplete' => 'new-password']],
+            'options' => ['attr' => ['class' => 'inputRegiLogi', 'autocomplete' => 'new-password']],
             'required' => true,
             'constraints' => [
                 new NotBlank([

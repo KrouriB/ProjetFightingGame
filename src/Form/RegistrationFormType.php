@@ -21,8 +21,18 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('email', EmailType::class)
+            ->add('username', TextType::class,
+                [
+                    'attr' => ['class' => 'inputRegiLogi'],
+                    'label' => 'Pseudo: '
+                ]
+            )
+            ->add('email', EmailType::class,
+                [
+                    'attr' => ['class' => 'inputRegiLogi'],
+                    'label' => 'Email: '
+                ]
+            )
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'label' => 'J\'accepte les conditions générales',
@@ -30,13 +40,13 @@ class RegistrationFormType extends AbstractType
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
                     ]),
-                ],
-            ])
+                ]]
+            )
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'mapped' => false,
-                'options' => ['attr' => ['class' => 'password-field', 'autocomplete' => 'new-password']],
+                'options' => ['attr' => ['class' => 'inputRegiLogi', 'autocomplete' => 'new-password']],
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
@@ -47,8 +57,8 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Le mot de passe doit avoir une longueur de 12 caractères, 1 Majuscule, 1 Miniscule, 1 Chiffre et 1 Caractère spécial',
                     ]),
                 ],
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Mot de Passe: '],
+                'second_options' => ['label' => 'Répeter le Mot de Passe: '],
             ])
         ;
     }
