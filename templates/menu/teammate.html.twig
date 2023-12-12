@@ -12,7 +12,7 @@
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
         </section>
-        <section class="longSide">
+        <section class="longSide flex">
             <header class="topBar desktop flex">
                 <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
                 <span class="gold desktop">{{ app.user.getGold }}&nbsp;G</span>
