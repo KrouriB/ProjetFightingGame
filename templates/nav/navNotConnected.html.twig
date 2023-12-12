@@ -1,8 +1,24 @@
 {% block body %}
-    <nav class="flex notConnected">
-        {# <div class="menuButton"><a href="">{{ 'partie rapide'|upper }}</a></div> #}
-        <div class="menuButton"><a href="{{ path('app_register') }}">{{ 'inscription'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_login') }}">{{ 'connexion'|upper }}</a></div>
-        <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
+    <nav class="desktopFlex sidebarnotConnected">
+        <ul class="flex">
+            {# <li class="menuButton">
+                <a href="">{{ 'partie rapide'|upper }}</a>
+            </li> #}
+            <li class="menuButton">
+                <a href="{{ path('app_not_co') }}">{{ 'menu'|upper }}</a>
+            </li>
+            <li class="menuButton">
+                <a href="{{ path('app_register') }}">{{ 'inscription'|upper }}</a>
+            </li>
+            <li class="menuButton">
+                <a href="{{ path('app_login') }}">{{ 'connexion'|upper }}</a>
+            </li>
+            <li class="menuButton">
+                <a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a>
+            </li>
+            <li class="menuButton">
+                <a href="{{ path('app_rule') }}">{{ 'règle'|upper }}</a>
+            </li>
+        </ul>
     </nav>
 {% endblock %}
