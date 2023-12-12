@@ -785,19 +785,19 @@ span#tarteaucitronDisclaimerAlert {
  * Icon
  */
 .tarteaucitronIconBottomRight {
-    bottom: 20px;
+    bottom: 60px;
     right: 20px;
 }
 .tarteaucitronIconBottomLeft {
-    bottom: 20px;
+    bottom: 60px;
     left: 20px;
 }
 .tarteaucitronIconTopRight {
-    top: 20px;
+    top: 60px;
     right: 20px;
 }
 .tarteaucitronIconTopLeft {
-    top: 20px;
+    top: 60px;
     left: 20px;
 }
 
