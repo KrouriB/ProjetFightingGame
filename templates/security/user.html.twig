@@ -8,12 +8,20 @@
 
 {% block body %}
     <main class="flex">
+        {% include "/nav/navMenuMobile.html.twig" %}
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
-            {% include "/nav/navMenuMobile.html.twig" %}
         </section>
         <section class="longSide flex userPage">
             <h1>Votre Page</h1>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="admin">
+                    <h2>Acces Administration</h2>
+                    <a href="{{ path('admin') }}">Equilibrage</a>
+                    <a href=""></a>
+                </div>
+            {% endif %}
             {{ form_errors(userInfo) }}
 
             {{ form_start(userInfo) }}
@@ -40,12 +48,13 @@
                 <p>Nombre de win : {{ app.user.winCount }}</p>
 
                 <div class="actionUser">
-                    <a class="btnUser" onclick="deleteUser()">Supprimez le compte</a>
-                    <a href="{{ path('app_password') }}" class="btnUser">Changer de mot de passe</a>
+                    <a class="btnUser" onclick="deleteUser()">Supprimez le compte <i class="fa-solid fa-trash"></i></a>
+                    <a href="{{ path('app_password') }}" class="btnUser">Changer de mot de passe <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     <button type="submit" class="btnUser">Register</button>
                 </div>
 
             {{ form_end(userInfo) }}
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}
