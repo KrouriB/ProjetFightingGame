@@ -3,3 +3,92 @@
 {% block meta %}
     <meta name="description" content="vous retrouverez ici les règle du jeu">
 {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/notCo.css') }}">
+{% endblock %}
+
+{% block body %}
+    <main class="flex">
+        {% if app.user %}
+            {% include "/nav/navMenuMobile.html.twig" %}
+        {% else %}
+            {% include "/nav/navNotConnectedMobile.html.twig" %}
+        {% endif %}
+        <section class="flex shortSide">
+            {% if app.user %}
+                {% include "/nav/navMenuDesktop.html.twig" %}
+            {% else %}
+                {% include "/nav/navNotConnected.html.twig" %}
+            {% endif %}
+        </section><span> </span>
+        <section class="flex longSide">
+            <header class="topBar desktop flex">
+                {% if app.user %}
+                    <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
+                    <span class="gold">{{ app.user.getGold }}&nbsp;G</span>
+                {% endif %}
+                <button  class="parameter desktop"><i class="fa-solid fa-gear"></i></button>
+            </header>
+            <div class="flex rule">
+                <h1>Les Règles</h1>
+                <article>
+                    <h2>Explication :</h2>
+                    <p class="ligneJust"><strong>The Little Fighting</strong> est un <strong>jeu de combat</strong> <strong>tour par tour</strong>, c'est a dire une jeu ou une fois ou l'action d'un de joueur a été faite, l'action suivante viendra de l'autre joueur.</p>
+                    <p class="ligneJust">Dans ce jeu vous pourez collection différent personnages et objet utiliser pour les combats en plus de pouvoir en créer de nouveau avec des caractéristique personnaliser</p>
+                </article>
+                <article>
+                    <h2>Spécificité :</h2>
+                    <p class="ligneJust">Parmi les caractéristiques des personnages et armes de ce jeu il y a les élements, les catégories et les types. La combinaison entre un type et une catégorie va donner une classe d'arme spécifique.</p>
+                    <h3>Classe d'arme :</h3>
+                    <ul>
+                        <li><span>Hache</span> = <span class="type1">Type 1</span> + <span class="classique">Classique</span></li>
+                        <li><span>{{ 'é'|upper }}pée</span> = <span class="type2">Type 2</span> + <span class="classique">Classique</span></li>
+                        <li><span>Lance</span> = <span class="type3">Type 3</span> + <span class="classique">Classique</span></li>
+                        <li><span>Tattouage</span> = <span class="type1">Type 1</span> + <span class="magie">Magie</span></li>
+                        <li><span>Tome</span> = <span class="type2">Type 2</span> + <span class="magie">Magie</span></li>
+                        <li><span>Sceptre</span> = <span class="type3">Type 3</span> + <span class="magie">Magie</span></li>
+                        <li><span>Gantelets</span> = <span class="type1">Type 1</span> + <span class="alternatif">Alternatif</span></li>
+                        <li><span>Dague</span> = <span class="type2">Type 2</span> + <span class="alternatif">Alternatif</span></li>
+                        <li><span>Arc</span> = <span class="type3">Type 3</span> + <span class="alternatif">Alternatif</span></li>
+                    </ul>
+                    <h3>{{ 'é'|upper }}léments d'une arme :</h3>
+                    <p class="ligneJust">Une arme a 2 éléments, le 1er est pour l'attaque, le 2nd est pour la compétence offensive.</p>
+                </article>
+                <article>
+                    <h2>Système de combat :</h2>
+                    <p class="ligneJust">Les caractéristiques permete de faire les sytème d'avantage/désavantage du jeu. Lors d'une action offensive, s'il y a avantage ou désaventage, un multiplicateur de dégat sera appliquer.</p>
+                    <h3>{{ 'é'|upper }}lément :</h3>
+                    <p class="ligneGauche">Les avantages (x2) : <span class="feu">Feu</span>&nbsp;>&nbsp;<span class="metal">Métal</span> >&nbsp;<span class="bois">Bois</span>&nbsp;>&nbsp;<span class="terre">Terre</span> >&nbsp;<span class="eau">Eau</span>&nbsp;>&nbsp;<span class="feu">Feu</span></p>
+                    <p class="ligneGauche">Les désavantage (x0.5) : <span class="feu">Feu</span>&nbsp;>&nbsp;<span class="terre">Terre</span> >&nbsp;<span class="metal">Métal</span>&nbsp;>&nbsp;<span class="eau">Eau</span> >&nbsp;<span class="bois">Bois</span>&nbsp;>&nbsp;<span class="feu">Feu</span></p>
+                    <p class="ligneJust">L'élément Neutre lui n'a pas d'avantage et désavantage.</p>
+                    <p class="ligneJust">Si l'élément d'un personnage et l'action offensive séléctionner concorde, alors un multiplicateur de 1.5 sera ajouter.</p>
+                    <h3>Type :</h3>
+                    <p class="ligneGauche">Les avantages (x1.25) : <span class="type1">Type 1</span>&nbsp;>&nbsp;<span class="type3">Type 3</span> >&nbsp;<span class="type2">Type 2</span>&nbsp;>&nbsp;<span class="type1">Type 1</span></p>
+                    <p class="ligneGauche">Les désavantage (x0.75) : <span class="type1">Type 1</span>&nbsp;>&nbsp;<span class="type2">Type 2</span> >&nbsp;<span class="type3">Type 3</span>&nbsp;>&nbsp;<span class="type1">Type 1</span></p>
+                    <h3>Catégorie :</h3>
+                    <p class="ligneGauche">Les avantages (x1.33) : <span class="classique">Classique</span>&nbsp;>&nbsp;<span class="alternatif">Alternatif</span> >&nbsp;<span class="magie">Magie</span>&nbsp;>&nbsp;<span class="classique">Classique</span></p>
+                    <p class="ligneGauche">Les désavantage (x0.66) : <span class="classique">Classique</span>&nbsp;>&nbsp;<span class="magie">Magie</span> >&nbsp;<span class="alternatif">Alternatif</span>&nbsp;>&nbsp;<span class="classique">Classique</span></p>
+                </article>
+                <article>
+                    <h2>Les Actions :</h2>
+                    <p class="ligneJust">En combat il y aura 4 action possible, la compétence offensive, la compétence défensive et l'abandon.</p>
+                    <h3>L'attaque :</h3>
+                    <p class="ligneJust">L'attaque est l'action offensive de base qui ne conssomme pas d'energie et n'as pas de tour d'attente.</p>
+                    <p class="littleInfo">1er Action en vertical, En haut à gauche en horizontal</p>
+                    <h3>La cométance offensive</h3>
+                    <p class="ligneJust">Action qui aura un nom personnaliser est l'autre action offensive avec un côut en energie et un nombre de tour d'attente</p>
+                    <p class="littleInfo">2ème Action en vertical, En haut à droite en horizontal</p>
+                    <h3>La compétence défensive</h3>
+                    <p class="ligneJust">Action qui aura un nom personnaliser est l'action défensive avec un côut en energie et un nombre de tour d'attente</p>
+                    <p class="littleInfo">3ème Action en vertical, En bas à gauche en horizontal</p>
+                    <h3>L'abandon</h3>
+                    <p class="ligneJust">Cette action permet d'abandonner le combat</p>
+                    <p class="littleInfo">4ème Action en vertical, En bas à droite en horizontal</p>
+                </article>
+            </div>
+            {% include "/footer.html.twig" %}
+        </section>
+    </main>
+{% endblock %}
