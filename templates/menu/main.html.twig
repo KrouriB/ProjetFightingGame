@@ -54,6 +54,7 @@
                 </div>
                 <header class="nav-header flex">
                     <a href="{{ path('app_user') }}" class="pseudo">{{ app.user.userIdentifier }}</a>
+                    <span class="gold">{{ app.user.getGold }}&nbsp;G</span>
                     <button  class="parameter mobile"><i class="fa-solid fa-gear"></i></button>
                 </header>
                 <ul class="nav-list">
@@ -96,6 +97,7 @@
                     {{ form_widget(teammate.equipe) }}
                 {{ form_end(teammate) }}
                 <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
+                <span class="gold desktop">{{ app.user.getGold }}&nbsp;G</span>
                 <button  class="parameter desktop"><i class="fa-solid fa-gear"></i></button>
             </header>
             <div id="menuMain">
@@ -105,6 +107,7 @@
                     {% endfor %}
                 </ol>
             </div>
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}

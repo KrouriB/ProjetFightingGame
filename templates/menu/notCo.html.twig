@@ -18,12 +18,12 @@
             {% include "/nav/navNotConnectedMobile.html.twig" %}
         </section>
         <section class="longSide">
-            <header>
+            <header class="headMain">
                 <div class="parameter topRight"></div>
                 <h1>The Little Fighting</h1>
                 <p>Sur ce jeu vous pourrez lancer des combats avec des personnages, armes et équipements que vous aurez créés</p>
             </header>
-            <main>
+            <div>
                 <div class="classPerso flex">
                     <h2>Les différente classe de personnage jouable</h2>
                     <div class="flex classes">
@@ -103,8 +103,8 @@
                         </div>
                     </div>
                 </div>
-            </main>
-
+            </div>
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}

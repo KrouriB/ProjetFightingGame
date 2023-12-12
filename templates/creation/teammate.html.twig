@@ -4,9 +4,9 @@
 
 {% block body %}
     <main class='flex'>
+        {% include "/nav/navMenuMobile.html.twig" %}
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
-            {% include "/nav/navMenuMobile.html.twig" %}
         </section>
 
         <section class="longSide">
@@ -14,6 +14,7 @@
 
             {{ form_start(equipe) }}
             {{ form_end(equipe) }}
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}

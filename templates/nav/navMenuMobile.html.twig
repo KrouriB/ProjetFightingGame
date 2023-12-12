@@ -10,6 +10,7 @@
         </div>
         <header class="nav-header flex">
             <a href="{{ path('app_user') }}" class="pseudo">{{ app.user.userIdentifier }}</a>
+            <span class="gold">{{ app.user.getGold }}&nbsp;G</span>
             <button  class="parameter mobile"><i class="fa-solid fa-gear"></i></button>
         </header>
         <ul class="nav-list">

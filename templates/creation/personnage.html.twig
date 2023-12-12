@@ -9,15 +9,16 @@
 
 {% block body %}
     <main class='flex'>
+        {% include "/nav/navMenuMobile.html.twig" %}
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
-            {% include "/nav/navMenuMobile.html.twig" %}
         </section>
         <section class="longSide creationPage">
             {{ form_errors(perso) }}
 
             {{ form_start(perso) }}
                 <div class="creationPart leftCreation flex">
+                    <span class="gold creationGold desktop">{{ app.user.getGold }}&nbsp;G</span>
                     <div class="ligne">
                         <div class="ligneSup flex">
                             {{ form_label(perso.element) }}
@@ -126,12 +127,16 @@
                             {{ form_errors(perso.energy) }}
                         </div>
                     </div>
-                    <div class="zoneValidate">
-                        <a onclick="validate()">Valider</a>
-                        {{ form_widget(perso.valider) }}
+                    <div class="bottomValid flex">
+                        <p>Cout de création : <span class="gold">2000&nbsp;G</span></p>
+                        <div class="zoneValidate">
+                            <a onclick="validate()">Valider</a>
+                            {{ form_widget(perso.valider) }}
+                        </div>
                     </div>
                 </div>
             {{ form_end(perso) }}
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}

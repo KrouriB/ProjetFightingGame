@@ -8,14 +8,15 @@
 
 {% block body %}
     <main class='flex'>
+        {% include "/nav/navMenuMobile.html.twig" %}
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
-            {% include "/nav/navMenuMobile.html.twig" %}
         </section>
         <section class="longSide inventoryPage">
-            <header class="topBar flex desktop desktop">
+            <header class="topBar desktop flex">
                 <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
-                <div class="parameter"></div>
+                <span class="gold">{{ app.user.getGold }}&nbsp;G</span>
+                <button  class="parameter desktop"><i class="fa-solid fa-gear"></i></button>
             </header>
             <div id="teammates">
                 <div id="inventory" class="flex">
@@ -52,6 +53,7 @@
                     {% endfor %}
                 </div>
             </div>
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}

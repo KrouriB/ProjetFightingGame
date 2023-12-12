@@ -6,15 +6,23 @@
     <meta name="description" content="page des termes d'utilisation">
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/notCo.css') }}">
+{% endblock %}
+
 {% block body %}
     <main class='flex'>
+        {% if app.user %}
+            {% include "/nav/navMenuMobile.html.twig" %}
+        {% else %}
+            {% include "/nav/navNotConnectedMobile.html.twig" %}
+        {% endif %}
         <section class="shortSide flex">
             {% if app.user %}
                 {% include "/nav/navMenuDesktop.html.twig" %}
-                {% include "/nav/navMenuMobile.html.twig" %}
             {% else %}
                 {% include "/nav/navNotConnected.html.twig" %}
-                {% include "/nav/navNotConnectedMobile.html.twig" %}
             {% endif %}
         </section>
         <section class="longSide scrollable pad16">
@@ -178,6 +186,7 @@
             <ul>
                 <li>By email: brice.krouri@gmail.com</li>
             </ul>
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}

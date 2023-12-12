@@ -14,9 +14,9 @@
 
 {% block body %}
     <main class="flex">
+        {% include "/nav/navNotConnectedMobile.html.twig" %}
         <section class="shortSide flex">
             {% include "/nav/navNotConnected.html.twig" %}
-            {% include "/nav/navNotConnectedMobile.html.twig" %}
         </section>
         <section class="longSide flex">
             {% for flash_error in app.flashes('verify_email_error') %}
@@ -46,6 +46,7 @@
                 </div>
         
             {{ form_end(registrationForm) }}
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}

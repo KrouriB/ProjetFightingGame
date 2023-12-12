@@ -8,14 +8,15 @@
 
 {% block body %}
     <main class='flex'>
+        {% include "/nav/navMenuMobile.html.twig" %}
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
-            {% include "/nav/navMenuMobile.html.twig" %}
         </section>
         <section class="longSide">
-            <header class="topBar flex desktop">
+            <header class="topBar desktop flex">
                 <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
-                <div class="parameter"></div>
+                <span class="gold desktop">{{ app.user.getGold }}&nbsp;G</span>
+                <button  class="parameter desktop"><i class="fa-solid fa-gear"></i></button>
             </header>
             <div id="menuMain" class="flex">
                 {% for teammate in equipes %}
@@ -45,6 +46,7 @@
                     <a href="{{ path('app_creation_teammate') }}">+</a>
                 </div>
             </div>
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}

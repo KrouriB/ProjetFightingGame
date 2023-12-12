@@ -14,9 +14,9 @@
 
 {% block body %}
     <main class="flex">
+        {% include "/nav/navNotConnectedMobile.html.twig" %}
         <section class="shortSide flex">
             {% include "/nav/navNotConnected.html.twig" %}
-            {% include "/nav/navNotConnectedMobile.html.twig" %}
         </section>
         <section class="longSide flex">
             <form method="post">
@@ -47,6 +47,7 @@
                     </button>
                 </div>
             </form>
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}
