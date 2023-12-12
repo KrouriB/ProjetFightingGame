@@ -1,7 +1,93 @@
 @import "root.css";
 
-.agreeTerms
+a
+{
+    color: var(--text);
+    text-decoration: underline;
+}
+
+h1
+{
+    width: 75%;
+    min-height: auto;
+}
+
+.longSide
+{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    min-height: calc(100vh - 77px);
+}
+
+form
 {
     display: flex;
     flex-direction: column;
+    gap: 12px;
+    width: 75%;
+}
+
+form > div
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputRegiLogi
+{
+    font-size: 1em;
+}
+
+.bottomBlock
+{
+    width: 100%;
+    justify-content: space-between;
+    font-size: 1em;
+    flex-direction: row;
+}
+
+.bottomBlock button
+{
+    font-size: 1em;
+    padding: 2px 8px;
+}
+
+.bottomBlock a
+{
+    border: 1px solid var(--text);
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 2px 8px;
+}
+
+.bottomBlock a i
+{
+    font-size: 0.8em;
+}
+
+#registration_form_agreeTerms
+{
+    height: 100%;
+}
+
+.agreeTerms > div
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media(max-height: 748px) and (orientation: landscape)
+{
+    .longSide
+    {
+        justify-content: space-between;
+    }
+    
+    h1
+    {
+        font-size: 1.6em;
+    }
 }
