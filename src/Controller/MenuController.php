@@ -10,6 +10,7 @@ use App\Repository\WeaponRepository;
 use App\Repository\AccessoryRepository;
 use App\Repository\PersonnageRepository;
 use App\Repository\StockWeaponRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\StockAccessoryRepository;
 use App\Repository\StockPersonnageRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,17 +72,22 @@ class MenuController extends AbstractController
     }
 
     #[Route('/menu/rank', name: 'app_rank')]
-    public function rank(UserRepository $userRepository/*, Request $request, RouterInterface $router*/): Response
+    public function rank(UserRepository $userRepository, Request $request, PaginatorInterface $paginator/*, RouterInterface $router*/): Response
     {
         // $session = $request->getSession();
         // if($session->get('in fight') == 'yes')
         // {
         //     return new RedirectResponse($router->generate('app_lose')); // if user was in fight when refresh/quit -> lose
         // }
-        
-        $users = $userRepository->findBy([],['winCount' => 'DESC']);
+
+        $pagination = $paginator->paginate(
+            $userRepository->findByWin(),
+            $request->query->get('page', 1),
+            10
+        );
+
         return $this->render('everyone/rank.html.twig', [
-            'users' => $users,
+            'users' => $pagination,
         ]);
     }
 
