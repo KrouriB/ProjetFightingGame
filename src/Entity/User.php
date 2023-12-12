@@ -326,7 +326,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function loseGame(): static
     {
-        $this->setWinCount($this->winCount - 1);
+        if($this->winCount > 0)
+        {
+            $this->setWinCount($this->winCount - 1);
+        }
         // dd($this->winCount);
 
         return $this;
