@@ -7,37 +7,45 @@
 {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/notCo.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/regi_log.css') }}">
 {% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-
-    <h1>Register</h1>
-
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        <div class="agreeTerms">
-            <div>
-                {{ form_label(registrationForm.agreeTerms) }}
-                {{ form_widget(registrationForm.agreeTerms) }}
-            </div>
-            <a href="{{ path('app_agreeTerms') }}">Lire les conditions générales</a>
-            {{ form_errors(registrationForm.agreeTerms) }}
-        </div>
-
-        <div class="bottomBlock">
-            <a href="{{ path('app_login') }}">Connexion</a>
-            <button type="submit" class="btn">Register</button>
-        </div>
-
-    {{ form_end(registrationForm) }}
+    <main class="flex">
+        <section class="shortSide flex">
+            {% include "/nav/navNotConnected.html.twig" %}
+            {% include "/nav/navNotConnectedMobile.html.twig" %}
+        </section>
+        <section class="longSide flex">
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+            {% endfor %}
+        
+            <h1>Inscrivez Vous</h1>
+        
+            {{ form_errors(registrationForm) }}
+        
+            {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.username) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword) }}
+                <div class="agreeTerms">
+                    <div>
+                        {{ form_label(registrationForm.agreeTerms) }}
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                    </div>
+                    <a href="{{ path('app_agreeTerms') }}">Lire les conditions générales</a>
+                    {{ form_errors(registrationForm.agreeTerms) }}
+                </div>
+        
+                <div class="bottomBlock flex">
+                    <a href="{{ path('app_login') }}">Connexion <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <button type="submit" class="btn">Register</button>
+                </div>
+        
+            {{ form_end(registrationForm) }}
+        </section>
+    </main>
 {% endblock %}
