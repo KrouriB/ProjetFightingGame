@@ -37,11 +37,6 @@
     visibility: hidden;
 }
 
-.flex
-{
-    display: flex;
-}
-
 body
 {
     width: 100%;
@@ -51,6 +46,32 @@ nav
 {
     font-family: 'Noto Sans Pahawh Hmong', sans-serif;
     font-size: 2em;
+}
+
+footer
+{
+    background-color: var(--tertiary);
+    justify-content: space-between;
+    padding: 12px 8px;
+    color: var(--textReverse);
+    align-items: center;
+    width: 100%;
+}
+
+.links
+{
+    gap: 20px;
+}
+
+.links a
+{
+    color: var(--textReverse);
+}
+
+.longSide
+{
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .menuButton
@@ -159,9 +180,152 @@ li
     font-size: 0.5em;
 }
 
+.topBar
+{
+    justify-content: flex-end;
+}
+
+.rule
+{
+    flex-direction: column;
+    gap: 28px;
+}
+
+.rule article
+{
+    margin-bottom: 48px;
+}
+
+.rule article h2
+{
+    margin-top: 32px;
+    font-size: 1.6em;
+}
+
+.rule article h3
+{
+    margin-top: 24px;
+    font-size: 1.2em;
+}
+
+.rule article  p
+{
+    margin-top: 12px;
+}
+
+.ligneJust
+{
+    text-align: justify;
+}
+
+.ligneGauche
+{
+    text-align: left;
+}
+
+.littleInfo
+{
+    font-size: 0.8em;
+}
+
+article ul
+{
+    height: auto;
+}
+
+.type1
+{
+    text-shadow: green 0 0 3px;
+    font-weight: normal;
+}
+
+.type2
+{
+    text-shadow: red 0 0 3px;
+    font-weight: normal;
+}
+
+.type3
+{
+    text-shadow: blue 0 0 3px;
+    font-weight: normal;
+}
+
+.classique
+{
+    text-shadow: yellow 0 0 3px;
+    font-weight: normal;
+}
+
+.magie
+{
+    text-shadow: purple 0 0 3px;
+    font-weight: normal;
+}
+
+.alternatif
+{
+    text-shadow: chocolate 0 0 3px;
+    font-weight: normal;
+}
+
+.feu
+{
+    color: red;
+    font-weight: normal;
+}
+
+.eau
+{
+    color: blue;
+    font-weight: normal;
+}
+
+.metal
+{
+    color: lightslategray;
+    font-weight: normal;
+}
+
+.bois
+{
+    color: green;
+    font-weight: normal;
+}
+
+.terre
+{
+    color: burlywood;
+    font-weight: normal;
+}
+
+.rank
+{
+    justify-content: space-between;
+}
+
+.gold
+{
+    color: var(--money);
+}
+
+.footerStock
+{
+    position: absolute;
+    bottom: 0;
+    z-index: 5;
+    border-top: 2px solid var(--textReverse);
+    width: 67%;
+}
+
 @media(orientation: landscape)
 {
-    html, body {margin: 0; height: 100%; overflow: hidden}
+    html, body
+    {
+        margin: 0;
+        height: 100%;
+        overflow: hidden
+    }
 
     .desktop
     {
@@ -194,6 +358,11 @@ li
         justify-content: space-around;
         flex-direction: column;
         height: 100%;
+    }
+
+    main .shortSide
+    {
+        z-index: 99;
     }
     
     .sidebar ul {
@@ -262,6 +431,20 @@ li
     }
 }
 
+@media(max-width: 1120px) and (orientation: landscape)
+{
+    .topBar
+    {
+        flex-wrap: wrap;
+    }
+
+    footer
+    {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+
 @media(orientation: portrait)
 {
     .desktop
@@ -284,6 +467,21 @@ li
         display: flex;
         min-width: 100%;
         position: fixed;
+        z-index: 5;
+    }
+    .gold
+    {
+        font-size: 0.6em;
+    }
+
+    footer
+    {
+        flex-direction: column;
+    }
+
+    footer a
+    {
+        text-decoration: none;
     }
 
     .longSide
@@ -304,7 +502,7 @@ li
 
     /* menu burger */
 
-    .nav
+    .nav-header
     {
         padding: 1rem;
     }
@@ -348,7 +546,7 @@ li
         top: 77px;
         left: 0;
         overflow: hidden;
-        z-index: 2;
+        z-index: 3;
     }
 
     .nav > .nav-list > li
@@ -360,11 +558,13 @@ li
     .nav > #nav-check:checked ~ .nav-list
     {
         height: calc(100vh - 50px);
+        position: fixed;
     }
 
-    .nav > #nav-check:checked ~ main
+    .nav > #nav-check:checked ~ .nav-header
     {
-        overflow: hidden;
+        position: sticky;
+        top: 0;
     }
 }
 
@@ -379,6 +579,13 @@ li
     {
         font-size: 0.6em;
     }
+}
+
+
+
+.flex
+{
+    display: flex;
 }
 
 /* https://codepen.io/chriiss/pen/qBJjLEx?editors=1100 */

@@ -3,6 +3,37 @@
 #rankingTable
 {
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+}
+
+.topBar
+{
+    padding: 20px 20px 0 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination span
+{
+    background-color: var(--tertiary);
+    border-radius: 80px;
+    color: var(--textReverse);
+    padding: 8px 16px;
+}
+
+.pagination a
+{
+    color: var(--textReverse);
+    text-decoration: none;
+}
+
+.pagination
+{
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
 }
 
 table, td, th {
@@ -47,4 +78,12 @@ tr:nth-child(3)
 tr:nth-child(4) 
 {
     background-color: var(--third);
+}
+
+@media(orientation: portrait)
+{
+    .pagination span
+    {
+        margin-bottom: 36px;
+    }
 }

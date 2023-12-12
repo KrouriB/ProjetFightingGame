@@ -14,8 +14,6 @@ h1
 
 .longSide
 {
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 16px;
     min-height: calc(100vh - 77px);
@@ -81,11 +79,6 @@ form > div
 
 @media(max-height: 748px) and (orientation: landscape)
 {
-    .longSide
-    {
-        justify-content: space-between;
-    }
-    
     h1
     {
         font-size: 1.6em;
