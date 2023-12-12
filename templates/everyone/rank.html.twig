@@ -13,23 +13,25 @@
 
 {% block body %}
     <main class='flex'>
+        {% if app.user %}
+            {% include "/nav/navMenuMobile.html.twig" %}
+        {% else %}
+            {% include "/nav/navNotConnectedMobile.html.twig" %}
+        {% endif %}
         <section class="shortSide flex">
             {% if app.user %}
                 {% include "/nav/navMenuDesktop.html.twig" %}
-                {% include "/nav/navMenuMobile.html.twig" %}
             {% else %}
                 {% include "/nav/navNotConnected.html.twig" %}
-                {% include "/nav/navNotConnectedMobile.html.twig" %}
             {% endif %}
         </section>
-        <section class="longSide">
-            <header class="topBar flex desktop">
-                
-                
+        <section class="longSide flex rank">
+            <header class="topBar desktop flex">
                 {% if app.user %}
                     <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
+                    <span class="gold">{{ app.user.getGold }}&nbsp;G</span>
                 {% endif %}
-                <div class="parameter"></div>
+                <button  class="parameter desktop"><i class="fa-solid fa-gear"></i></button>
             </header>
             <div id="rankingTable" class="flex">
                 <table>
@@ -38,7 +40,7 @@
                         <th>Pseudo</th>
                         <th>Nombre de victoire</th>
                     </tr>
-                    {% set i = 1 %}
+                    {% set i = 1 + (10 * ( (0 + app.request.get("page")) - 1)) %}
                     {% for user in users %}
                         <tr>
                             <td>{{ i }}</td>
@@ -47,17 +49,19 @@
                         </tr>
                         {% set i = i + 1 %}
                     {% endfor %}
-                    {% if i < 10 %}
-                    {% for i in i..10 %}
+                    {% if i < 10 * (0 + app.request.get("page")) %}
+                    {% for i in i..(10 * (0 + app.request.get("page"))) %}
                         <tr>
-                            <td></td>
+                            <td>{{ i }}</td>
                             <td></td>
                             <td></td>
                         </tr>
                     {% endfor %}
                     {% endif %}
                 </table>
+                {{ knp_pagination_render(users) }}
             </div>
+            {% include "/footer.html.twig" %}
         </section>
     </main>
 {% endblock %}
