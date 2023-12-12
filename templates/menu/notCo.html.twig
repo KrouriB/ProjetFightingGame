@@ -4,12 +4,18 @@
     <meta name="description" content="menu pour un utilisateur non connecter">
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/notCo.css') }}">
+{% endblock %}
+
 {% block title %}Menu{% endblock %}
 
 {% block body %}
     <main class='flex'>
         <section class="shortSide flex notCoPage">
             {% include "/nav/navNotConnected.html.twig" %}
+            {% include "/nav/navNotConnectedMobile.html.twig" %}
         </section>
         <section class="longSide">
             <header>
@@ -20,69 +26,80 @@
             <main>
                 <div class="classPerso flex">
                     <h2>Les différente classe de personnage jouable</h2>
-                    <figure class="class">
-                        <img src="{{ asset(img/character/axesman.webp) }}" alt="combattant à la hache">
-                        <figcaption>Type 1 (Hache)</figcaption>
-                        <figcaption>Classique</figcaption>
-                    </figure>
-                    <figure class="class">
-                        <img src="{{ asset(img/character/swordsman.webp) }}" alt="combattant à l'épée">
-                        <figcaption>Type 2 ({{ 'é'|upper }}pée)</figcaption>
-                        <figcaption>Classique</figcaption>
-                    </figure>
-                    <figure class="class">
-                        <img src="{{ asset(img/character/spearsman.webp) }}" alt="combattant à la lance">
-                        <figcaption>Type 3 (Lance)</figcaption>
-                        <figcaption>Classique</figcaption>
-                    </figure>
-                    <figure class="class">
-                        <img src="{{ asset(img/character/mage_tattou_midJourney_modified.webp) }}" alt="mage tatoué">
-                        <figcaption>Type 1 (Tatouage)</figcaption>
-                        <figcaption>Magie</figcaption>
-                    </figure>
-                    <figure class="class">
-                        <img src="{{ asset(img/character/mage_book_midjourney_modified.webp) }}" alt="mage avec un livre">
-                        <figcaption>Type 2 (Livre)</figcaption>
-                        <figcaption>Magie</figcaption>
-                    </figure>
-                    <figure class="class">
-                        <img src="{{ asset(img/character/mageWand.webp) }}" alt="mage avec sceptre">
-                        <figcaption>Type 3 (Sceptre)</figcaption>
-                        <figcaption>Magie</figcaption>
-                    </figure>
-                    <figure class="class">
-                        <img src="{{ asset(img/character/fighter.webp) }}" alt="combattant au gantelets">
-                        <figcaption>Type 1 (Gantelets)</figcaption>
-                        <figcaption>Alternatif</figcaption>
-                    </figure>
-                    <figure class="class">
-                        <img src="{{ asset(img/character/thief.webp) }}" alt="combattant à la dague">
-                        <figcaption>Type 2 (Dague)</figcaption>
-                        <figcaption>Alternatif</figcaption>
-                    </figure>
-                    <figure class="class">
-                        <img src="{{ asset(img/character/ranger.webp) }}" alt="combattant à l'arc">
-                        <figcaption>Type 3 (Arc)</figcaption>
-                        <figcaption>Alternatif</figcaption>
-                    </figure>
+                    <div class="flex classes">
+                        <figure class="class">
+                            <img src="{{ asset("img/character/axesman.webp") }}" alt="combattant à la hache">
+                            <figcaption>Type 1 +</figcaption>
+                            <figcaption>Classique</figcaption>
+                            <figcaption class="arme">= <span>Hache</span></figcaption>
+                        </figure>
+                        <figure class="class">
+                            <img src="{{ asset("img/character/swordsman.webp") }}" alt="combattant à l'épée">
+                            <figcaption>Type 2 +</figcaption>
+                            <figcaption>Classique</figcaption>
+                            <figcaption class="arme">= <span>{{ 'é'|upper }}pée</span></figcaption>
+                        </figure>
+                        <figure class="class">
+                            <img src="{{ asset("img/character/spearsman.webp") }}" alt="combattant à la lance">
+                            <figcaption>Type 3 +</figcaption>
+                            <figcaption>Classique</figcaption>
+                            <figcaption class="arme">= <span>Lance</span></figcaption>
+                        </figure>
+                        <figure class="class">
+                            <img src="{{ asset("img/character/mage_tattou_midJourney_modified.webp") }}" alt="mage tatoué">
+                            <figcaption>Type 1 +</figcaption>
+                            <figcaption>Magie</figcaption>
+                            <figcaption class="arme">= <span>Tatouage</span></figcaption>
+                        </figure>
+                        <figure class="class">
+                            <img src="{{ asset("img/character/mage_book_midjourney_modified.webp") }}" alt="mage avec un livre">
+                            <figcaption>Type 2 +</figcaption>
+                            <figcaption>Magie</figcaption>
+                            <figcaption class="arme">= <span>Livre</span></figcaption>
+                        </figure>
+                        <figure class="class">
+                            <img src="{{ asset("img/character/mageWand.webp") }}" alt="mage avec sceptre">
+                            <figcaption>Type 3 +</figcaption>
+                            <figcaption>Magie</figcaption>
+                            <figcaption class="arme">= <span>Sceptre</span></figcaption>
+                        </figure>
+                        <figure class="class">
+                            <img src="{{ asset("img/character/fighter.webp") }}" alt="combattant au gantelets">
+                            <figcaption>Type 1 +</figcaption>
+                            <figcaption>Alternatif</figcaption>
+                            <figcaption class="arme">= <span>Gantelets</span></figcaption>
+                        </figure>
+                        <figure class="class">
+                            <img src="{{ asset("img/character/thief.webp") }}" alt="combattant à la dague">
+                            <figcaption>Type 2 +</figcaption>
+                            <figcaption>Alternatif</figcaption>
+                            <figcaption class="arme">= <span>Dague</span></figcaption>
+                        </figure>
+                        <figure class="class">
+                            <img src="{{ asset("img/character/ranger.webp") }}" alt="combattant à l'arc">
+                            <figcaption>Type 3 +</figcaption>
+                            <figcaption>Alternatif</figcaption>
+                            <figcaption class="arme">= <span>Arc</span></figcaption>
+                        </figure>
+                    </div>
                 </div>
                 <div class="randomPerso">
                     <h2>Un personnage du jeu et ses caractéristique</h2>
-                    <div>
-                        <figure>
+                    <div class="flex infoRandom">
+                        <figure class="flex">
                             <img src="{{ asset(personnage.imagePath) }}" alt="l'image du personnage détailler">
                             <figcaption>{{ personnage.name }}</figcaption>
                         </figure>
-                        <div>
-                            <p>{{ 'é'|upper }}lément : {{ personnage.element.nameElement }}</p>
-                            <p>Le Type : {{ personnage.type.nameType }}</p>
-                            <p>La Catégorie{{ personnage.category.name }}</p>
+                        <div class="random infoMid">
+                            <p>{{ 'é'|upper }}lément&nbsp;: <span>{{ personnage.element.nameElement }}</span></p>
+                            <p><span>{{ personnage.type.nameType }}</span></p>
+                            <p>Catégorie&nbsp;: <span>{{ personnage.category.nameCategory }}</span></p>
                         </div>
-                        <div>
-                            <p>{{ personnage.life }}</p>
-                            <p>{{ personnage.energy }}</p>
-                            <p>{{ personnage.attack }}</p>
-                            <p>{{ personnage.magic }}</p>
+                        <div class="random infoLast">
+                            <p>Point de Vie&nbsp;: <span>{{ personnage.life }}</span></p>
+                            <p>Energie&nbsp;: <span>{{ personnage.energy }}</span></p>
+                            <p>Attaque&nbsp;: <span>{{ personnage.attack }}</span></p>
+                            <p>Magie&nbsp;: <span>{{ personnage.magic }}</span></p>
                         </div>
                     </div>
                 </div>
