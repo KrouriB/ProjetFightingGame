@@ -10,15 +10,13 @@
     <main class='flex'>
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
+            {% include "/nav/navMenuMobile.html.twig" %}
         </section>
         <section class="longSide">
             <header class="topBar flex desktop">
-                
-                
                 <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
                 <div class="parameter"></div>
             </header>
-            {% include "/nav/navMenuMobile.html.twig" %}
             <div id="menuMain" class="flex">
                 {% for teammate in equipes %}
                     <div class="teammate">

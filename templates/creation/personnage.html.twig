@@ -11,9 +11,9 @@
     <main class='flex'>
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
+            {% include "/nav/navMenuMobile.html.twig" %}
         </section>
         <section class="longSide creationPage">
-            {% include "/nav/navMenuMobile.html.twig" %}
             {{ form_errors(perso) }}
 
             {{ form_start(perso) }}

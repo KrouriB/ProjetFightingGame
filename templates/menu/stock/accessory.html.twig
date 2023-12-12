@@ -10,13 +10,13 @@
     <main class='flex'>
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
+            {% include "/nav/navMenuMobile.html.twig" %}
         </section>
         <section class="longSide inventoryPage">
             <header class="topBar flex desktop desktop">
                 <a href="{{ path('app_user') }}" class="pseudo desktop">{{ app.user.userIdentifier }}</a>
                 <div class="parameter"></div>
             </header>
-            {% include "/nav/navMenuMobile.html.twig" %}
             <div id="teammates">
                 <div id="inventory" class="flex">
                     <div class="personnagesIcone unselectedInventory invIco"><a href="{{ path('app_stock_personnage') }}"><img src="{{ asset('img/icon/personnages.webp') }}"/></a></div>
