@@ -1,0 +1,36 @@
+{% block body %}
+    <nav class="mobileFlex nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-btn">
+            <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+        <header class="nav-header flex">
+            <span class="nonCo">Not Connected</span>
+            <button class="parameter mobile"><i class="fa-solid fa-gear"></i></button>
+        </header>
+        <ul class="nav-list">
+            {# <li>
+                <div class="menuButton"><a href="">{{ 'partie rapide'|upper }}</a></div>
+            </li> #}
+            <li>
+                <div class="menuButton"><a href="{{ path('app_not_co') }}">{{ 'menu'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_register') }}">{{ 'inscription'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_login') }}">{{ 'connexion'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_rank') }}">{{ 'classement'|upper }}</a></div>
+            </li>
+            <li>
+                <div class="menuButton"><a href="{{ path('app_rule') }}">{{ 'règle'|upper }}</a></div>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
