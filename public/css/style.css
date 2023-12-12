@@ -69,6 +69,7 @@
 
 #inventory
 {
+    z-index: -1;
     gap: 20px;
 }
 
@@ -300,11 +301,6 @@
 @media(orientation: portrait)
 {
     /* choose on what to show */
-
-    .notCoPage
-    {
-        height: 100vh;
-    }
 
     .notConnected
     {
