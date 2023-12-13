@@ -117,6 +117,17 @@
     font-size: 1em;
 }
 
+.wepCat
+{
+    flex-direction: column;
+    align-items: center;
+}
+
+.wep
+{
+    font-size: 1.4em;
+}
+
 @media(orientation: landscape)
 {
     .creationPage form
@@ -124,7 +135,7 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: calc(100% - 62px);
+        height: calc(100% - 50px);
     }
 
     .leftCreation
@@ -160,7 +171,7 @@
 {
     .creationPage form
     {
-        height: calc(100% - 139px);
+        height: calc(100% - 116px);
     }
 }
 
