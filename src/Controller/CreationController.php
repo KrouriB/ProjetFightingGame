@@ -175,9 +175,108 @@ class CreationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $weapon = $form->getData();
+            switch($weapon->getCategory()->getId())
+            {
+                case 1:
+                    switch($weapon->getType()->getId())
+                    {
+                        case 1:
+                            $weapon->setImagePath('/img/character/axe.webp');
+                            break;
+                        case 2:
+                            $weapon->setImagePath('/img/character/sword.webp');
+                            break;
+                        case 3:
+                            $weapon->setImagePath('/img/character/lance.webp');
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch($weapon->getType()->getId())
+                    {
+                        case 1:
+                            $weapon->setImagePath('/img/character/tattou.webp');
+                            break;
+                        case 2:
+                            $weapon->setImagePath('/img/character/book.webp');
+                            break;
+                        case 3:
+                            $weapon->setImagePath('/img/character/wand.webp');
+                            break;
+                    }
+                    break;
+                case 3:
+                    switch($weapon->getType()->getId())
+                    {
+                        case 1:
+                            $weapon->setImagePath('/img/character/gauntlet.webp');
+                            break;
+                        case 2:
+                            $weapon->setImagePath('/img/character/dagger.webp');
+                            break;
+                        case 3:
+                            $weapon->setImagePath('/img/character/bow.webp');
+                            break;
+                    }
+                    break;
+            }
+
+            $gold = (($weapon->getAttackStat() / 10) * 50) + (($weapon->getMagicStat() / 10) * 50) + (($weapon->getAttackSkill() / 10) * 150) + (($weapon->getMagicSkill() / 10) * 150) - ((($weapon->getEnergySkill() - 30) / 6) * 90) - ((($weapon->getWaitSkill() - 1) / 1) * 150);
+
+            // test si les valeurs envoyer ont été modifier en trichant
+            if(($weapon->getAttackStat() % 10 != 0) || ($weapon->getAttackStat() > 200))
+            {
+                $this->addFlash('error', 'Votre arme a des valeur non valide');
+                return $this->redirectToRoute('app_creation_weapon');
+            }
+            elseif(($weapon->getMagicStat() % 10 != 0) || ($weapon->getMagicStat() > 200))
+            {
+                $this->addFlash('error', 'Votre arme a des valeur non valide');
+                return $this->redirectToRoute('app_creation_weapon');
+            }
+            elseif(($weapon->getAttackSkill() % 10 != 0) || ($weapon->getAttackSkill() > 500))
+            {
+                $this->addFlash('error', 'Votre arme a des valeur non valide');
+                return $this->redirectToRoute('app_creation_weapon');
+            }
+            elseif(($weapon->getMagicSkill() % 10 != 0) || ($weapon->getMagicSkill() > 500))
+            {
+                $this->addFlash('error', 'Votre arme a des valeur non valide');
+                return $this->redirectToRoute('app_creation_weapon');
+            }
+            elseif((($weapon->getEnergySkill() - 30) % 6 != 0) || ($weapon->getEnergySkill() > 180) || ($weapon->getEnergySkill() < 30))
+            {
+                $this->addFlash('error', 'Votre arme a des valeur non valide');
+                return $this->redirectToRoute('app_creation_weapon');
+            }
+            elseif((($weapon->getWaitSkill() - 1) % 1 != 0) || ($weapon->getWaitSkill() > 10) || ($weapon->getWaitSkill() < 1))
+            {
+                $this->addFlash('error', 'Votre arme a des valeur non valide');
+                return $this->redirectToRoute('app_creation_weapon');
+            }
+            elseif($this->getUser()->getGold() < $gold)
+            {
+                $this->addFlash('error', 'Vous n\'avez pas assez d\'argent pour faire ce arme, il vous en faut '.$gold);
+                return $this->redirectToRoute('app_creation_weapon');
+            }
+
+            $weapon->setCost($gold);
+            
+            $weapon->setUserCreator($this->getUser());
+
+            $this->getUser()->createPersonnage();
+
+            $stockWeapon = $this->getUser()->getStockWeapons();
+            $stockWeapon[0]->addWeapon($weapon);
+
+            // dd($stockWeapon);
+
             $entityManager->persist($weapon);
+            $entityManager->persist($this->getUser());
+            $entityManager->persist($stockWeapon[0]);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Vous avez créer votre arme !');
             return $this->redirectToRoute('app_main');
         }
 
