@@ -3,42 +3,111 @@
 
 
 // constant and variable
-var points = 31;
-const hpPerso = document.getElementById("personnage_life");
-const atkPerso = document.getElementById("personnage_attack");
-const magPerso = document.getElementById("personnage_magic");
-const nrjPerso = document.getElementById("personnage_energy");
+const atkStat = document.getElementById("weapon_attackStat");
+const magStat = document.getElementById("weapon_magicStat");
+const atkSkill = document.getElementById("weapon_attackSkill");
+const magSkill = document.getElementById("weapon_magicSkill");
+const nrjSkill = document.getElementById("weapon_energySkill");
+const waitSkill = document.getElementById("weapon_waitSkill");
 
+var cost;
 
-// calculate point
-function showPoints(pts)
+function costCalc()
 {
-    let spanPts = document.getElementById("pointAllouable");
-    spanPts.innerText = pts + '/31';
+    let atkStatI = parseInt(atkStat.value, 10);
+    let magStatI = parseInt(magStat.value, 10);
+    let atkSkillI = parseInt(atkSkill.value, 10);
+    let magSkillI = parseInt(magSkill.value, 10);
+    let nrjSkillI = parseInt(nrjSkill.value, 10);
+    let waitSkillI = parseInt(waitSkill.value, 10);
+
+    let span = document.getElementById("cost");
+
+    cost = ((atkStatI / 10) * 50) + ((magStatI / 10) * 50) + ((atkSkillI / 10) * 150) + ((magSkillI / 10) * 150) - (((nrjSkillI - 30) / 6) * 90) - (((waitSkillI - 1) / 1) * 150);
+
+    span.innerText = cost;
 }
 
 
 // function more
 
 
-function moreHpPerso()
+function moreAtkStat()
 {
-    let button = document.getElementById('hpPlus');
+    let button = document.getElementById('atkStatPlus');
 
-    if(document.getElementById('hpMinus').classList.contains('grey'))
+    if(document.getElementById('atkStatMinus').classList.contains('grey'))
     {
-        document.getElementById('hpMinus').classList.remove('grey');
+        document.getElementById('atkStatMinus').classList.remove('grey');
     }
 
-    let value = parseInt(hpPerso.value, 10);
-    value = isNaN(value) ? 200 : value;
-    if(value < 500 && points > 0)
+    let value = parseInt(atkStat.value, 10);
+    value = isNaN(value) ? 20 : value;
+    if(value < 200)
     {
-        value = value + 25;
-        showPoints(--points);
+        value = value + 10;
+        costCalc();
     }
 
-    hpPerso.value = value;
+    atkStat.value = value;
+
+    if(value == 200)
+    {
+        button.classList.add('grey');
+    }
+    else if(button.classList.contains('grey'))
+    {
+        button.classList.remove('grey');
+    }
+}
+
+function moreMagStat()
+{
+    let button = document.getElementById('magStatPlus');
+
+    if(document.getElementById('magStatMinus').classList.contains('grey'))
+    {
+        document.getElementById('magStatMinus').classList.remove('grey');
+    }
+
+    let value = parseInt(magStat.value, 10);
+    value = isNaN(value) ? 20 : value;
+    if(value < 200)
+    {
+        value = value + 10;
+        costCalc();
+    }
+
+    magStat.value = value;
+
+    if(value == 200)
+    {
+        button.classList.add('grey');
+    }
+    else if(button.classList.contains('grey'))
+    {
+        button.classList.remove('grey');
+    }
+}
+
+function moreAtkSkill()
+{
+    let button = document.getElementById('atkSkillPlus');
+
+    if(document.getElementById('atkSkillMinus').classList.contains('grey'))
+    {
+        document.getElementById('atkSkillMinus').classList.remove('grey');
+    }
+
+    let value = parseInt(atkSkill.value, 10);
+    value = isNaN(value) ? 50 : value;
+    if(value < 500)
+    {
+        value = value + 10;
+        costCalc();
+    }
+
+    atkSkill.value = value;
 
     if(value == 500)
     {
@@ -50,26 +119,26 @@ function moreHpPerso()
     }
 }
 
-function moreAtkPerso()
+function moreMagSkill()
 {
-    let button = document.getElementById('atkPlus');
+    let button = document.getElementById('magSkillPlus');
 
-    if(document.getElementById('atkMinus').classList.contains('grey'))
+    if(document.getElementById('magSkillMinus').classList.contains('grey'))
     {
-        document.getElementById('atkMinus').classList.remove('grey');
+        document.getElementById('magSkillMinus').classList.remove('grey');
     }
 
-    let value = parseInt(atkPerso.value, 10);
-    value = isNaN(value) ? 0 : value;
-    if(value < 40 && points > 0)
+    let value = parseInt(magSkill.value, 10);
+    value = isNaN(value) ? 50 : value;
+    if(value < 500)
     {
-        value = value + 4;
-        showPoints(--points);
+        value = value + 10;
+        costCalc();
     }
 
-    atkPerso.value = value;
+    magSkill.value = value;
 
-    if(value == 40)
+    if(value == 500)
     {
         button.classList.add('grey');
     }
@@ -79,36 +148,7 @@ function moreAtkPerso()
     }
 }
 
-function moreMagPerso()
-{
-    let button = document.getElementById('magPlus');
-
-    if(document.getElementById('magMinus').classList.contains('grey'))
-    {
-        document.getElementById('magMinus').classList.remove('grey');
-    }
-
-    let value = parseInt(magPerso.value, 10);
-    value = isNaN(value) ? 0 : value;
-    if(value < 40 && points > 0)
-    {
-        value = value + 4;
-        showPoints(--points);
-    }
-
-    magPerso.value = value;
-
-    if(value == 40)
-    {
-        button.classList.add('grey');
-    }
-    else if(button.classList.contains('grey'))
-    {
-        button.classList.remove('grey');
-    }
-}
-
-function moreNrjPerso()
+function moreNrjSkill()
 {
     let button = document.getElementById('nrjPlus');
 
@@ -117,17 +157,46 @@ function moreNrjPerso()
         document.getElementById('nrjMinus').classList.remove('grey');
     }
 
-    let value = parseInt(nrjPerso.value, 10);
-    value = isNaN(value) ? 60 : value;
-    if(value < 180 && points > 0)
+    let value = parseInt(nrjSkill.value, 10);
+    value = isNaN(value) ? 30 : value;
+    if(value < 180)
     {
-        value = value + 8;
-        showPoints(--points);
+        value = value + 6;
+        costCalc();
     }
 
-    nrjPerso.value = value;
+    nrjSkill.value = value;
 
     if(value == 180)
+    {
+        button.classList.add('grey');
+    }
+    else if(button.classList.contains('grey'))
+    {
+        button.classList.remove('grey');
+    }
+}
+
+function moreWaitSkill()
+{
+    let button = document.getElementById('waitPlus');
+
+    if(document.getElementById('waitMinus').classList.contains('grey'))
+    {
+        document.getElementById('waitMinus').classList.remove('grey');
+    }
+
+    let value = parseInt(waitSkill.value, 10);
+    value = isNaN(value) ? 1 : value;
+    if(value < 10)
+    {
+        value = value + 1;
+        costCalc();
+    }
+
+    waitSkill.value = value;
+
+    if(value == 10)
     {
         button.classList.add('grey');
     }
@@ -141,57 +210,27 @@ function moreNrjPerso()
 // function less
 
 
-function lessHpPerso()
+function lessAtkStat()
 {
-    let button = document.getElementById('hpMinus');
+    let button = document.getElementById('atkStatMinus');
 
-    if(document.getElementById('hpPlus').classList.contains('grey'))
+    if(document.getElementById('atkStatPlus').classList.contains('grey'))
     {
-        document.getElementById('hpPlus').classList.remove('grey');
+        document.getElementById('atkStatPlus').classList.remove('grey');
     }
 
-    var value = parseInt(hpPerso.value, 10);
-    value = isNaN(value) ? 200 : value;
-
-    if(value > 200)
-    {
-        value = value - 25;
-        showPoints(++points);
-    }
-
-    hpPerso.value = value;
-
-    if(value == 200)
-    {
-        button.classList.add('grey');
-    }
-    else if(button.classList.contains('grey'))
-    {
-        button.classList.remove('grey');
-    }
-}
-
-function lessAtkPerso()
-{
-    let button = document.getElementById('atkMinus');
-
-    if(document.getElementById('atkPlus').classList.contains('grey'))
-    {
-        document.getElementById('atkPlus').classList.remove('grey');
-    }
-
-    var value = parseInt(atkPerso.value, 10);
+    var value = parseInt(atkStat.value, 10);
     value = isNaN(value) ? 0 : value;
 
-    if(value > 0)
+    if(value > 20)
     {
-        value = value - 4;
-        showPoints(++points);
+        value = value - 10;
+        costCalc();
     }
 
-    atkPerso.value = value;
+    atkStat.value = value;
 
-    if(value == 0)
+    if(value == 20)
     {
         button.classList.add('grey');
     }
@@ -201,27 +240,27 @@ function lessAtkPerso()
     }
 }
 
-function lessMagPerso()
+function lessMagStat()
 {
-    let button = document.getElementById('magMinus');
+    let button = document.getElementById('magStatMinus');
 
-    if(document.getElementById('magPlus').classList.contains('grey'))
+    if(document.getElementById('magStatPlus').classList.contains('grey'))
     {
-        document.getElementById('magPlus').classList.remove('grey');
+        document.getElementById('magStatPlus').classList.remove('grey');
     }
 
-    var value = parseInt(magPerso.value, 10);
-    value = isNaN(value) ? 0 : value;
+    var value = parseInt(magStat.value, 10);
+    value = isNaN(value) ? 20 : value;
 
-    if(value > 0)
+    if(value > 20)
     {
-        value = value - 4;
-        showPoints(++points);
+        value = value - 10;
+        costCalc();
     }
 
-    magPerso.value = value;
+    magStat.value = value;
 
-    if(value == 0)
+    if(value == 20)
     {
         button.classList.add('grey');
     }
@@ -231,7 +270,67 @@ function lessMagPerso()
     }
 }
 
-function lessNrjPerso()
+function lessAtkSkill()
+{
+    let button = document.getElementById('atkSkillMinus');
+
+    if(document.getElementById('atkSkillPlus').classList.contains('grey'))
+    {
+        document.getElementById('atkSkillPlus').classList.remove('grey');
+    }
+
+    var value = parseInt(atkSkill.value, 10);
+    value = isNaN(value) ? 50 : value;
+
+    if(value > 50)
+    {
+        value = value - 10;
+        costCalc();
+    }
+
+    atkSkill.value = value;
+
+    if(value == 50)
+    {
+        button.classList.add('grey');
+    }
+    else if(button.classList.contains('grey'))
+    {
+        button.classList.remove('grey');
+    }
+}
+
+function lessMagSkill()
+{
+    let button = document.getElementById('magSkillMinus');
+
+    if(document.getElementById('magSkillPlus').classList.contains('grey'))
+    {
+        document.getElementById('magSkillPlus').classList.remove('grey');
+    }
+
+    var value = parseInt(magSkill.value, 10);
+    value = isNaN(value) ? 50 : value;
+
+    if(value > 50)
+    {
+        value = value - 10;
+        costCalc();
+    }
+
+    magSkill.value = value;
+
+    if(value == 50)
+    {
+        button.classList.add('grey');
+    }
+    else if(button.classList.contains('grey'))
+    {
+        button.classList.remove('grey');
+    }
+}
+
+function lessNrjSkill()
 {
     let button = document.getElementById('nrjMinus');
 
@@ -240,17 +339,47 @@ function lessNrjPerso()
         document.getElementById('nrjPlus').classList.remove('grey');
     }
 
-    let value = parseInt(nrjPerso.value, 10);
-    value = isNaN(value) ? 60 : value;
-    if(value > 60)
+    let value = parseInt(nrjSkill.value, 10);
+    value = isNaN(value) ? 30 : value;
+    if(value > 30)
     {
-        value = value - 8;
-        showPoints(++points);
+        value = value - 6;
+        costCalc();
     }
 
-    nrjPerso.value = value;
+    nrjSkill.value = value;
 
-    if(value == 60)
+    if(value == 30)
+    {
+        button.classList.add('grey');
+    }
+    else if(button.classList.contains('grey'))
+    {
+        button.classList.remove('grey');
+    }
+}
+
+function lessWaitSkill()
+{
+    let button = document.getElementById('waitMinus');
+
+    if(document.getElementById('waitPlus').classList.contains('grey'))
+    {
+        document.getElementById('waitPlus').classList.remove('grey');
+    }
+
+    var value = parseInt(waitSkill.value, 10);
+    value = isNaN(value) ? 1 : value;
+
+    if(value > 1)
+    {
+        value = value - 1;
+        costCalc();
+    }
+
+    waitSkill.value = value;
+
+    if(value == 1)
     {
         button.classList.add('grey');
     }
@@ -265,20 +394,22 @@ function lessNrjPerso()
 
 
 async function makeNotDisable(stat){
-    hpPerso.disabled = stat;
-    atkPerso.disabled = stat;
-    magPerso.disabled = stat;
-    nrjPerso.disabled = stat;
+    atkStat.disabled = stat;
+    magStat.disabled = stat;
+    atkSkill.disabled = stat;
+    magSkill.disabled = stat;
+    nrjSkill.disabled = stat;
+    waitSkill.disabled = stat;
 }
 
 async function validate()
 {
     await makeNotDisable(false);
-    document.getElementById("personnage_valider").click();
+    document.getElementById("weapon_valider").click();
 }
 
 
 // initialize
 
-showPoints(points);
+costCalc();
 makeNotDisable(true);
