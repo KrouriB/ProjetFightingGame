@@ -29,15 +29,6 @@ class WeaponType extends AbstractType
                 ]
             )
             ->add(
-                'cost',
-                IntegerType::class,
-                [
-                    'attr' => [
-                        'class' => 'hidden'
-                    ]
-                ]
-            )
-            ->add(
                 'weaponType',
                 EntityType::class,
                 [
@@ -73,13 +64,13 @@ class WeaponType extends AbstractType
                 [
                     'attr' => [
                         'class' => 'form-control',
-                        'min' => 200,
-                        'max' => 2000,
+                        'min' => 20,
+                        'max' => 200,
                         'step' => 10,
-                        'value' => 200
+                        'value' => 20,
                     ],
                     'label' => "Atk. Base : ",
-                    'help' => "Min : 20%, Max : 2000%, 5 or = 1%",
+                    'help' => "Min : 20%, Max : 200%, 50 or = 10%",
                 ]
             )
             ->add(
@@ -88,13 +79,13 @@ class WeaponType extends AbstractType
                 [
                     'attr' => [
                         'class' => 'form-control',
-                        'min' => 200,
-                        'max' => 2000,
+                        'min' => 20,
+                        'max' => 200,
                         'step' => 10,
-                        'value' => 200
+                        'value' => 20,
                     ],
                     'label' => "Mag. Base : ",
-                    'help' => "Min : 200%, Max : 2000%, 5 or = 10%",
+                    'help' => "Min : 20%, Max : 200%, 50 or = 10%",
                 ]
             )
             ->add(
@@ -122,13 +113,13 @@ class WeaponType extends AbstractType
                 [
                     'attr' => [
                         'class' => 'form-control',
-                        'min' => 500,
-                        'max' => 5000,
+                        'min' => 50,
+                        'max' => 500,
                         'step' => 10,
-                        'value' => 500
+                        'value' => 50
                     ],
                     'label' => "Atk. Comp. : ",
-                    'help' => "Min : 500%, Max : 5000%, 15 or = 10%",
+                    'help' => "Min : 50%, Max : 500%, 150 or = 10%",
                 ]
             )
             ->add(
@@ -137,13 +128,13 @@ class WeaponType extends AbstractType
                 [
                     'attr' => [
                         'class' => 'form-control',
-                        'min' => 500,
-                        'max' => 5000,
+                        'min' => 50,
+                        'max' => 500,
                         'step' => 10,
-                        'value' => 500
+                        'value' => 50
                     ],
                     'label' => "Mag. Comp. : ",
-                    'help' => "Min : 500%, Max : 5000%, 15 or = 10%",
+                    'help' => "Min : 50%, Max : 500%, 150 or = 10%",
                 ]
             )
             ->add(
@@ -154,11 +145,11 @@ class WeaponType extends AbstractType
                         'class' => 'form-control',
                         'min' => 30,
                         'max' => 180,
-                        'step' => 1,
+                        'step' => 6,
                         'value' => 30
                     ],
                     'label' => "Nrj. Comp. : ",
-                    'help' => "Min : 30, Max : 180, - 15 or = + 1 Nrj",
+                    'help' => "Min : 30, Max : 180, - 90 or = + 6 Nrj",
                 ]
             )
             ->add(
