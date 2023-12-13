@@ -218,6 +218,11 @@
         flex-direction: row;
         justify-content: space-around;
     }
+
+    .blockItem
+    {
+        height: 152px;
+    }
 }
 
 @media(orientation: portrait)
