@@ -350,6 +350,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function createWeapon(int $gold): static
+    {
+        $this->setGold($this->gold - $gold);
+
+        return $this;
+    }
     
     public function __toString()
     {

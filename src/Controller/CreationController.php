@@ -175,10 +175,10 @@ class CreationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $weapon = $form->getData();
-            switch($weapon->getCategory()->getId())
+            switch($weapon->getWeaponCategory()->getId())
             {
                 case 1:
-                    switch($weapon->getType()->getId())
+                    switch($weapon->getWeaponType()->getId())
                     {
                         case 1:
                             $weapon->setImagePath('/img/character/axe.webp');
@@ -192,7 +192,7 @@ class CreationController extends AbstractController
                     }
                     break;
                 case 2:
-                    switch($weapon->getType()->getId())
+                    switch($weapon->getWeaponType()->getId())
                     {
                         case 1:
                             $weapon->setImagePath('/img/character/tattou.webp');
@@ -206,7 +206,7 @@ class CreationController extends AbstractController
                     }
                     break;
                 case 3:
-                    switch($weapon->getType()->getId())
+                    switch($weapon->getWeaponType()->getId())
                     {
                         case 1:
                             $weapon->setImagePath('/img/character/gauntlet.webp');
@@ -264,7 +264,7 @@ class CreationController extends AbstractController
             
             $weapon->setUserCreator($this->getUser());
 
-            $this->getUser()->createPersonnage();
+            $this->getUser()->createWeapon($gold);
 
             $stockWeapon = $this->getUser()->getStockWeapons();
             $stockWeapon[0]->addWeapon($weapon);
