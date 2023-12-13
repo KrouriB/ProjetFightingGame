@@ -100,12 +100,15 @@
                 <span class="gold desktop">{{ app.user.getGold }}&nbsp;G</span>
                 <button  class="parameter desktop"><i class="fa-solid fa-gear"></i></button>
             </header>
-            <div id="menuMain">
-                <ol class="carousel__viewport">
+            <div id="menuMain" class="flex">
                     {% for equipier in equipes %}
                         {# futur carousel #}
                     {% endfor %}
-                </ol>
+                    <div class="container">
+                        <button id="left-btn" class="buttonCar"><i class="arrow"></i></button>
+                        <img id="carousel" src="" alt="">
+                        <button id="right-btn" class="buttonCar"><i class="arrow"></i></button>
+                    </div>
             </div>
             {% include "/footer.html.twig" %}
         </section>
