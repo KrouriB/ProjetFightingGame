@@ -21,21 +21,6 @@ class StockPersonnageRepository extends ServiceEntityRepository
         parent::__construct($registry, StockPersonnage::class);
     }
 
-//    /**
-//     * @return StockPersonnage[] Returns an array of StockPersonnage objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
     public function findPersonnagesOfUser(int $id): array
     {
         $em = $this->getEntityManager();
@@ -51,6 +36,21 @@ class StockPersonnageRepository extends ServiceEntityRepository
         $query = $sub->getQuery();
         return $query->getResult();
     }
+
+//    /**
+//     * @return StockPersonnage[] Returns an array of StockPersonnage objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('s')
+//            ->andWhere('s.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('s.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
 //    public function findOneBySomeField($value): ?StockPersonnage
 //    {
