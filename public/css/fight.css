@@ -7,7 +7,7 @@
 {
     background-color: var(--healthBar);
     position: absolute;
-    z-index: -1;
+    z-index: 4;
     height: 100%;
     right: 0;
 }
@@ -16,7 +16,7 @@
 {
     background-color: var(--underhealthBar);
     position: absolute;
-    z-index: -2;
+    z-index: 3;
     height: 100%;
     width: 100%;
 }
@@ -25,7 +25,7 @@
 {
     background-color: var(--energyBar);
     position: absolute;
-    z-index: -1;
+    z-index: 4;
     height: 100%;
     right: 0;
 }
@@ -34,9 +34,15 @@
 {
     background-color: var(--underEnergyBar);
     position: absolute;
-    z-index: -2;
+    z-index: 3;
     height: 100%;
     width: 100%;
+}
+
+.bar span
+{
+    z-index: 5;
+    position: relative;
 }
 
 .ennemieHealthBar
@@ -85,10 +91,19 @@
 
 #scene
 {
-    padding: 16px;
     flex-direction: column;
     justify-content: space-around;
     height: 100%;
+    position: relative;
+}
+
+#scene > img
+{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
 }
 
 #actionBar
@@ -132,6 +147,7 @@
     border-radius: 16px;
     overflow: hidden;
     color: var(--textReverse);
+    border: 1px solid var(--textReverse);
 }
 
 .bar > span
@@ -178,6 +194,8 @@
 {
     flex-direction: column;
     justify-content: space-between;
+    margin-top: 0;
+    min-height: auto;
 }
 
 .imgPerso{
@@ -227,9 +245,21 @@
 
 @media(orientation: portrait)
 {
-    .bars
+    .aSide
     {
         align-items: center;
+    }
+
+    .ennemieName, .allyName
+    {
+        flex-direction: column-reverse;
+    }
+
+    .bars
+    {
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
         gap: 20px;
     }
 
@@ -276,6 +306,16 @@
         width: 100%;
         min-height: 100%;
         display: flex;
+    }
+
+    .ennemieSide
+    {
+        margin-top: 20px;
+    }
+
+    .allySide
+    {
+        margin-bottom: 20px;
     }
 }
 

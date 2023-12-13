@@ -22,6 +22,7 @@
     --healthEnnemieInfo: 100%;
     --energyAllyInfo: 100%;
     --energyEnnemieInfo: 100%;
+    --bgImage: url("../../img/bg/hill.webp");
 }
 
 *
@@ -581,6 +582,34 @@ article ul
     }
 }
 
+
+.flash {
+    padding: 0.75rem 0;
+    border-radius: 2.5px;
+    justify-content: center;
+    width: 80%;
+    text-align: center;
+    font-size: 1.1rem;
+    box-shadow: 7px 10px 2px -2px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+.flash-success {
+    background-color: #a4c7b0;
+    color: #2b4032;
+}
+
+.flash-warning {
+    background-color: #d7cfb5;
+    color: #725f28;
+}
+
+.flash-error {
+    background-color: #d3878a;
+    color: #721c24;
+}
 
 
 .flex
