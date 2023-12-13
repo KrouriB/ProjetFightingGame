@@ -25,7 +25,8 @@ class WeaponType extends AbstractType
                 [
                     'attr' => [
                         'class' => 'form-control'
-                    ]
+                    ],
+                    'label' => "Nom : ",
                 ]
             )
             ->add(
@@ -35,7 +36,8 @@ class WeaponType extends AbstractType
                     'class' => TypeWeapon::class,
                     'attr' => [
                         'class' => 'form-control'
-                    ]
+                    ],
+                    'label' => "Type : ",
                 ]
             )
             ->add(
@@ -45,7 +47,8 @@ class WeaponType extends AbstractType
                     'class' => CategoryWeapon::class,
                     'attr' => [
                         'class' => 'form-control'
-                    ]
+                    ],
+                    'label' => "Catégorie : ",
                 ]
             )
             ->add(
@@ -55,7 +58,8 @@ class WeaponType extends AbstractType
                     'class' => Element::class,
                     'attr' => [
                         'class' => 'form-control'
-                    ]
+                    ],
+                    'label' => "Element de base : ",
                 ]
             )
             ->add(
@@ -69,7 +73,7 @@ class WeaponType extends AbstractType
                         'step' => 10,
                         'value' => 20,
                     ],
-                    'label' => "Atk. Base : ",
+                    'label' => "Attaque Base : ",
                     'help' => "Min : 20%, Max : 200%, 50 or = 10%",
                 ]
             )
@@ -84,7 +88,7 @@ class WeaponType extends AbstractType
                         'step' => 10,
                         'value' => 20,
                     ],
-                    'label' => "Mag. Base : ",
+                    'label' => "Magie Base : ",
                     'help' => "Min : 20%, Max : 200%, 50 or = 10%",
                 ]
             )
@@ -94,7 +98,8 @@ class WeaponType extends AbstractType
                 [
                     'attr' => [
                         'class' => 'form-control'
-                    ]
+                    ],
+                    'label' => "Nom de Compétence: ",
                 ]
             )
             ->add(
@@ -104,7 +109,8 @@ class WeaponType extends AbstractType
                     'class' => Element::class,
                     'attr' => [
                         'class' => 'form-control'
-                    ]
+                    ],
+                    'label' => "Element de compétence : ",
                 ]
             )
             ->add(
@@ -118,7 +124,7 @@ class WeaponType extends AbstractType
                         'step' => 10,
                         'value' => 50
                     ],
-                    'label' => "Atk. Comp. : ",
+                    'label' => "Attaque Compétence : ",
                     'help' => "Min : 50%, Max : 500%, 150 or = 10%",
                 ]
             )
@@ -133,7 +139,7 @@ class WeaponType extends AbstractType
                         'step' => 10,
                         'value' => 50
                     ],
-                    'label' => "Mag. Comp. : ",
+                    'label' => "Magie Compétence : ",
                     'help' => "Min : 50%, Max : 500%, 150 or = 10%",
                 ]
             )
@@ -148,7 +154,7 @@ class WeaponType extends AbstractType
                         'step' => 6,
                         'value' => 30
                     ],
-                    'label' => "Nrj. Comp. : ",
+                    'label' => "Energie Compétence : ",
                     'help' => "Min : 30, Max : 180, - 90 or = + 6 Nrj",
                 ]
             )
@@ -163,7 +169,7 @@ class WeaponType extends AbstractType
                         'step' => 1,
                         'value' => 1
                     ],
-                    'label' => "Tours Attente : ",
+                    'label' => "Tours d'Attente : ",
                     'help' => "Min : 1, Max : 10, - 150 or = + 1 Tour",
                 ]
             )
