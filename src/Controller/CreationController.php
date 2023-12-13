@@ -138,7 +138,7 @@ class CreationController extends AbstractController
                 return $this->redirectToRoute('app_creation_personnage');
             }
             
-            $perso->setUserCreator($this->getUser());
+            // $perso->setUserCreator($this->getUser());
 
             $this->getUser()->createPersonnage();
 
@@ -181,13 +181,13 @@ class CreationController extends AbstractController
                     switch($weapon->getWeaponType()->getId())
                     {
                         case 1:
-                            $weapon->setImagePath('/img/character/axe.webp');
+                            $weapon->setImagePath('/img/weapon/axe.webp');
                             break;
                         case 2:
-                            $weapon->setImagePath('/img/character/sword.webp');
+                            $weapon->setImagePath('/img/weapon/sword.webp');
                             break;
                         case 3:
-                            $weapon->setImagePath('/img/character/lance.webp');
+                            $weapon->setImagePath('/img/weapon/lance.webp');
                             break;
                     }
                     break;
@@ -195,13 +195,13 @@ class CreationController extends AbstractController
                     switch($weapon->getWeaponType()->getId())
                     {
                         case 1:
-                            $weapon->setImagePath('/img/character/tattou.webp');
+                            $weapon->setImagePath('/img/weapon/tattou.webp');
                             break;
                         case 2:
-                            $weapon->setImagePath('/img/character/book.webp');
+                            $weapon->setImagePath('/img/weapon/book.webp');
                             break;
                         case 3:
-                            $weapon->setImagePath('/img/character/wand.webp');
+                            $weapon->setImagePath('/img/weapon/wand.webp');
                             break;
                     }
                     break;
@@ -209,13 +209,13 @@ class CreationController extends AbstractController
                     switch($weapon->getWeaponType()->getId())
                     {
                         case 1:
-                            $weapon->setImagePath('/img/character/gauntlet.webp');
+                            $weapon->setImagePath('/img/weapon/gauntlet.webp');
                             break;
                         case 2:
-                            $weapon->setImagePath('/img/character/dagger.webp');
+                            $weapon->setImagePath('/img/weapon/dagger.webp');
                             break;
                         case 3:
-                            $weapon->setImagePath('/img/character/bow.webp');
+                            $weapon->setImagePath('/img/weapon/bow.webp');
                             break;
                     }
                     break;
@@ -262,7 +262,7 @@ class CreationController extends AbstractController
 
             $weapon->setCost($gold);
             
-            $weapon->setUserCreator($this->getUser());
+            // $weapon->setUserCreator($this->getUser());
 
             $this->getUser()->createWeapon($gold);
 
