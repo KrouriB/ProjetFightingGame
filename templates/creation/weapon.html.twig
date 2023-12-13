@@ -3,21 +3,21 @@
 {% block title %}New Teammate{% endblock %}
 
 {% block stylesheets %}
-            
             <link rel="stylesheet" href="{{ asset('/css/creation.css') }}">
 {% endblock %}
 
 {% block body %}
-    <main class='flex'>
+    <main class='flex wep'>
         {% include "/nav/navMenuMobile.html.twig" %}
         <section class="shortSide flex">
             {% include "/nav/navMenuDesktop.html.twig" %}
         </section>
-        <section class="longSide">
+        <section class="longSide creationPage flex">
             {{ form_errors(weapon) }}
 
             {{ form_start(weapon) }}
-                <div class="leftCreation">
+                <div class="creationPart leftCreation flex">
+                    <span class="gold creationGold desktop">{{ app.user.getGold }}&nbsp;G</span>
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(weapon.weaponType) }}
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="ligne">
-                        <div class="ligneSup">
+                        <div class="ligneSup flex">
                             {{ form_label(weapon.weaponCategory) }}
                             {{ form_widget(weapon.weaponCategory) }}
                         </div>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="shortSide rightCreation">
+                <div class="shortSide creationPart rightCreation flex">
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(weapon.name) }}
@@ -66,16 +66,23 @@
                             {{ form_errors(weapon.nameSkill) }}
                         </div>
                     </div>
-                    <div class="ligne">
-                        <p>Cout en or : <span id="cost"></span></p>
-                        {{ form_widget(weapon.cost) }}
+                    <div class="ligne separation">
+                        <div class="ligne">
+                            <p>Cout en or : <span id="cost" class="gold"></span></p>
+                        </div>
                     </div>
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(weapon.attackStat) }}
-                            <a class="buttonStat statMinus grey" id="atkStatMinus" onclick="lessAtkStatWeapon()" disabled>-</a>
-                            {{ form_widget(weapon.attackStat) }}
-                            <a class="buttonStat statPlus" id="atkStatPlus" onclick="moreAtkStatWeapon()">+</a>
+                            <div class="statLigne flex">
+                                <div class='flex'>
+                                    <a class="buttonStat statMinus grey" id="atkStatMinus" onclick="lessAtkStat()">-</a>
+                                </div>
+                                {{ form_widget(weapon.attackStat) }}
+                                <div class='flex'>
+                                    <a class="buttonStat statPlus" id="atkStatPlus" onclick="moreAtkStat()">+</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(weapon.attackStat) }}
@@ -85,9 +92,15 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(weapon.magicStat) }}
-                            <a class="buttonStat statMinus grey" id="magStatMinus" onclick="lessMagStatWeapon()">-</a>
-                            {{ form_widget(weapon.magicStat) }}
-                            <a class="buttonStat statPlus" id="magStatPlus" onclick="moreMagStatWeapon()">+</a>
+                            <div class="statLigne flex">
+                                <div class='flex'>
+                                    <a class="buttonStat statMinus grey" id="magStatMinus"  onclick="lessMagStat()">-</a>
+                                </div>
+                                {{ form_widget(weapon.magicStat) }}
+                                <div class='flex'>
+                                    <a class="buttonStat statPlus" id="magStatPlus"  onclick="moreMagStat()">+</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(weapon.magicStat) }}
@@ -97,9 +110,15 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(weapon.attackSkill) }}
-                            <a class="buttonStat statMinus grey" id="atkSkillMinus" onclick="lessAtkSkillWeapon()">-</a>
-                            {{ form_widget(weapon.attackSkill) }}
-                            <a class="buttonStat statPlus" id="atkSkillPlus" onclick="moreAtkSkillWeapon()">+</a>
+                            <div class="statLigne flex">
+                                <div class='flex'>
+                                    <a class="buttonStat statMinus grey" id="atkSkillMinus" onclick="lessAtkSkill()">-</a>
+                                </div>
+                                {{ form_widget(weapon.attackSkill) }}
+                                <div class='flex'>
+                                    <a class="buttonStat statPlus" id="atkSkillPlus" onclick="moreAtkSkill()">+</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(weapon.attackSkill) }}
@@ -109,9 +128,15 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(weapon.magicSkill) }}
-                            <a class="buttonStat statMinus grey" id="magSkillMinus" onclick="lessMagSkillWeapon()">-</a>
-                            {{ form_widget(weapon.magicSkill) }}
-                            <a class="buttonStat statPlus" id="magSkillPlus" onclick="moreMagSkillWeapon()">+</a>
+                            <div class="statLigne flex">
+                                <div class='flex'>
+                                    <a class="buttonStat statMinus grey" id="magSkillMinus"  onclick="lessMagSkill()">-</a>
+                                </div>
+                                {{ form_widget(weapon.magicSkill) }}
+                                <div class='flex'>
+                                    <a class="buttonStat statPlus" id="magSkillPlus"  onclick="moreMagSkill()">+</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(weapon.magicSkill) }}
@@ -121,9 +146,15 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(weapon.energySkill) }}
-                            <a class="buttonStat statMinus grey" id="energySkillMinus" onclick="lessEnergySkillWeapon()">-</a>
-                            {{ form_widget(weapon.energySkill) }}
-                            <a class="buttonStat statPlus" id="energySkillPlus" onclick="moreEnergySkillWeapon()">+</a>
+                            <div class="statLigne flex">
+                                <div class='flex'>
+                                    <a class="buttonStat statMinus grey" id="nrjMinus"  onclick="lessNrjSkill()">-</a>
+                                </div>
+                                {{ form_widget(weapon.energySkill) }}
+                                <div class='flex'>
+                                    <a class="buttonStat statPlus" id="nrjPlus"  onclick="moreNrjSkill()">+</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(weapon.energySkill) }}
@@ -133,9 +164,15 @@
                     <div class="ligne">
                         <div class="ligneSup">
                             {{ form_label(weapon.waitSkill) }}
-                            <a class="buttonStat statMinus grey" id="waitSkillMinus" onclick="lessWaitSkillWeapon()">-</a>
-                            {{ form_widget(weapon.waitSkill) }}
-                            <a class="buttonStat statPlus" id="waitSkillPlus" onclick="moreWaitSkillWeapon()">+</a>
+                            <div class="statLigne flex">
+                                <div class='flex'>
+                                    <a class="buttonStat statMinus grey" id="waitMinus"  onclick="lessWaitSkill()">-</a>
+                                </div>
+                                {{ form_widget(weapon.waitSkill) }}
+                                <div class='flex'>
+                                    <a class="buttonStat statPlus" id="waitPlus"  onclick="moreWaitSkill()">+</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ligneInf infoStat">
                             {{ form_help(weapon.waitSkill) }}
@@ -155,5 +192,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('/js/creation.js') }}"></script>
+    <script src="{{ asset('/js/creationWeapon.js') }}"></script>
 {% endblock %}
